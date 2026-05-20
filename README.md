@@ -1,4 +1,4 @@
-# @hafidznoor/idn-finlogos
+# idn-finlogos
 
 Indonesian financial institution logos — banks, e-wallets, payment gateways, switching, regulatory, and 18 more categories — as optimized SVGs with per-logo ESM imports.
 
@@ -11,7 +11,7 @@ Indonesian financial institution logos — banks, e-wallets, payment gateways, s
 ## Install
 
 ```bash
-npm install @hafidznoor/idn-finlogos
+npm install idn-finlogos
 ```
 
 Or use directly from a CDN — no install required.
@@ -25,9 +25,9 @@ Or use directly from a CDN — no install required.
 Tree-shakeable. Only the logos you import end up in your bundle.
 
 ```js
-import bca from '@hafidznoor/idn-finlogos/icons/bca';
-import gopay from '@hafidznoor/idn-finlogos/icons/gopay';
-import doku from '@hafidznoor/idn-finlogos/icons/doku';
+import bca from 'idn-finlogos/icons/bca';
+import gopay from 'idn-finlogos/icons/gopay';
+import doku from 'idn-finlogos/icons/doku';
 
 // Each import is the SVG markup as a string.
 document.getElementById('logo').innerHTML = bca;
@@ -35,7 +35,7 @@ document.getElementById('logo').innerHTML = bca;
 
 In React:
 ```jsx
-import bca from '@hafidznoor/idn-finlogos/icons/bca';
+import bca from 'idn-finlogos/icons/bca';
 
 function BcaLogo() {
   return <span dangerouslySetInnerHTML={{ __html: bca }} />;
@@ -45,7 +45,7 @@ function BcaLogo() {
 ### 2. Raw SVG file as URL (for `<img src>`, asset pipelines)
 
 ```js
-import bcaUrl from '@hafidznoor/idn-finlogos/icons/bca.svg';
+import bcaUrl from 'idn-finlogos/icons/bca.svg';
 // → '/assets/bca-abc123.svg' (your bundler hashes it)
 
 <img src={bcaUrl} alt="BCA" />
@@ -54,7 +54,7 @@ import bcaUrl from '@hafidznoor/idn-finlogos/icons/bca.svg';
 ### 3. Metadata helpers (for catalog pages, dynamic pickers)
 
 ```js
-import { listLogos, getLogo, getLogoUrl, getCategories } from '@hafidznoor/idn-finlogos';
+import { listLogos, getLogo, getLogoUrl, getCategories } from 'idn-finlogos';
 
 listLogos();                                // → all 489
 listLogos({ category: 'bank-logo' });       // → 153 banks
@@ -67,14 +67,14 @@ await getLogo('bca');
 // → { slug, name, category, svg: '<svg>...</svg>', ... }
 
 getLogoUrl('bca');
-// → 'https://cdn.jsdelivr.net/npm/@hafidznoor/idn-finlogos@2.0.0/dist/icons/bca.svg'
+// → 'https://cdn.jsdelivr.net/npm/idn-finlogos@2.0.1/dist/icons/bca.svg'
 ```
 
 ### 4. CDN — no install, no build step
 
 ```html
-<img src="https://cdn.jsdelivr.net/npm/@hafidznoor/idn-finlogos@2/dist/icons/bca.svg" />
-<img src="https://unpkg.com/@hafidznoor/idn-finlogos@2/dist/icons/gopay.svg" />
+<img src="https://cdn.jsdelivr.net/npm/idn-finlogos@2/dist/icons/bca.svg" />
+<img src="https://unpkg.com/idn-finlogos@2/dist/icons/gopay.svg" />
 ```
 
 Pin a major (`@2`), minor (`@2.0`), or exact version (`@2.0.0`).
@@ -94,7 +94,7 @@ Pin a major (`@2`), minor (`@2.0`), or exact version (`@2.0.0`).
 Types are bundled. No `@types/` install required.
 
 ```ts
-import { listLogos, type LogoMeta } from '@hafidznoor/idn-finlogos';
+import { listLogos, type LogoMeta } from 'idn-finlogos';
 
 const banks: LogoMeta[] = listLogos({ category: 'bank-logo' });
 ```

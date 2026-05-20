@@ -7,7 +7,7 @@ Archiving (not deleting) preserves every existing `npm install indo-financial-lo
 ---
 
 ```markdown
-# ⚠️ DEPRECATED — use @hafidznoor/idn-finlogos instead
+# ⚠️ DEPRECATED — use idn-finlogos instead
 
 This package (`indo-financial-logolibrary`, v1) is **no longer maintained**.
 
@@ -21,20 +21,20 @@ v1 used a runtime `fs.readdirSync` to expose logo paths. That meant:
 
 ## Use v2 instead
 
-[**@hafidznoor/idn-finlogos**](https://github.com/hafidznoor/idn-finlogos) — public npm, jsDelivr/unpkg CDN, per-logo ESM imports, TypeScript types, ~10× smaller download.
+[**idn-finlogos**](https://github.com/hafidznoor/idn-finlogos) — public npm, jsDelivr/unpkg CDN, per-logo ESM imports, TypeScript types, ~10× smaller download.
 
 \`\`\`bash
-npm install @hafidznoor/idn-finlogos
+npm install idn-finlogos
 \`\`\`
 
 \`\`\`js
-import bca from '@hafidznoor/idn-finlogos/icons/bca';
+import bca from 'idn-finlogos/icons/bca';
 \`\`\`
 
 Or via CDN, no install:
 
 \`\`\`html
-<img src="https://cdn.jsdelivr.net/npm/@hafidznoor/idn-finlogos@2/dist/icons/bca.svg">
+<img src="https://cdn.jsdelivr.net/npm/idn-finlogos@2/dist/icons/bca.svg">
 \`\`\`
 
 ## Migrating
@@ -52,9 +52,9 @@ This repo is left online (archived) so any existing `npm install` commands keep 
 
 ## Deployment checklist
 
-1. ☐ v2 published to public npm (`@hafidznoor/idn-finlogos@2.0.0`).
+1. ☐ v2 published to public npm (`idn-finlogos@2.0.1`).
 2. ☐ v2 repo public on GitHub at `hafidznoor/idn-finlogos`.
 3. ☐ Replace v1 `Readme.md` with the template above.
 4. ☐ Commit + push v1 deprecation banner.
 5. ☐ GitHub: archive the v1 repo (Settings → General → Archive this repository).
-6. ☐ Optional: deprecate the v1 npm package on GitHub Packages: `npm deprecate "indo-financial-logolibrary@*" "Use @hafidznoor/idn-finlogos instead. See README."` (requires being logged into GitHub Packages registry).
+6. ☐ Optional: deprecate the v1 npm package on GitHub Packages: `npm deprecate "indo-financial-logolibrary@*" "Use idn-finlogos instead. See README."` (requires being logged into GitHub Packages registry).

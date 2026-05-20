@@ -72,17 +72,17 @@ function main() {
   const total = rows.length;
   const kept = total - dropCount;
 
-  let md = `# Migration from v1 (\`indo-financial-logolibrary\`) to v2 (\`@hafidznoor/idn-finlogos\`)
+  let md = `# Migration from v1 (\`indo-financial-logolibrary\`) to v2 (\`idn-finlogos\`)
 
 ## tl;dr
 
 | | v1 | v2 |
 |---|---|---|
 | Registry | GitHub Packages (auth required) | Public npm (no auth) |
-| Install | \`npm i indo-financial-logolibrary\` | \`npm i @hafidznoor/idn-finlogos\` |
+| Install | \`npm i indo-financial-logolibrary\` | \`npm i idn-finlogos\` |
 | Browser bundlers | Broken (uses Node \`fs\` at runtime) | Works (per-logo ESM imports, tree-shakeable) |
 | Filenames | Spaces, parens (\`BCA Digital.svg\`) | Kebab-case slugs (\`bca-digital\`) |
-| Access pattern | \`bankLogo.SVG['Bank Logo']['BCA']\` → path | \`import bca from '@hafidznoor/idn-finlogos/icons/bca'\` → SVG string |
+| Access pattern | \`bankLogo.SVG['Bank Logo']['BCA']\` → path | \`import bca from 'idn-finlogos/icons/bca'\` → SVG string |
 | Categories | Folders | Metadata (\`listLogos({ category })\`) |
 | PNG variants | x1, x2, x3, x4, Large baked in | Dropped — use a CDN image transform or rasterize yourself |
 | License | Conflicting (MIT vs CC-BY-NC-4.0) | Dual-licensed: MIT (code) + CC-BY-NC-4.0 (assets) |
@@ -100,19 +100,19 @@ const path = bankLogo.SVG['Bank Logo']['BCA'];   // path string on disk
 **v2** — pick one:
 \`\`\`js
 // (a) Inline SVG string (recommended)
-import bca from '@hafidznoor/idn-finlogos/icons/bca';
+import bca from 'idn-finlogos/icons/bca';
 element.innerHTML = bca;
 
 // (b) URL-style (your bundler hashes it)
-import bcaUrl from '@hafidznoor/idn-finlogos/icons/bca.svg';
+import bcaUrl from 'idn-finlogos/icons/bca.svg';
 <img src={bcaUrl} />
 
 // (c) Dynamic
-import { getLogo } from '@hafidznoor/idn-finlogos';
+import { getLogo } from 'idn-finlogos';
 const { svg } = await getLogo('bca');
 
 // (d) CDN — no install
-<img src="https://cdn.jsdelivr.net/npm/@hafidznoor/idn-finlogos@2/dist/icons/bca.svg" />
+<img src="https://cdn.jsdelivr.net/npm/idn-finlogos@2/dist/icons/bca.svg" />
 \`\`\`
 
 ## Categories: v1 → v2 slugs

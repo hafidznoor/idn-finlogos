@@ -61,4 +61,4 @@ If two logos would slugify to the same value (e.g. one brand appearing in multip
 2. `git push origin main --tags`
 3. The `release.yml` workflow publishes to npm with provenance and creates a GitHub Release with the SVG zip attached.
 
-The `NPM_TOKEN` repo secret needs to be set for publish. Use a granular access token scoped to `@hafidznoor/idn-finlogos` only.
+The `NPM_TOKEN` repo secret needs to be set for publish. Use a granular access token scoped to `idn-finlogos` only.
