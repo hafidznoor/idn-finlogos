@@ -1,0 +1,69 @@
+{
+  "name": "@hafidznoor/idn-finlogos",
+  "version": "2.0.0",
+  "description": "Indonesian financial institution logos (banks, e-wallets, payment gateways, and 20+ more categories) as optimized SVGs with per-logo ESM imports.",
+  "keywords": [
+    "indonesia",
+    "indonesian",
+    "logos",
+    "svg",
+    "icons",
+    "bank",
+    "e-wallet",
+    "payment",
+    "payment-gateway",
+    "fintech",
+    "idn"
+  ],
+  "author": "Hafidz Noor Fauzi",
+  "license": "SEE LICENSE IN LICENSE",
+  "homepage": "https://github.com/hafidznoor/idn-finlogos#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hafidznoor/idn-finlogos.git"
+  },
+  "bugs": "https://github.com/hafidznoor/idn-finlogos/issues",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "sideEffects": false,
+  "files": [
+    "dist/",
+    "LICENSE",
+    "LICENSE-ASSETS",
+    "NOTICE",
+    "README.md"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    },
+    "./manifest.json": "./dist/manifest.json",
+    "./icons/*.svg": "./dist/icons/*.svg",
+    "./icons/*": {
+      "types": "./dist/icons/*.d.ts",
+      "import": "./dist/icons/*.mjs",
+      "require": "./dist/icons/*.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "bootstrap": "node scripts/bootstrap.mjs",
+    "validate": "node scripts/validate.mjs",
+    "build": "node scripts/build.mjs",
+    "prepublishOnly": "npm run validate && npm run build"
+  },
+  "devDependencies": {
+    "js-yaml": "^4.1.0",
+    "svgo": "^3.3.0"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

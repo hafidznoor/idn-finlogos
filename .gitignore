@@ -1,0 +1,12 @@
+node_modules/
+dist/
+
+.DS_Store
+.idea/
+.vscode/
+*.log
+npm-debug.log*
+.env
+.env.local
+
+*.tgz
