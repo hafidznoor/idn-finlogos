@@ -1,0 +1,27 @@
+name: Deprecate scoped package
+
+# One-shot: marks @hafidznoor/idn-finlogos@* as deprecated on npm with a
+# pointer to the unscoped successor. Triggered manually from the Actions tab.
+# Delete this file once it has been run successfully.
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  deprecate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Deprecate @hafidznoor/idn-finlogos@*
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          npm deprecate "@hafidznoor/idn-finlogos@*" \
+            "Renamed: install 'idn-finlogos' (unscoped) instead. Same API, same CDN paths. https://github.com/hafidznoor/idn-finlogos"
