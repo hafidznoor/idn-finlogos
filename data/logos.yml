@@ -1,0 +1,1472 @@
+# Source of truth for the logo catalog.
+# Each entry: { slug, name (display), category, aliases? (string[]), tags? (string[]) }
+# Bootstrapped from v1 SVG on 2026-05-20.
+# Hand-curate display names + add aliases as needed; CI validates icons/ ↔ this file.
+
+- slug: 2c2p
+  name: 2c2p
+  category: payment-gateway
+- slug: acc
+  name: ACC
+  category: financing
+- slug: acc-alt
+  name: ACC (Alt)
+  category: financing
+- slug: adakami
+  name: AdaKami
+  category: financing
+- slug: adakami-alt
+  name: AdaKami (Alt)
+  category: financing
+- slug: adira-finance
+  name: Adira Finance
+  category: financing
+- slug: aeon-credit-service
+  name: AEON Credit Service
+  category: financing
+- slug: aetra-tangerang
+  name: Aetra Tangerang
+  category: utilities
+- slug: afpi
+  name: AFPI
+  category: regulatory
+- slug: akulaku
+  name: Akulaku
+  category: financing
+- slug: akulaku-paylater
+  name: Akulaku Paylater
+  category: financing
+- slug: aladin
+  name: Aladin
+  category: bank-logo
+- slug: alfamart
+  name: Alfamart
+  category: supermarket
+- slug: alfamidi
+  name: Alfamidi
+  category: supermarket
+- slug: alipay-new
+  name: Alipay (New)
+  category: miscellaneous
+- slug: alipay-old
+  name: Alipay (Old)
+  category: miscellaneous
+- slug: allo
+  name: Allo
+  category: bank-logo
+- slug: alto
+  name: ALTO
+  category: switching
+- slug: amar-bank
+  name: Amar Bank
+  category: bank-logo
+- slug: amercian-express-alt
+  name: Amercian Express (Alt)
+  category: card-payment
+- slug: american-express
+  name: American Express
+  category: card-payment
+- slug: american-express-alt-2
+  name: American Express (Alt-2)
+  category: card-payment
+- slug: anteraja
+  name: Anteraja
+  category: logistic
+- slug: anz
+  name: ANZ
+  category: bank-logo
+- slug: app-store
+  name: App Store
+  category: game
+- slug: apple-arcade
+  name: Apple Arcade
+  category: game
+- slug: apple-card
+  name: Apple Card
+  category: card-payment
+- slug: apple-music
+  name: Apple Music
+  category: entertainment
+- slug: apple-pay
+  name: Apple Pay
+  category: miscellaneous
+- slug: aspi
+  name: ASPI
+  category: regulatory
+- slug: assa
+  name: ASSA
+  category: logistic
+- slug: astra-pay
+  name: Astra Pay
+  category: e-wallet
+- slug: atm-bersama
+  name: ATM Bersama
+  category: switching
+- slug: axis
+  name: AXIS
+  category: mobile-telco
+- slug: bangkok-bank
+  name: Bangkok Bank
+  category: bank-logo
+- slug: bank-artha-graha-internasional
+  name: Bank Artha Graha Internasional
+  category: bank-logo
+- slug: bank-bengkulu
+  name: Bank Bengkulu
+  category: bank-logo
+- slug: bank-bjb
+  name: Bank BJB
+  category: bank-logo
+- slug: bank-bjb-syariah
+  name: Bank BJB Syariah
+  category: bank-logo
+- slug: bank-bpd-aceh
+  name: Bank BPD Aceh
+  category: bank-logo
+- slug: bank-bpd-bali
+  name: Bank BPD Bali
+  category: bank-logo
+- slug: bank-bpd-banten
+  name: Bank BPD Banten
+  category: bank-logo
+- slug: bank-bpd-diy
+  name: Bank BPD DIY
+  category: bank-logo
+- slug: bank-bpd-jambi
+  name: Bank BPD Jambi
+  category: bank-logo
+- slug: bank-bpd-jateng
+  name: Bank BPD Jateng
+  category: bank-logo
+- slug: bank-bpd-jatim
+  name: Bank BPD Jatim
+  category: bank-logo
+- slug: bank-bpd-kalbar
+  name: Bank BPD Kalbar
+  category: bank-logo
+- slug: bank-bpd-kalbar-alt
+  name: Bank BPD Kalbar (Alt)
+  category: bank-logo
+- slug: bank-bpd-kalimantan-timur
+  name: Bank BPD Kalimantan Timur
+  category: bank-logo
+- slug: bank-bpd-kalsel
+  name: Bank BPD Kalsel
+  category: bank-logo
+- slug: bank-bpd-kalteng
+  name: Bank BPD Kalteng
+  category: bank-logo
+- slug: bank-bpd-lampung
+  name: Bank BPD Lampung
+  category: bank-logo
+- slug: bank-bpd-maluku-malut
+  name: Bank BPD Maluku Malut
+  category: bank-logo
+- slug: bank-bpd-ntb-syariah
+  name: Bank BPD NTB Syariah
+  category: bank-logo
+- slug: bank-bpd-ntb-syariah-alt
+  name: Bank BPD NTB Syariah (Alt)
+  category: bank-logo
+- slug: bank-bpd-ntt
+  name: Bank BPD NTT
+  category: bank-logo
+- slug: bank-bpd-papua
+  name: Bank BPD Papua
+  category: bank-logo
+- slug: bank-bpd-riau-kepri
+  name: Bank BPD Riau Kepri
+  category: bank-logo
+- slug: bank-bpd-riau-kepri-syariah
+  name: Bank BPD Riau Kepri Syariah
+  category: bank-logo
+- slug: bank-bpd-sulselbar
+  name: Bank BPD Sulselbar
+  category: bank-logo
+- slug: bank-bpd-sulteng
+  name: Bank BPD Sulteng
+  category: bank-logo
+- slug: bank-bpd-sultra
+  name: Bank BPD Sultra
+  category: bank-logo
+- slug: bank-bpd-sulutgo
+  name: Bank BPD Sulutgo
+  category: bank-logo
+- slug: bank-bpd-sumsel-babel
+  name: Bank BPD Sumsel Babel
+  category: bank-logo
+- slug: bank-bpd-sumsel-babel-alt-1
+  name: Bank BPD Sumsel Babel (Alt-1)
+  category: bank-logo
+- slug: bank-bpd-sumsel-babel-alt-2
+  name: Bank BPD Sumsel Babel (Alt-2)
+  category: bank-logo
+- slug: bank-bpd-sumut
+  name: Bank BPD Sumut
+  category: bank-logo
+- slug: bank-bumi-artha
+  name: Bank Bumi Artha
+  category: bank-logo
+- slug: bank-capital
+  name: Bank Capital
+  category: bank-logo
+- slug: bank-capital-alt
+  name: Bank Capital (Alt)
+  category: bank-logo
+- slug: bank-dki
+  name: Bank DKI
+  category: bank-logo
+- slug: bank-ganesha
+  name: Bank Ganesha
+  category: bank-logo
+- slug: bank-ina
+  name: Bank INA
+  category: bank-logo
+- slug: bank-index-selindo
+  name: Bank Index Selindo
+  category: bank-logo
+- slug: bank-index-selindo-alt
+  name: Bank Index Selindo (Alt)
+  category: bank-logo
+- slug: bank-indonesia
+  name: Bank Indonesia
+  category: regulatory
+- slug: bank-jasa-jakarta
+  name: Bank Jasa Jakarta
+  category: bank-logo
+- slug: bank-lampung
+  name: Bank Lampung
+  category: bank-logo
+- slug: bank-mas
+  name: Bank Mas
+  category: bank-logo
+- slug: bank-maspion
+  name: Bank Maspion
+  category: bank-logo
+- slug: bank-maspion-alt
+  name: Bank Maspion (Alt)
+  category: bank-logo
+- slug: bank-mayapada
+  name: Bank Mayapada
+  category: bank-logo
+- slug: bank-mayapada-alt
+  name: Bank Mayapada (Alt)
+  category: bank-logo
+- slug: bank-mayora
+  name: Bank Mayora
+  category: bank-logo
+- slug: bank-mestika-dharma
+  name: Bank Mestika Dharma
+  category: bank-logo
+- slug: bank-nagari
+  name: Bank Nagari
+  category: bank-logo
+- slug: bank-of-america
+  name: Bank of America
+  category: bank-logo
+- slug: bank-of-china
+  name: Bank of China
+  category: bank-logo
+- slug: bank-of-india
+  name: Bank of India
+  category: bank-logo
+- slug: bank-of-india-indonesia
+  name: Bank of India Indonesia
+  category: bank-logo
+- slug: bank-raya
+  name: Bank Raya
+  category: bank-logo
+- slug: bank-resona-perdania
+  name: Bank Resona Perdania
+  category: bank-logo
+- slug: bank-resona-perdania-alt
+  name: Bank Resona Perdania (Alt)
+  category: bank-logo
+- slug: bank-sahabat-sampoerna
+  name: Bank Sahabat Sampoerna
+  category: bank-logo
+- slug: bank-smbc-indonesia
+  name: Bank SMBC Indonesia
+  category: bank-logo
+- slug: bank-victoria
+  name: Bank Victoria
+  category: bank-logo
+- slug: bank-victoria-syariah
+  name: Bank Victoria Syariah
+  category: bank-logo
+- slug: bank-woori-saudara
+  name: Bank Woori Saudara
+  category: bank-logo
+- slug: bappebti
+  name: BAPPEBTI
+  category: regulatory
+- slug: baznas
+  name: BAZNAS
+  category: donation
+- slug: bca
+  name: BCA
+  category: bank-logo
+- slug: bca-atm
+  name: BCA ATM
+  category: switching
+- slug: bca-debit
+  name: BCA Debit
+  category: switching
+- slug: bca-digital
+  name: BCA Digital
+  category: bank-logo
+- slug: bca-finance
+  name: BCA Finance
+  category: financing
+- slug: bca-flazz
+  name: BCA Flazz
+  category: prepaid-card
+- slug: bca-flazz-alt
+  name: BCA Flazz (Alt)
+  category: prepaid-card
+- slug: bca-klikpay
+  name: BCA KlikPay
+  category: direct-debit
+- slug: bca-mobile
+  name: BCA Mobile
+  category: bank-app
+- slug: bca-syariah
+  name: BCA Syariah
+  category: bank-logo
+- slug: bea-cukai
+  name: Bea Cukai
+  category: government
+- slug: bhinneka
+  name: Bhinneka
+  category: e-commerce
+- slug: bi-fast
+  name: BI-FAST
+  category: switching
+- slug: biznet
+  name: Biznet
+  category: isp
+- slug: biznet-home
+  name: Biznet Home
+  category: isp
+- slug: blibli
+  name: Blibli
+  category: e-commerce
+- slug: blu-bca
+  name: Blu BCA
+  category: bank-logo
+- slug: bluepay
+  name: Bluepay
+  category: e-wallet
+- slug: bnc
+  name: BNC
+  category: bank-logo
+- slug: bni
+  name: BNI
+  category: bank-logo
+- slug: bni-mobile-banking
+  name: BNI Mobile Banking
+  category: bank-app
+- slug: bni-tapcash
+  name: BNI TapCash
+  category: prepaid-card
+- slug: bnp-paribas
+  name: BNP Paribas
+  category: bank-logo
+- slug: bpd
+  name: BPD
+  category: regulatory
+- slug: bri
+  name: BRI
+  category: bank-logo
+- slug: bri-alt
+  name: BRI (Alt)
+  category: bank-logo
+- slug: bri-brizzi
+  name: BRI BRIZZI
+  category: prepaid-card
+- slug: bri-brizzi-alt
+  name: BRI BRIZZI (Alt)
+  category: prepaid-card
+- slug: bri-direct-debit
+  name: BRI Direct Debit
+  category: direct-debit
+- slug: bri-finance
+  name: BRI Finance
+  category: financing
+- slug: bri-vertical
+  name: BRI (Vertical)
+  category: bank-logo
+- slug: bright
+  name: Bright
+  category: supermarket
+- slug: brimo
+  name: BRImo
+  category: bank-app
+- slug: bsi
+  name: BSI
+  category: bank-logo
+- slug: bsi-mobile
+  name: BSI Mobile
+  category: bank-app
+- slug: btn
+  name: BTN
+  category: bank-logo
+- slug: btn-alt
+  name: BTN (Alt)
+  category: bank-logo
+- slug: btn-new
+  name: BTN (New)
+  category: bank-logo
+- slug: btn-syariah
+  name: BTN Syariah
+  category: bank-logo
+- slug: btn-syariah-new
+  name: BTN Syariah (New)
+  category: bank-logo
+- slug: btpn
+  name: BTPN
+  category: bank-logo
+- slug: btpn-syariah
+  name: BTPN Syariah
+  category: bank-logo
+- slug: bukalapak
+  name: Bukalapak
+  category: e-commerce
+- slug: bukalapak-new
+  name: Bukalapak (New)
+  category: e-commerce
+- slug: bussan-auto-finance
+  name: Bussan Auto Finance
+  category: financing
+- slug: by-u
+  name: by.U
+  category: mobile-telco
+- slug: catchplay
+  name: Catchplay
+  category: entertainment
+- slug: cbn
+  name: CBN
+  category: isp
+- slug: ccb-indonesia
+  name: CCB Indonesia
+  category: bank-logo
+- slug: ccb-indonesia-alt
+  name: CCB Indonesia (Alt)
+  category: bank-logo
+- slug: cgv
+  name: CGV
+  category: entertainment
+- slug: cimb-niaga
+  name: CIMB Niaga
+  category: bank-logo
+- slug: cimb-niaga-syariah
+  name: CIMB Niaga Syariah
+  category: bank-logo
+- slug: cinepolis
+  name: Cinepolis
+  category: entertainment
+- slug: circle-k
+  name: Circle K
+  category: supermarket
+- slug: circle-k-alt
+  name: Circle K (Alt)
+  category: supermarket
+- slug: cirrus
+  name: Cirrus
+  category: card-payment
+- slug: citibank
+  name: Citibank
+  category: bank-logo
+- slug: citibank-alt
+  name: Citibank (Alt)
+  category: bank-logo
+- slug: cititrans
+  name: Cititrans
+  category: transportation
+- slug: commonwealth
+  name: Commonwealth
+  category: bank-logo
+- slug: contactless
+  name: Contactless
+  category: card-payment
+- slug: contactless-alt
+  name: Contactless (Alt)
+  category: card-payment
+- slug: credit-suisse
+  name: Credit Suisse
+  category: bank-logo
+- slug: ctbc-bank
+  name: CTBC Bank
+  category: bank-logo
+- slug: daihatsu-financial-service
+  name: Daihatsu Financial Service
+  category: financing
+- slug: dakota-cargo
+  name: Dakota Cargo
+  category: logistic
+- slug: dakota-logistik
+  name: Dakota Logistik
+  category: logistic
+- slug: damri
+  name: DAMRI
+  category: transportation
+- slug: dan-plus-dan
+  name: Dan+Dan
+  category: supermarket
+- slug: dana
+  name: DANA
+  category: e-wallet
+- slug: danamon
+  name: Danamon
+  category: bank-logo
+- slug: danamon-mufg
+  name: Danamon (MUFG)
+  category: bank-logo
+- slug: danamon-syariah
+  name: Danamon Syariah
+  category: bank-logo
+- slug: daytrans
+  name: DayTrans
+  category: transportation
+- slug: dbs
+  name: DBS
+  category: bank-logo
+- slug: deutsche-bank
+  name: Deutsche Bank
+  category: bank-logo
+- slug: dhl-express
+  name: DHL Express
+  category: logistic
+- slug: digibank
+  name: Digibank
+  category: bank-app
+- slug: digibank-alt
+  name: Digibank (Alt)
+  category: bank-app
+- slug: dipay
+  name: Dipay
+  category: e-wallet
+- slug: discover
+  name: Discover
+  category: card-payment
+- slug: discover-alt
+  name: Discover (Alt)
+  category: card-payment
+- slug: disney-plus
+  name: Disney+
+  category: entertainment
+- slug: disney-plus-hotstar
+  name: Disney+ Hotstar
+  category: entertainment
+- slug: djp-online
+  name: DJP Online
+  category: government
+- slug: djp-online-alt
+  name: DJP Online (Alt)
+  category: government
+- slug: doku
+  name: DOKU
+  category: e-wallet
+- slug: dompet-dhuafa
+  name: Dompet Dhuafa
+  category: donation
+- slug: dompet-dhuafa-alt
+  name: Dompet Dhuafa (Alt)
+  category: donation
+- slug: dutamoney
+  name: Dutamoney
+  category: e-wallet
+- slug: e-toll-card
+  name: e-Toll Card
+  category: prepaid-card
+- slug: ea-play
+  name: EA Play
+  category: game
+- slug: ea-play-alt
+  name: EA Play (Alt)
+  category: game
+- slug: ekonomi-syariah
+  name: Ekonomi Syariah
+  category: regulatory
+- slug: ekonomi-syariah-alt
+  name: Ekonomi Syariah (Alt)
+  category: regulatory
+- slug: ems
+  name: EMS
+  category: logistic
+- slug: epic-games
+  name: Epic Games
+  category: game
+- slug: epic-games-store
+  name: Epic Games Store
+  category: game
+- slug: esl-express
+  name: ESL Express
+  category: logistic
+- slug: espay
+  name: Espay
+  category: payment-gateway
+- slug: family-mart
+  name: Family Mart
+  category: supermarket
+- slug: fedex-express
+  name: FedEx Express
+  category: logistic
+- slug: fif-astra
+  name: FIF Astra
+  category: financing
+- slug: finmas
+  name: Finmas
+  category: financing
+- slug: finpay
+  name: Finpay
+  category: payment-gateway
+- slug: first-logistic
+  name: First Logistic
+  category: logistic
+- slug: first-media
+  name: First Media
+  category: isp
+- slug: flip
+  name: Flip
+  category: remittance
+- slug: giant
+  name: Giant
+  category: supermarket
+- slug: google-pay
+  name: Google Pay
+  category: miscellaneous
+- slug: google-play
+  name: Google Play
+  category: game
+- slug: google-play-alt
+  name: Google Play (Alt)
+  category: game
+- slug: gopay
+  name: Gopay
+  category: e-wallet
+- slug: gopay-alt
+  name: Gopay (Alt)
+  category: e-wallet
+- slug: gopaylater
+  name: Gopaylater
+  category: financing
+- slug: gpn
+  name: GPN
+  category: card-payment
+- slug: grab-pay
+  name: Grab Pay
+  category: miscellaneous
+- slug: hbo-go
+  name: HBO GO
+  category: entertainment
+- slug: hero
+  name: Hero
+  category: supermarket
+- slug: hibank
+  name: hibank
+  category: bank-logo
+- slug: home-credit
+  name: Home Credit
+  category: financing
+- slug: hoox
+  name: HOOX
+  category: entertainment
+- slug: hsbc
+  name: HSBC
+  category: bank-logo
+- slug: hypermart
+  name: Hypermart
+  category: supermarket
+- slug: i-saku
+  name: I.Saku
+  category: e-wallet
+- slug: ibk-bank
+  name: IBK Bank
+  category: bank-logo
+- slug: icbc
+  name: ICBC
+  category: bank-logo
+- slug: icbc-alt
+  name: ICBC (Alt)
+  category: bank-logo
+- slug: id-express
+  name: ID Express
+  category: logistic
+- slug: im3
+  name: IM3
+  category: mobile-telco
+- slug: indihome-new
+  name: IndiHome (New)
+  category: isp
+- slug: indihome-old
+  name: IndiHome (Old)
+  category: isp
+- slug: indodana
+  name: Indodana
+  category: financing
+- slug: indomaret
+  name: Indomaret
+  category: supermarket
+- slug: indosat-hifi
+  name: Indosat Hifi
+  category: isp
+- slug: indosat-m2
+  name: Indosat M2
+  category: isp
+- slug: ing-bank
+  name: ING Bank
+  category: bank-logo
+- slug: inklusi-keuangan
+  name: Inklusi Keuangan
+  category: regulatory
+- slug: interlink
+  name: Interlink
+  category: miscellaneous
+- slug: ipay88
+  name: ipay88
+  category: payment-gateway
+- slug: j-and-t-cargo
+  name: J&T Cargo
+  category: logistic
+- slug: j-and-t-express
+  name: J&T Express
+  category: logistic
+- slug: j-trust-bank
+  name: J Trust Bank
+  category: bank-logo
+- slug: jago
+  name: Jago
+  category: bank-logo
+- slug: jago-app
+  name: Jago
+  category: bank-app
+- slug: jakcard
+  name: Jakcard
+  category: prepaid-card
+- slug: jaklingko
+  name: JakLingko
+  category: transportation
+- slug: jakone-mobile
+  name: JakOne Mobile
+  category: bank-app
+- slug: jakone-pay
+  name: JakOne Pay
+  category: e-wallet
+- slug: jalin
+  name: Jalin
+  category: switching
+- slug: jcb
+  name: JCB
+  category: card-payment
+- slug: jenius
+  name: Jenius
+  category: bank-logo
+- slug: jenius-app
+  name: Jenius
+  category: bank-app
+- slug: jenius-pay
+  name: Jenius Pay
+  category: direct-debit
+- slug: jne
+  name: JNE
+  category: logistic
+- slug: jne-alt
+  name: JNE (Alt)
+  category: logistic
+- slug: joox
+  name: JOOX
+  category: entertainment
+- slug: jp-morgan-chase
+  name: JP Morgan Chase
+  category: bank-logo
+- slug: kai
+  name: KAI
+  category: transportation
+- slug: kai-bandara
+  name: KAI Bandara
+  category: transportation
+- slug: kai-commuter-new
+  name: KAI Commuter (New)
+  category: transportation
+- slug: kai-commuter-old
+  name: KAI Commuter (Old)
+  category: transportation
+- slug: kai-logistik
+  name: KAI Logistik
+  category: logistic
+- slug: kartu-as
+  name: Kartu As
+  category: mobile-telco
+- slug: kartu-halo
+  name: Kartu Halo
+  category: mobile-telco
+- slug: kaspro
+  name: Kaspro
+  category: e-wallet
+- slug: kb-bukopin
+  name: KB Bukopin
+  category: bank-logo
+- slug: kb-bukopin-alt
+  name: KB Bukopin (Alt)
+  category: bank-logo
+- slug: kb-bukopin-syariah
+  name: KB Bukopin Syariah
+  category: bank-logo
+- slug: keb-hana-bank
+  name: KEB Hana Bank
+  category: bank-logo
+- slug: keb-hana-bank-alt
+  name: KEB Hana Bank (Alt)
+  category: bank-logo
+- slug: kemenkeu
+  name: Kemenkeu
+  category: government
+- slug: kitabisa
+  name: Kitabisa
+  category: donation
+- slug: kitabisa-alt
+  name: Kitabisa (Alt)
+  category: donation
+- slug: kominfo
+  name: KOMINFO
+  category: regulatory
+- slug: kredit-pintar
+  name: Kredit Pintar
+  category: financing
+- slug: kreditplus
+  name: KreditPlus
+  category: financing
+- slug: kredivo
+  name: Kredivo
+  category: financing
+- slug: krom
+  name: Krom
+  category: bank-logo
+- slug: lalamove
+  name: Lalamove
+  category: logistic
+- slug: langitmusik
+  name: Langitmusik
+  category: entertainment
+- slug: lawson
+  name: Lawson
+  category: supermarket
+- slug: lazada
+  name: Lazada
+  category: e-commerce
+- slug: lazada-express
+  name: Lazada Express
+  category: logistic
+- slug: lexus-financial-service
+  name: Lexus Financial Service
+  category: financing
+- slug: lexus-financial-service-1
+  name: Lexus Financial Service-1
+  category: financing
+- slug: line-bank
+  name: LINE Bank
+  category: bank-logo
+- slug: line-bank-alt
+  name: LINE Bank (Alt)
+  category: bank-logo
+- slug: line-pay
+  name: LINE Pay
+  category: miscellaneous
+- slug: line-pay-alt
+  name: LINE Pay (Alt)
+  category: miscellaneous
+- slug: link
+  name: Link
+  category: switching
+- slug: link-new
+  name: Link (New)
+  category: switching
+- slug: link-new-alt
+  name: Link (New Alt)
+  category: switching
+- slug: link-old
+  name: Link (Old)
+  category: switching
+- slug: linkaja
+  name: LinkAja
+  category: e-wallet
+- slug: lion-parcel
+  name: Lion Parcel
+  category: logistic
+- slug: live-on
+  name: Live.On
+  category: mobile-telco
+- slug: lotte
+  name: Lotte
+  category: supermarket
+- slug: lotte-grosir
+  name: Lotte Grosir
+  category: supermarket
+- slug: lotte-mart
+  name: Lotte Mart
+  category: supermarket
+- slug: lps
+  name: LPS
+  category: regulatory
+- slug: lrt-jakarta
+  name: LRT Jakarta
+  category: transportation
+- slug: maestro
+  name: Maestro
+  category: card-payment
+- slug: mandiri
+  name: Mandiri
+  category: bank-logo
+- slug: mandiri-e-cash
+  name: Mandiri E-Cash
+  category: direct-debit
+- slug: mandiri-e-money
+  name: Mandiri e-money
+  category: prepaid-card
+- slug: mandiri-livin
+  name: Mandiri Livin
+  category: bank-app
+- slug: mandiri-taspen
+  name: Mandiri Taspen
+  category: bank-logo
+- slug: mastercard
+  name: Mastercard
+  category: card-payment
+- slug: mastercard-black
+  name: Mastercard Black
+  category: card-payment
+- slug: mastercard-contactless
+  name: Mastercard Contactless
+  category: card-payment
+- slug: mastercard-contactless-alt
+  name: Mastercard Contactless (Alt)
+  category: card-payment
+- slug: mastercard-debit
+  name: Mastercard Debit
+  category: card-payment
+- slug: mastercard-debit-alt
+  name: Mastercard Debit (Alt)
+  category: card-payment
+- slug: mastercard-securecode
+  name: Mastercard SecureCode
+  category: card-payment
+- slug: mastercard-securecode-new
+  name: Mastercard SecureCode (New)
+  category: card-payment
+- slug: masterpass
+  name: Masterpass
+  category: card-payment
+- slug: masterpass-alt
+  name: Masterpass (Alt)
+  category: card-payment
+- slug: maxstream
+  name: Maxstream
+  category: entertainment
+- slug: maybank
+  name: Maybank
+  category: bank-logo
+- slug: mega
+  name: Mega
+  category: bank-logo
+- slug: mega-syariah
+  name: Mega Syariah
+  category: bank-logo
+- slug: melsa
+  name: Melsa
+  category: isp
+- slug: mentari-ooredoo
+  name: Mentari Ooredoo
+  category: mobile-telco
+- slug: meps
+  name: MEPS
+  category: switching
+- slug: midtrans
+  name: Midtrans
+  category: payment-gateway
+- slug: mizuho-bank
+  name: Mizuho Bank
+  category: bank-logo
+- slug: mnc
+  name: MNC
+  category: bank-logo
+- slug: mnc-bank
+  name: MNC Bank
+  category: bank-logo
+- slug: mnc-vision
+  name: MNC Vision
+  category: entertainment
+- slug: moneygram
+  name: MoneyGram
+  category: remittance
+- slug: motion-banking
+  name: Motion Banking
+  category: bank-logo
+- slug: motion-banking-alt
+  name: Motion Banking (Alt)
+  category: bank-logo
+- slug: motion-pay
+  name: Motion Pay
+  category: e-wallet
+- slug: mrt-jakarta
+  name: MRT Jakarta
+  category: transportation
+- slug: mtix
+  name: MTIX
+  category: entertainment
+- slug: mualamat
+  name: Mualamat
+  category: bank-logo
+- slug: mufg
+  name: MUFG
+  category: bank-logo
+- slug: mufg-alt
+  name: MUFG (Alt)
+  category: bank-logo
+- slug: my-nintendo
+  name: My Nintendo
+  category: game
+- slug: myrepublic
+  name: MyRepublic
+  category: isp
+- slug: nanobank-syariah
+  name: Nanobank Syariah
+  category: bank-logo
+- slug: nanobank-syariah-alt
+  name: Nanobank Syariah (Alt)
+  category: bank-logo
+- slug: ncs
+  name: NCS
+  category: logistic
+- slug: neobank
+  name: Neobank
+  category: bank-app
+- slug: netflix
+  name: Netflix
+  category: entertainment
+- slug: netflix-alt
+  name: Netflix (Alt)
+  category: entertainment
+- slug: nets
+  name: NETS
+  category: miscellaneous
+- slug: netzme
+  name: Netzme
+  category: e-wallet
+- slug: nex-parabola
+  name: Nex Parabola
+  category: entertainment
+- slug: nickelodeon
+  name: Nickelodeon
+  category: entertainment
+- slug: ninja-xpress
+  name: Ninja Xpress
+  category: logistic
+- slug: nintendo-online
+  name: Nintendo Online
+  category: game
+- slug: nobu
+  name: NOBU
+  category: bank-logo
+- slug: ocbc-nisp
+  name: OCBC NISP
+  category: bank-logo
+- slug: octo-clicks
+  name: OCTO Clicks
+  category: bank-app
+- slug: octo-clicks-direct-debit
+  name: OCTO Clicks
+  category: direct-debit
+- slug: ojk
+  name: OJK
+  category: regulatory
+- slug: ok-bank
+  name: OK Bank
+  category: bank-logo
+- slug: oneklik
+  name: OneKlik
+  category: direct-debit
+- slug: otto-pay
+  name: OTTO Pay
+  category: e-wallet
+- slug: ovo-new
+  name: OVO (New)
+  category: e-wallet
+- slug: ovo-new-alt
+  name: OVO (New Alt)
+  category: e-wallet
+- slug: ovo-old
+  name: OVO (Old)
+  category: e-wallet
+- slug: ovo-old-alt
+  name: OVO (Old Alt)
+  category: e-wallet
+- slug: pam-jaya-new
+  name: PAM Jaya (New)
+  category: utilities
+- slug: pam-jaya-old
+  name: PAM Jaya (Old)
+  category: utilities
+- slug: pandu-logistics
+  name: Pandu Logistics
+  category: logistic
+- slug: panin-dubai-syariah
+  name: Panin Dubai Syariah
+  category: bank-logo
+- slug: paninbank
+  name: PaninBank
+  category: bank-logo
+- slug: paydia
+  name: Paydia
+  category: e-wallet
+- slug: payoneer
+  name: Payoneer
+  category: remittance
+- slug: paypal
+  name: PayPal
+  category: remittance
+- slug: paytren
+  name: Paytren
+  category: e-wallet
+- slug: pcp-express
+  name: PCP Express
+  category: logistic
+- slug: pdam
+  name: PDAM
+  category: utilities
+- slug: pdam-kota-surabaya
+  name: PDAM Kota Surabaya
+  category: utilities
+- slug: pegadaian
+  name: Pegadaian
+  category: financing
+- slug: perbankan-syariah-ib
+  name: Perbankan Syariah (IB)
+  category: regulatory
+- slug: permata
+  name: Permata
+  category: bank-logo
+- slug: permata-bank-alt
+  name: Permata Bank (Alt)
+  category: bank-logo
+- slug: permata-bank-new
+  name: Permata Bank (New)
+  category: bank-logo
+- slug: pgn
+  name: PGN
+  category: utilities
+- slug: playstation-plus
+  name: Playstation Plus
+  category: game
+- slug: playstation-store
+  name: Playstation Store
+  category: game
+- slug: pln
+  name: PLN
+  category: utilities
+- slug: pos-indonesia-new
+  name: Pos Indonesia (New)
+  category: logistic
+- slug: pos-indonesia-old
+  name: Pos Indonesia (Old)
+  category: logistic
+- slug: pospay
+  name: Pospay
+  category: e-wallet
+- slug: prima
+  name: PRIMA
+  category: switching
+- slug: prima-bank
+  name: PRIMA Bank
+  category: bank-logo
+- slug: prima-debit
+  name: PRIMA Debit
+  category: switching
+- slug: prime-video
+  name: Prime Video
+  category: entertainment
+- slug: prismalink
+  name: PrismaLink
+  category: payment-gateway
+- slug: qnb
+  name: QNB
+  category: bank-logo
+- slug: qris
+  name: QRIS
+  category: government
+- slug: rex
+  name: REX
+  category: logistic
+- slug: ria-money
+  name: Ria Money
+  category: remittance
+- slug: rpx
+  name: RPX
+  category: logistic
+- slug: rumah-zakat
+  name: Rumah Zakat
+  category: donation
+- slug: rumah-zakat-alt
+  name: Rumah Zakat (Alt)
+  category: donation
+- slug: samsung-card
+  name: Samsung Card
+  category: card-payment
+- slug: samsung-pay
+  name: Samsung Pay
+  category: miscellaneous
+- slug: samsung-pay-alt
+  name: Samsung Pay (Alt)
+  category: miscellaneous
+- slug: sap-express
+  name: SAP Express
+  category: logistic
+- slug: sbi-indonesia
+  name: SBI Indonesia
+  category: bank-logo
+- slug: seabank
+  name: SeaBank
+  category: bank-logo
+- slug: shinhan-bank
+  name: Shinhan Bank
+  category: bank-logo
+- slug: shinhan-bank-alt
+  name: Shinhan Bank (Alt)
+  category: bank-logo
+- slug: shopee
+  name: Shopee
+  category: e-commerce
+- slug: shopee-alt
+  name: Shopee (Alt)
+  category: e-commerce
+- slug: shopee-pay
+  name: Shopee Pay
+  category: e-wallet
+- slug: sicepat-ekspres
+  name: Sicepat Ekspres
+  category: logistic
+- slug: simpati
+  name: Simpati
+  category: mobile-telco
+- slug: sinarmas
+  name: Sinarmas
+  category: bank-logo
+- slug: sinarmas-syariah
+  name: Sinarmas Syariah
+  category: bank-logo
+- slug: skrill
+  name: Skrill
+  category: remittance
+- slug: smartfren
+  name: Smartfren
+  category: mobile-telco
+- slug: smartfren-old
+  name: Smartfren (Old)
+  category: mobile-telco
+- slug: speedcash
+  name: SpeedCash
+  category: e-wallet
+- slug: spotify
+  name: Spotify
+  category: entertainment
+- slug: spotify-alt
+  name: Spotify (Alt)
+  category: entertainment
+- slug: spx-express
+  name: SPX Express
+  category: logistic
+- slug: standard-chartered
+  name: Standard Chartered
+  category: bank-logo
+- slug: steam
+  name: Steam
+  category: game
+- slug: stripe
+  name: Stripe
+  category: payment-gateway
+- slug: superbank
+  name: Superbank
+  category: bank-logo
+- slug: superbank-alt
+  name: Superbank (Alt)
+  category: bank-logo
+- slug: taf-toyota-astra-financial
+  name: TAF - Toyota Astra Financial
+  category: financing
+- slug: telkomsel
+  name: Telkomsel
+  category: mobile-telco
+- slug: telkomsel-alt
+  name: Telkomsel (Alt)
+  category: mobile-telco
+- slug: telkomsel-halo
+  name: Telkomsel Halo
+  category: mobile-telco
+- slug: telkomsel-orbit
+  name: Telkomsel Orbit
+  category: isp
+- slug: telkomsel-prabayar
+  name: Telkomsel Prabayar
+  category: mobile-telco
+- slug: tiki
+  name: TIKI
+  category: logistic
+- slug: tokopedia
+  name: Tokopedia
+  category: e-commerce
+- slug: toserba-yogya
+  name: Toserba Yogya
+  category: supermarket
+- slug: toyota-financial-service
+  name: Toyota Financial Service
+  category: financing
+- slug: transfez
+  name: Transfez
+  category: remittance
+- slug: transjakarta
+  name: TransJakarta
+  category: transportation
+- slug: transmart
+  name: Transmart
+  category: supermarket
+- slug: transvision-new
+  name: TransVision (New)
+  category: entertainment
+- slug: transvision-old
+  name: TransVision (Old)
+  category: entertainment
+- slug: tri
+  name: Tri
+  category: mobile-telco
+- slug: truemoney
+  name: TrueMoney
+  category: e-wallet
+- slug: uangku
+  name: Uangku
+  category: e-wallet
+- slug: ubisoft-plus
+  name: UBISOFT+
+  category: game
+- slug: union-pay
+  name: Union Pay
+  category: card-payment
+- slug: union-pay-contactless
+  name: Union Pay Contactless
+  category: card-payment
+- slug: union-pay-contactless-en
+  name: Union Pay Contactless (EN)
+  category: card-payment
+- slug: union-pay-en
+  name: Union Pay (EN)
+  category: card-payment
+- slug: uob
+  name: UOB
+  category: bank-logo
+- slug: uob-ez-pay
+  name: UOB EZ Pay
+  category: direct-debit
+- slug: uob-tmrw
+  name: UOB TMRW
+  category: bank-app
+- slug: verified-by-visa
+  name: Verified by VISA
+  category: card-payment
+- slug: verified-by-visa-new
+  name: Verified by VISA (New)
+  category: card-payment
+- slug: vidio
+  name: Vidio
+  category: entertainment
+- slug: visa
+  name: VISA
+  category: card-payment
+- slug: visa-checkout
+  name: VISA Checkout
+  category: card-payment
+- slug: visa-debit
+  name: VISA Debit
+  category: card-payment
+- slug: visa-pay
+  name: VISA Pay
+  category: card-payment
+- slug: visa-paywave
+  name: VISA PayWave
+  category: card-payment
+- slug: visa-plus
+  name: VISA Plus
+  category: card-payment
+- slug: visa-secure-3ds
+  name: VISA Secure (3DS)
+  category: card-payment
+- slug: visa-signature
+  name: VISA Signature
+  category: card-payment
+- slug: vision-plus
+  name: Vision+
+  category: entertainment
+- slug: viu
+  name: VIU
+  category: entertainment
+- slug: wahana-express
+  name: Wahana Express
+  category: logistic
+- slug: wahana-express-alt
+  name: Wahana Express (Alt)
+  category: logistic
+- slug: welab-bank
+  name: Welab Bank
+  category: bank-logo
+- slug: western-union
+  name: Western Union
+  category: remittance
+- slug: whoosh
+  name: Whoosh
+  category: transportation
+- slug: wirecard
+  name: Wirecard
+  category: miscellaneous
+- slug: wirecard-1
+  name: Wirecard-1
+  category: miscellaneous
+- slug: wirecard-2
+  name: Wirecard-2
+  category: miscellaneous
+- slug: wise
+  name: Wise
+  category: remittance
+- slug: wom-finance
+  name: WOM Finance
+  category: financing
+- slug: wondr-by-bni
+  name: Wondr by BNI
+  category: bank-app
+- slug: world-bank
+  name: World Bank
+  category: regulatory
+- slug: world-bank-alt
+  name: World Bank (Alt)
+  category: regulatory
+- slug: xbox-game-pass
+  name: XBOX Game Pass
+  category: game
+- slug: xendit
+  name: Xendit
+  category: payment-gateway
+- slug: xl
+  name: XL
+  category: mobile-telco
+- slug: xl-prioritas
+  name: XL Prioritas
+  category: mobile-telco
+- slug: xxi-21
+  name: XXI (21)
+  category: entertainment
+- slug: yomart
+  name: Yomart
+  category: supermarket
+- slug: yukk
+  name: Yukk
+  category: e-wallet
+- slug: zalora
+  name: Zalora
+  category: e-commerce
