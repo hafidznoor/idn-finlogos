@@ -38,8 +38,8 @@ The artwork is hand-curated from the public Figma community libraries linked in 
 | Platform | Install |
 |---|---|
 | **Web (npm)** | `npm install idn-finlogos` |
-| **Android (Gradle / Maven Central)** | `implementation("io.github.hafidznoor:idn-finlogos:2.1.3")` |
-| **iOS (Swift Package Manager)** | `.package(url: "https://github.com/hafidznoor/idn-finlogos", from: "2.1.3")` |
+| **Android (Gradle / Maven Central)** | `implementation("io.github.hafidznoor:idn-finlogos:2.1.6")` |
+| **iOS (Swift Package Manager)** | `.package(url: "https://github.com/hafidznoor/idn-finlogos", from: "2.1.6")` |
 | **Flutter (pub.dev)** | `flutter pub add idn_finlogos` |
 | **Web (CDN)** | `https://cdn.jsdelivr.net/npm/idn-finlogos@2/dist/icons/<slug>.svg` |
 
@@ -82,7 +82,7 @@ dependencyResolutionManagement {
 Then use the same coordinate as Maven Central:
 
 ```kotlin
-implementation("io.github.hafidznoor:idn-finlogos:2.1.3")
+implementation("io.github.hafidznoor:idn-finlogos:2.1.6")
 ```
 
 ---
@@ -150,7 +150,7 @@ await getLogo('bca');
 // → { slug, name, category, svg: '<svg>...</svg>', ... }
 
 getLogoUrl('bca');
-// → 'https://cdn.jsdelivr.net/npm/idn-finlogos@2.1.3/dist/icons/bca.svg'
+// → 'https://cdn.jsdelivr.net/npm/idn-finlogos@2.1.6/dist/icons/bca.svg'
 ```
 
 ### 4. CDN — no install, no build step
@@ -160,7 +160,7 @@ getLogoUrl('bca');
 <img src="https://unpkg.com/idn-finlogos@2/dist/icons/gopay.svg" />
 ```
 
-Pin a major (`@2`), minor (`@2.1`), or exact version (`@2.1.3`).
+Pin a major (`@2`), minor (`@2.1`), or exact version (`@2.1.6`).
 
 ---
 
@@ -169,7 +169,7 @@ Pin a major (`@2`), minor (`@2.1`), or exact version (`@2.1.3`).
 ```kotlin
 // app/build.gradle.kts
 dependencies {
-    implementation("io.github.hafidznoor:idn-finlogos:2.1.3")
+    implementation("io.github.hafidznoor:idn-finlogos:2.1.6")
     // Recommended SVG renderer:
     implementation("io.coil-kt:coil-compose:2.6.0")
     implementation("io.coil-kt:coil-svg:2.6.0")
@@ -199,7 +199,7 @@ fun BcaLogo() {
 
 Catalog API: `IdnFinLogos.all`, `byCategory(...)`, `get(...)`, `search(...)`. See [platforms/android/README.md](./platforms/android/README.md).
 
-JitPack also works without waiting on Maven Central — add `maven { url = uri("https://jitpack.io") }` to your repositories and use `com.github.hafidznoor:idn-finlogos:2.1.3`.
+JitPack also works without waiting on Maven Central — add `maven { url = uri("https://jitpack.io") }` to your repositories and use `com.github.hafidznoor:idn-finlogos:2.1.6`.
 
 ---
 
@@ -207,7 +207,7 @@ JitPack also works without waiting on Maven Central — add `maven { url = uri("
 
 ```swift
 // Package.swift
-.package(url: "https://github.com/hafidznoor/idn-finlogos", from: "2.1.3")
+.package(url: "https://github.com/hafidznoor/idn-finlogos", from: "2.1.6")
 ```
 
 Add **SVGKit** (or your preferred SVG renderer) separately:
