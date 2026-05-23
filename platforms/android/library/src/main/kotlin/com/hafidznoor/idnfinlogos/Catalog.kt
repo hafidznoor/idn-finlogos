@@ -7,7 +7,7 @@
 package com.hafidznoor.idnfinlogos
 
 internal object Catalog {
-    const val VERSION: String = "2.1.5"
+    const val VERSION: String = "2.1.6"
 
     val LOGOS: List<LogoMeta> = listOf(
         LogoMeta(slug="2c2p", name="2c2p", category="payment-gateway", aliases=emptyList(), tags=emptyList(), assetPath="idn-finlogos/2c2p.svg"),
