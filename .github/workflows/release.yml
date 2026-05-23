@@ -124,10 +124,13 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           chmod +x ./gradlew 2>/dev/null || true
+          # -x signMavenPublication: vanniktech wires Maven Central signing
+          # onto every publication via signAllPublications(); GHP doesn't
+          # require signatures and this job intentionally lacks the keys.
           if [ -x ./gradlew ]; then
-            ./gradlew :library:publishAllPublicationsToGitHubPackagesRepository --no-configuration-cache
+            ./gradlew :library:publishAllPublicationsToGitHubPackagesRepository -x signMavenPublication --no-configuration-cache
           else
-            gradle :library:publishAllPublicationsToGitHubPackagesRepository --no-configuration-cache
+            gradle :library:publishAllPublicationsToGitHubPackagesRepository -x signMavenPublication --no-configuration-cache
           fi
 
   publish-flutter:
