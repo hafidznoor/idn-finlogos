@@ -86,18 +86,16 @@ jobs:
           channel: stable
           cache: true
 
-      - name: Configure pub.dev credentials
-        run: |
-          mkdir -p ~/.config/dart
-          cat > ~/.config/dart/pub-credentials.json <<EOF
-          ${{ secrets.PUB_CREDENTIALS_JSON }}
-          EOF
+      - name: Configure pub.dev token
+        env:
+          PUB_DEV_TOKEN: ${{ secrets.PUB_DEV_TOKEN }}
+        run: dart pub token add https://pub.dev --stdin <<< "$PUB_DEV_TOKEN"
 
       - name: Publish to pub.dev
         working-directory: platforms/flutter
         run: |
           flutter pub get
-          flutter pub publish --force
+          dart pub publish --force
 
   github-release:
     needs: [publish-npm, publish-android, publish-flutter]
