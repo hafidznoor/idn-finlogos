@@ -1,53 +1,113 @@
 # idn-finlogos
 
-Indonesian financial institution logos — banks, e-wallets, payment gateways, switching, regulatory, and 18 more categories — as optimized SVGs, available on **npm, Maven Central, Swift Package Manager, and pub.dev**.
+**Indonesian financial institution logos** — banks, e-wallets, payment gateways, switching networks, regulators, and more, as **optimized SVGs** ready to drop into web, Android, iOS, and Flutter projects.
 
-**489 logos · 23 categories · SVG only · zero runtime dependencies**
+[![npm version](https://img.shields.io/npm/v/idn-finlogos?logo=npm&label=npm)](https://www.npmjs.com/package/idn-finlogos)
+[![npm downloads](https://img.shields.io/npm/dm/idn-finlogos?logo=npm&label=downloads)](https://www.npmjs.com/package/idn-finlogos)
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.hafidznoor/idn-finlogos?logo=apachemaven&label=maven%20central)](https://central.sonatype.com/artifact/io.github.hafidznoor/idn-finlogos)
+[![pub.dev](https://img.shields.io/pub/v/idn_finlogos?logo=dart&label=pub.dev)](https://pub.dev/packages/idn_finlogos)
+[![CI](https://github.com/hafidznoor/idn-finlogos/actions/workflows/ci.yml/badge.svg)](https://github.com/hafidznoor/idn-finlogos/actions/workflows/ci.yml)
+[![License](https://img.shields.io/badge/license-MIT%20%2B%20CC%20BY--NC%204.0-blue)](#license)
+
+> **489 logos · 23 categories · SVG only · zero runtime dependencies · published to 4 registries**
+
+The single source of truth for Indonesian fintech and financial brand marks across **BCA, Mandiri, BRI, BNI, BSI, DANA, GoPay, OVO, ShopeePay, LinkAja, BI-FAST, QRIS, OJK, Bank Indonesia, LPS** and 470+ more — all hand-curated, SVGO-optimized, and shipped as native packages on **npm, Maven Central, Swift Package Manager, and pub.dev**.
 
 > v2 of the original `indo-financial-logolibrary`. See [MIGRATION.md](./MIGRATION.md) if you're upgrading.
 
 ---
 
-## About this project
+## Table of contents
 
-`idn-finlogos` is a curated, cross-platform asset library that solves a recurring problem for anyone shipping a product that touches Indonesian money flows: there is no single, reliable place to get clean SVGs for the local banks, e-wallets, payment rails, switching networks, regulators, and adjacent brands you need to render in your UI. Designers re-trace them from screenshots, engineers paste hotlinked PNGs from blog posts, and every team ends up maintaining a slightly-different fork of the same handful of marks.
+- [Quick install](#quick-install)
+- [Why idn-finlogos](#why-idn-finlogos)
+- [Quick start](#quick-start)
+- [Install](#install)
+- [Usage](#usage)
+  - [Web (npm)](#web-npm)
+  - [Android](#android)
+  - [iOS](#ios)
+  - [Flutter](#flutter)
+- [Coverage](#coverage)
+- [Complete logo catalog](#complete-logo-catalog)
+- [Design source (Figma)](#design-source-figma)
+- [TypeScript](#typescript)
+- [FAQ](#faq)
+- [License](#license)
+- [Contributing](#contributing)
 
-This package replaces that with one source of truth:
+---
 
-- **One catalog, four package ecosystems.** A single YAML manifest (`data/logos.yml`) plus the SVGs in `icons/` are compiled into native packages for **Web (npm)**, **Android (Maven Central / JitPack)**, **iOS (Swift Package Manager)**, and **Flutter (pub.dev)** — so the same `bca` slug returns the same artwork on every platform.
-- **Optimized for production use.** Every SVG is run through SVGO with a shared config, validated against the manifest in CI, and shipped as raw files (for `<img>` / asset pipelines), per-logo ESM modules (for tree-shaking on the web), and platform-native resources (`assets/` on Android & Flutter, bundle resources on iOS).
-- **Catalog API on every platform.** Beyond raw files, every language target exposes the same shape: `all`, `byCategory(...)`, `get(slug)`, `search(query)` — so you can build pickers, settings pages, and dynamic UIs without re-implementing the index.
-- **Designed for breadth, not just the top 10.** The set spans 153 banks (national, regional BPDs, syariah, foreign branches), all major e-wallets and switching networks (DANA, GoPay, OVO, BI-FAST, PRIMA, ALTO, Jalin), card schemes, regulators (OJK, BI, LPS, AFPI), telcos, ISPs, utilities, logistics, and entertainment subscriptions you'll see on a typical Indonesian checkout page.
-- **Honest about licensing.** Build tooling is MIT; the SVG artwork is **CC BY-NC 4.0**, and the trademarks themselves remain the property of their respective holders. Commercial use of any individual mark needs permission from that brand — see [License](#license) below.
+## Quick install
 
-### Who it's for
+| Platform | Install | Coordinate |
+|---|---|---|
+| **Web (npm)** | `npm install idn-finlogos` | `idn-finlogos` |
+| **Android (Gradle)** | `implementation("io.github.hafidznoor:idn-finlogos:2.1.6")` | `io.github.hafidznoor:idn-finlogos` |
+| **iOS (SPM)** | `.package(url: "https://github.com/hafidznoor/idn-finlogos", from: "2.1.6")` | `IdnFinLogos` |
+| **Flutter** | `flutter pub add idn_finlogos` | `idn_finlogos` |
+| **Web (CDN, zero install)** | `<img src="https://cdn.jsdelivr.net/npm/idn-finlogos@2/dist/icons/bca.svg" />` | jsDelivr / unpkg |
 
-- **Fintech & banking apps** rendering account/source pickers, payment method lists, transfer destination autocomplete, or transaction history rows.
-- **Payment gateways & PSPs** building checkout UIs that need to show every supported issuer, wallet, and switching network.
-- **Marketplaces & e-commerce** showing accepted payment methods, logistics options, or telco operators on a top-up page.
-- **Design systems & internal tools** that need a stable, versioned catalog instead of one-off Figma exports per team.
+All packages ship the same 489 SVGs from a single source of truth (`data/logos.yml` + `icons/`). Mobile packages bundle SVGs as platform-native resources; web packages ship them as both ESM modules and raw files.
 
-### Where the assets come from
+---
 
-The artwork is hand-curated from the public Figma community libraries linked in [Design source (Figma)](#design-source-figma) below. The npm/Maven/SPM/pub.dev packages are the production-grade, optimized, code-callable distribution of those Figma files — same artwork, redistributed in formats your build system can consume directly.
+## Why idn-finlogos
+
+Building a fintech, payments, banking, or e-commerce product for the Indonesian market means rendering dozens of local brand marks: banks (BCA, Mandiri, BRI), e-wallets (DANA, GoPay, OVO), payment rails (BI-FAST, QRIS, PRIMA, ALTO), regulators (OJK, BI, LPS), telcos, utilities, and more. Until now you had three bad options: trace them in Figma yourself, hotlink PNGs from blogs, or maintain a private fork of someone else's incomplete set.
+
+**idn-finlogos** replaces that with one curated, cross-platform asset library:
+
+- **One catalog, four ecosystems.** A single YAML manifest (`data/logos.yml`) compiles to npm, Maven Central / JitPack (Android), Swift Package Manager (iOS), and pub.dev (Flutter). The same `bca` slug returns identical artwork on every platform.
+- **Production-ready SVGs.** Every file is SVGO-optimized with a shared config, validated against the manifest in CI, and shipped both as raw `.svg` files and per-logo ESM modules (tree-shakeable bundles).
+- **Catalog API on every platform.** Beyond raw files, every language target exposes the same shape: `all`, `byCategory(...)`, `get(slug)`, `search(query)` — for pickers, settings screens, and dynamic UIs without re-implementing the index.
+- **Built for breadth.** 153 banks (national, regional BPDs, syariah, foreign branches), all major e-wallets, switching networks, card schemes (Visa, Mastercard, JCB, GPN), regulators, ISPs, utilities, logistics, and entertainment subscriptions you'll see on a typical Indonesian checkout page.
+- **Honest licensing.** Build tooling is MIT; the SVG artwork is CC BY-NC 4.0; trademarks remain the property of their holders. Commercial use of any individual mark requires permission from that brand — see [License](#license).
+
+**Who it's for:**
+
+- **Fintech & banking apps** rendering account pickers, transfer destinations, transaction rows.
+- **Payment gateways & PSPs** showing every supported issuer, wallet, and switching network in checkout.
+- **Marketplaces & e-commerce** displaying accepted payment methods, logistics options, or telco top-ups.
+- **Design systems & internal tools** that need a stable, versioned catalog instead of one-off Figma exports.
+
+---
+
+## Quick start
+
+```bash
+npm install idn-finlogos
+```
+
+```js
+import bca from 'idn-finlogos/icons/bca';
+
+document.getElementById('logo').innerHTML = bca;
+```
+
+That's it. `bca` is the SVG markup as a string. Same idea on Android, iOS, and Flutter — see [Usage](#usage) below.
 
 ---
 
 ## Install
 
-| Platform | Install |
+### From canonical registries
+
+The recommended install paths. Same artifact, same coordinates, no auth required.
+
+| Platform | Command |
 |---|---|
 | **Web (npm)** | `npm install idn-finlogos` |
-| **Android (Gradle / Maven Central)** | `implementation("io.github.hafidznoor:idn-finlogos:2.1.6")` |
+| **Android (Maven Central)** | `implementation("io.github.hafidznoor:idn-finlogos:2.1.6")` |
+| **Android (JitPack, no wait)** | Add `maven { url = uri("https://jitpack.io") }`, then `implementation("com.github.hafidznoor:idn-finlogos:2.1.6")` |
 | **iOS (Swift Package Manager)** | `.package(url: "https://github.com/hafidznoor/idn-finlogos", from: "2.1.6")` |
 | **Flutter (pub.dev)** | `flutter pub add idn_finlogos` |
-| **Web (CDN)** | `https://cdn.jsdelivr.net/npm/idn-finlogos@2/dist/icons/<slug>.svg` |
+| **Web (jsDelivr CDN)** | `https://cdn.jsdelivr.net/npm/idn-finlogos@2/dist/icons/<slug>.svg` |
+| **Web (unpkg CDN)** | `https://unpkg.com/idn-finlogos@2/dist/icons/<slug>.svg` |
 
-Each package ships the same 489 SVGs generated from a single source of truth (`data/logos.yml` + `icons/`). Mobile packages bundle the SVGs as platform-native resources; web packages ship them as ESM modules and raw files.
+### From GitHub Packages (mirror)
 
-### GitHub Packages (mirror)
-
-The npm and Android artifacts are also mirrored to GitHub Packages alongside the canonical npmjs.org / Maven Central releases. The canonical channels above remain the recommended install paths. GitHub Packages requires authentication even for public packages — generate a [Personal Access Token](https://github.com/settings/tokens) with the `read:packages` scope first.
+The npm and Android artifacts are also mirrored to **GitHub Packages** alongside the canonical releases. The canonical channels above remain recommended. GitHub Packages requires authentication even for public packages — generate a [Personal Access Token](https://github.com/settings/tokens) with the `read:packages` scope first.
 
 **npm** — add to `~/.npmrc` (or a project-local `.npmrc`):
 
@@ -58,7 +118,7 @@ The npm and Android artifacts are also mirrored to GitHub Packages alongside the
 
 Then install the scoped mirror:
 
-```
+```bash
 npm install @hafidznoor/idn-finlogos
 ```
 
@@ -87,23 +147,13 @@ implementation("io.github.hafidznoor:idn-finlogos:2.1.6")
 
 ---
 
-## Design source (Figma)
+## Usage
 
-The original artwork lives in three Figma community files. They are the canonical place to **browse, preview, and duplicate** the logos for design work. The packages on this repo are the **code distribution** of the same set — use Figma when designing, use the packages when shipping.
+### Web (npm)
 
-| Library | Figma community file |
-|---|---|
-| **Bank Logo Library — Indonesia** | https://www.figma.com/community/file/1246763677986037137/bank-logo-library-indonesia-in-svg-format |
-| **Payment Channel Logo Library — Indonesia** | https://www.figma.com/community/file/1263416469504652135/payment-channel-logo-library-indonesia-in-svg-format |
-| **Bill Payment Logo Library — Indonesia** | https://www.figma.com/community/file/1325472637345495839/bill-payment-logo-library-indonesia-in-svg-format |
+Four ways to consume logos on the web, depending on your bundler and rendering needs.
 
-If you notice a discrepancy between a logo here and the corresponding Figma file (an updated brand mark, a missing variant), please [open an issue](https://github.com/hafidznoor/idn-finlogos/issues) — the goal is to keep both in sync.
-
----
-
-## Web (npm) — four ways to use it
-
-### 1. Per-logo ESM import (recommended for app bundles)
+#### 1. Per-logo ESM import (recommended for app bundles)
 
 Tree-shakeable. Only the logos you import end up in your bundle.
 
@@ -116,7 +166,8 @@ import doku from 'idn-finlogos/icons/doku';
 document.getElementById('logo').innerHTML = bca;
 ```
 
-In React:
+**In React:**
+
 ```jsx
 import bca from 'idn-finlogos/icons/bca';
 
@@ -125,7 +176,11 @@ function BcaLogo() {
 }
 ```
 
-### 2. Raw SVG file as URL (for `<img src>`, asset pipelines)
+**In Vue / Svelte / Solid:** same idea — the import is a string, drop it into your framework's HTML-injection primitive.
+
+#### 2. Raw SVG file as URL
+
+For `<img src>`, asset pipelines, or framework loaders that hash and emit files.
 
 ```js
 import bcaUrl from 'idn-finlogos/icons/bca.svg';
@@ -134,7 +189,7 @@ import bcaUrl from 'idn-finlogos/icons/bca.svg';
 <img src={bcaUrl} alt="BCA" />
 ```
 
-### 3. Metadata helpers (for catalog pages, dynamic pickers)
+#### 3. Metadata helpers (for catalog pages, dynamic pickers)
 
 ```js
 import { listLogos, getLogo, getLogoUrl, getCategories } from 'idn-finlogos';
@@ -153,18 +208,20 @@ getLogoUrl('bca');
 // → 'https://cdn.jsdelivr.net/npm/idn-finlogos@2.1.6/dist/icons/bca.svg'
 ```
 
-### 4. CDN — no install, no build step
+#### 4. CDN — no install, no build step
 
 ```html
-<img src="https://cdn.jsdelivr.net/npm/idn-finlogos@2/dist/icons/bca.svg" />
-<img src="https://unpkg.com/idn-finlogos@2/dist/icons/gopay.svg" />
+<img src="https://cdn.jsdelivr.net/npm/idn-finlogos@2/dist/icons/bca.svg" alt="BCA" />
+<img src="https://unpkg.com/idn-finlogos@2/dist/icons/gopay.svg" alt="GoPay" />
 ```
 
-Pin a major (`@2`), minor (`@2.1`), or exact version (`@2.1.6`).
+Pin a major (`@2`), minor (`@2.1`), or exact version (`@2.1.6`). jsDelivr and unpkg both work.
 
 ---
 
-## Android
+### Android
+
+`io.github.hafidznoor:idn-finlogos` ships SVGs as Android assets plus a typed Kotlin catalog. Pair it with **Coil** (recommended), **Glide**, or any SVG renderer.
 
 ```kotlin
 // app/build.gradle.kts
@@ -197,20 +254,20 @@ fun BcaLogo() {
 }
 ```
 
-Catalog API: `IdnFinLogos.all`, `byCategory(...)`, `get(...)`, `search(...)`. See [platforms/android/README.md](./platforms/android/README.md).
+**Catalog API:** `IdnFinLogos.all`, `byCategory(...)`, `get(...)`, `search(...)`. Full Android-specific docs in [platforms/android/README.md](./platforms/android/README.md).
 
-JitPack also works without waiting on Maven Central — add `maven { url = uri("https://jitpack.io") }` to your repositories and use `com.github.hafidznoor:idn-finlogos:2.1.6`.
+**Min SDK:** API 21 (Android 5.0). **Compile SDK:** 34.
 
 ---
 
-## iOS
+### iOS
+
+`IdnFinLogos` ships SVGs as bundle resources plus a typed Swift catalog. Pair with **SVGKit** or your preferred SVG renderer.
 
 ```swift
 // Package.swift
 .package(url: "https://github.com/hafidznoor/idn-finlogos", from: "2.1.6")
 ```
-
-Add **SVGKit** (or your preferred SVG renderer) separately:
 
 ```swift
 import SwiftUI
@@ -227,11 +284,15 @@ struct BcaLogo: View {
 }
 ```
 
-Catalog API: `IdnFinLogos.all`, `byCategory(_:)`, `get(_:)`, `search(_:)`. Minimum platforms: iOS 13, macOS 11, tvOS 13, watchOS 6.
+**Catalog API:** `IdnFinLogos.all`, `byCategory(_:)`, `get(_:)`, `search(_:)`.
+
+**Minimum platforms:** iOS 13, macOS 11, tvOS 13, watchOS 6.
 
 ---
 
-## Flutter
+### Flutter
+
+`idn_finlogos` bundles SVGs as Flutter assets and exposes a Dart catalog. Pair with **flutter_svg**.
 
 ```bash
 flutter pub add idn_finlogos flutter_svg
@@ -253,19 +314,47 @@ class BcaLogo extends StatelessWidget {
 }
 ```
 
-Catalog API: `IdnFinLogos.all`, `byCategory(...)`, `get(...)`, `search(...)`. See [platforms/flutter/README.md](./platforms/flutter/README.md).
+**Catalog API:** `IdnFinLogos.all`, `byCategory(...)`, `get(...)`, `search(...)`. Full Flutter-specific docs in [platforms/flutter/README.md](./platforms/flutter/README.md).
+
+**Min SDK:** Dart 3.0+, Flutter 3.0+.
 
 ---
 
-## Categories
+## Coverage
 
-23 categories, browseable via `getCategories()` or `data/categories.yml`:
+**489 logos across 23 categories**, browseable via `getCategories()` or [`data/categories.yml`](./data/categories.yml).
 
-`bank-logo` · `bank-app` · `card-payment` · `direct-debit` · `donation` · `e-commerce` · `e-wallet` · `entertainment` · `financing` · `game` · `government` · `isp` · `logistic` · `miscellaneous` · `mobile-telco` · `payment-gateway` · `prepaid-card` · `regulatory` · `remittance` · `supermarket` · `switching` · `transportation` · `utilities`
+| # | Category | Slug | Logos |
+|---:|---|---|---:|
+| 1 | Bank Logo | `bank-logo` | 153 |
+| 2 | Card Payment | `card-payment` | 37 |
+| 3 | Logistic | `logistic` | 32 |
+| 4 | E-Wallet | `e-wallet` | 27 |
+| 5 | Entertainment | `entertainment` | 26 |
+| 6 | Financing | `financing` | 26 |
+| 7 | Supermarket | `supermarket` | 18 |
+| 8 | Mobile Telco | `mobile-telco` | 17 |
+| 9 | Game | `game` | 15 |
+| 10 | Bank App | `bank-app` | 14 |
+| 11 | Miscellaneous | `miscellaneous` | 14 |
+| 12 | Regulatory | `regulatory` | 14 |
+| 13 | Switching | `switching` | 13 |
+| 14 | Transportation | `transportation` | 12 |
+| 15 | ISP | `isp` | 11 |
+| 16 | E-Commerce | `e-commerce` | 9 |
+| 17 | Remittance | `remittance` | 9 |
+| 18 | Payment Gateway | `payment-gateway` | 8 |
+| 19 | Prepaid Card | `prepaid-card` | 8 |
+| 20 | Direct Debit | `direct-debit` | 7 |
+| 21 | Donation | `donation` | 7 |
+| 22 | Utilities | `utilities` | 7 |
+| 23 | Government | `government` | 5 |
+
+**Notable brands covered:** BCA, Mandiri, BRI, BNI, BSI, BTN, CIMB Niaga, Danamon, Permata, OCBC NISP, UOB, HSBC, Standard Chartered, Citibank, DBS, Maybank, DANA, GoPay, OVO, ShopeePay, LinkAja, DOKU, Midtrans, Xendit, Stripe, 2c2p, ipay88, BI-FAST, QRIS, PRIMA, ALTO, Jalin, GPN, Visa, Mastercard, JCB, OJK, Bank Indonesia, LPS, AFPI, Telkomsel, IndiHome, MyRepublic, JNE, J&T, SiCepat, Tokopedia, Shopee, Lazada, Bukalapak, Blibli, Pegadaian, PLN, PGN, KAI, TransJakarta, MRT Jakarta, Netflix, Spotify, Disney+ Hotstar — and 430+ more in the full catalog below.
 
 ---
 
-## Logo list
+## Complete logo catalog
 
 All 489 logos, grouped by category and sorted by name. Click a section to expand. The `code` is the slug you pass to `getLogo()`, `IdnFinLogos.get(...)`, or use as a file name (`icons/<slug>.svg`).
 
@@ -430,13 +519,27 @@ All 489 logos, grouped by category and sorted by name. Click a section to expand
 
 </details>
 
-> The list above is generated from [`data/logos.yml`](./data/logos.yml). If you spot something missing or wrong, that file is the source of truth — open an issue or PR against it and the build will re-emit the manifest.
+> The list above is generated from [`data/logos.yml`](./data/logos.yml). Missing or wrong? That file is the source of truth — open an issue or PR against it.
+
+---
+
+## Design source (Figma)
+
+The original artwork lives in three Figma community files. They're the canonical place to **browse, preview, and duplicate** the logos for design work. The packages here are the **code distribution** of the same set — use Figma when designing, use the packages when shipping.
+
+| Library | Figma community file |
+|---|---|
+| **Bank Logo Library — Indonesia** | https://www.figma.com/community/file/1246763677986037137/bank-logo-library-indonesia-in-svg-format |
+| **Payment Channel Logo Library — Indonesia** | https://www.figma.com/community/file/1263416469504652135/payment-channel-logo-library-indonesia-in-svg-format |
+| **Bill Payment Logo Library — Indonesia** | https://www.figma.com/community/file/1325472637345495839/bill-payment-logo-library-indonesia-in-svg-format |
+
+Spot a discrepancy between a logo here and the corresponding Figma file? Please [open an issue](https://github.com/hafidznoor/idn-finlogos/issues) — the goal is to keep both in sync.
 
 ---
 
 ## TypeScript
 
-Types are bundled. No `@types/` install required.
+TypeScript types are bundled. No `@types/` install required.
 
 ```ts
 import { listLogos, type LogoMeta } from 'idn-finlogos';
@@ -444,24 +547,54 @@ import { listLogos, type LogoMeta } from 'idn-finlogos';
 const banks: LogoMeta[] = listLogos({ category: 'bank-logo' });
 ```
 
+Each `LogoMeta` carries: `slug`, `name`, `category`, `aliases`, `tags`, plus accessors for SVG content and URLs.
+
+---
+
+## FAQ
+
+**Q: Are the SVGs free to use commercially?**
+The build tooling is MIT-licensed (free for any use). The SVG artwork is CC BY-NC 4.0 (non-commercial). The trademarks themselves belong to their holders — **commercial use of any individual brand mark requires permission from that brand**. See [License](#license).
+
+**Q: Why are some brand names misspelled (e.g. "Amercian Express", "Mualamat")?**
+Historical slugs are preserved for backwards compatibility with v1 (`indo-financial-logolibrary`). The display names in `name:` fields are correct; only the slug spelling is frozen.
+
+**Q: Can I request a missing logo?**
+Yes — open an issue at [github.com/hafidznoor/idn-finlogos/issues](https://github.com/hafidznoor/idn-finlogos/issues) with the brand name, your source for the vector, and the trademark holder. PRs against [`data/logos.yml`](./data/logos.yml) and `icons/<slug>.svg` welcome.
+
+**Q: Why are mobile packages so big?**
+Each platform bundles all 489 SVGs as native resources (~4 MB optimized). If you only need a few, the npm package is tree-shakeable — pick the per-logo ESM import path on the web. On mobile, the assets are stored as platform resources and lazily decoded.
+
+**Q: Do I need a separate SVG renderer on Android, iOS, or Flutter?**
+Yes — this package ships only the SVG files plus a catalog. Pair with **Coil** + `coil-svg` on Android, **SVGKit** on iOS, **flutter_svg** on Flutter (or any equivalent).
+
+**Q: What's the difference between Maven Central and JitPack for Android?**
+Same artifact, different repositories. Maven Central is canonical and recommended. JitPack is a fallback for when a new version hasn't propagated to Maven Central yet — useful for early adopters.
+
+**Q: Is there a GitHub Packages mirror?**
+Yes, for npm (`@hafidznoor/idn-finlogos`) and Android Maven (`io.github.hafidznoor:idn-finlogos`). See [GitHub Packages (mirror)](#from-github-packages-mirror). The canonical channels remain recommended.
+
+**Q: What does the catalog API return?**
+Every platform exposes `all`, `byCategory(slug)`, `get(slug)`, and `search(query)`. The shape is `{ slug, name, category, aliases, tags, ... }` plus a platform-appropriate way to get the SVG (string on web, asset path on Android/Flutter, URL on iOS).
+
 ---
 
 ## License
 
 **Dual-licensed.** Read both — they cover different parts of this package.
 
-- Build tooling, scripts, and module wrappers: **MIT** (see [LICENSE](./LICENSE))
-- SVG logo assets: **CC BY-NC 4.0** (see [LICENSE-ASSETS](./LICENSE-ASSETS))
+- Build tooling, scripts, and module wrappers → **MIT** (see [LICENSE](./LICENSE))
+- SVG logo assets → **CC BY-NC 4.0** (see [LICENSE-ASSETS](./LICENSE-ASSETS))
 
 The underlying logo marks remain the property of their respective trademark holders. Inclusion here does not imply endorsement. See [NOTICE](./NOTICE) for the full disclaimer.
 
-**Commercial use of the SVG assets requires permission from the trademark holder of each respective logo.**
+> **Commercial use of the SVG assets requires permission from the trademark holder of each respective logo.**
 
 ---
 
 ## Contributing
 
-This is a curated collection. To request a logo add/remove/update, open an issue at https://github.com/hafidznoor/idn-finlogos/issues — include the brand name, your source for the vector, and the trademark holder.
+This is a curated collection. To request a logo add/remove/update, open an issue at [github.com/hafidznoor/idn-finlogos/issues](https://github.com/hafidznoor/idn-finlogos/issues) — include the brand name, your source for the vector, and the trademark holder.
 
 For maintainers, the build pipeline is:
 
@@ -469,7 +602,14 @@ For maintainers, the build pipeline is:
 npm install
 npm run validate    # check icons/ ↔ data/logos.yml consistency
 npm run build       # produces dist/
+npm run build:all   # produces dist/ + Android + iOS + Flutter assets
 npm pack --dry-run  # inspect the publishable tarball
 ```
 
 The source of truth is [`data/logos.yml`](./data/logos.yml). Edit display names, add `aliases`, or add `tags` there — the build re-emits the manifest.
+
+---
+
+## Keywords
+
+`indonesia` · `indonesian banks` · `bank logos` · `e-wallet icons` · `payment gateway logos` · `fintech` · `svg` · `icons` · `react` · `vue` · `svelte` · `nextjs` · `android` · `ios` · `swift` · `kotlin` · `flutter` · `dart` · `bca` · `mandiri` · `bri` · `bni` · `dana` · `gopay` · `ovo` · `shopeepay` · `bi-fast` · `qris` · `ojk` · `bank indonesia` · `npm package` · `maven central` · `pub.dev`
