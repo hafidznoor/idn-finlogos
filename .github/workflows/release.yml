@@ -87,12 +87,12 @@ jobs:
           cache: true
 
       - name: Configure pub.dev token
-        env:
-          PUB_DEV_TOKEN: ${{ secrets.PUB_DEV_TOKEN }}
-        run: dart pub token add https://pub.dev --stdin <<< "$PUB_DEV_TOKEN"
+        run: dart pub token add https://pub.dev --env-var PUB_DEV_TOKEN
 
       - name: Publish to pub.dev
         working-directory: platforms/flutter
+        env:
+          PUB_DEV_TOKEN: ${{ secrets.PUB_DEV_TOKEN }}
         run: |
           flutter pub get
           dart pub publish --force

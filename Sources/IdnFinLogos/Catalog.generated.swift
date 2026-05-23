@@ -7,7 +7,7 @@
 import Foundation
 
 internal enum Catalog {
-    static let version: String = "2.1.0"
+    static let version: String = "2.1.3"
 
     static let logos: [LogoMeta] = [
         LogoMeta(slug: "2c2p", name: "2c2p", category: "payment-gateway", aliases: [], tags: []),
