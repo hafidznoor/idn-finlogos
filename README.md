@@ -1,6 +1,6 @@
 # idn-finlogos
 
-Indonesian financial institution logos — banks, e-wallets, payment gateways, switching, regulatory, and 18 more categories — as optimized SVGs with per-logo ESM imports.
+Indonesian financial institution logos — banks, e-wallets, payment gateways, switching, regulatory, and 18 more categories — as optimized SVGs, available on **npm, Maven Central, Swift Package Manager, and pub.dev**.
 
 **489 logos · 23 categories · SVG only · zero runtime dependencies**
 
@@ -10,15 +10,19 @@ Indonesian financial institution logos — banks, e-wallets, payment gateways, s
 
 ## Install
 
-```bash
-npm install idn-finlogos
-```
+| Platform | Install |
+|---|---|
+| **Web (npm)** | `npm install idn-finlogos` |
+| **Android (Gradle / Maven Central)** | `implementation("io.github.hafidznoor:idn-finlogos:2.0.1")` |
+| **iOS (Swift Package Manager)** | `.package(url: "https://github.com/hafidznoor/idn-finlogos", from: "2.0.1")` |
+| **Flutter (pub.dev)** | `flutter pub add idn_finlogos` |
+| **Web (CDN)** | `https://cdn.jsdelivr.net/npm/idn-finlogos@2/dist/icons/<slug>.svg` |
 
-Or use directly from a CDN — no install required.
+Each package ships the same 489 SVGs generated from a single source of truth (`data/logos.yml` + `icons/`). Mobile packages bundle the SVGs as platform-native resources; web packages ship them as ESM modules and raw files.
 
 ---
 
-## Four ways to use it
+## Web (npm) — four ways to use it
 
 ### 1. Per-logo ESM import (recommended for app bundles)
 
@@ -78,6 +82,99 @@ getLogoUrl('bca');
 ```
 
 Pin a major (`@2`), minor (`@2.0`), or exact version (`@2.0.0`).
+
+---
+
+## Android
+
+```kotlin
+// app/build.gradle.kts
+dependencies {
+    implementation("io.github.hafidznoor:idn-finlogos:2.0.1")
+    // Recommended SVG renderer:
+    implementation("io.coil-kt:coil-compose:2.6.0")
+    implementation("io.coil-kt:coil-svg:2.6.0")
+}
+```
+
+```kotlin
+import com.hafidznoor.idnfinlogos.IdnFinLogos
+import coil.ImageLoader
+import coil.compose.AsyncImage
+import coil.decode.SvgDecoder
+
+@Composable
+fun BcaLogo() {
+    val ctx = LocalContext.current
+    val loader = remember {
+        ImageLoader.Builder(ctx).components { add(SvgDecoder.Factory()) }.build()
+    }
+    val bca = IdnFinLogos.get("bca") ?: return
+    AsyncImage(
+        model = "file:///android_asset/${bca.assetPath}",
+        imageLoader = loader,
+        contentDescription = bca.name,
+    )
+}
+```
+
+Catalog API: `IdnFinLogos.all`, `byCategory(...)`, `get(...)`, `search(...)`. See [platforms/android/README.md](./platforms/android/README.md).
+
+JitPack also works without waiting on Maven Central — add `maven { url = uri("https://jitpack.io") }` to your repositories and use `com.github.hafidznoor:idn-finlogos:2.0.1`.
+
+---
+
+## iOS
+
+```swift
+// Package.swift
+.package(url: "https://github.com/hafidznoor/idn-finlogos", from: "2.0.1")
+```
+
+Add **SVGKit** (or your preferred SVG renderer) separately:
+
+```swift
+import SwiftUI
+import SVGKit
+import IdnFinLogos
+
+struct BcaLogo: View {
+    var body: some View {
+        if let url = IdnFinLogos.get("bca")?.url,
+           let img = SVGKImage(contentsOf: url)?.uiImage {
+            Image(uiImage: img).resizable().scaledToFit()
+        }
+    }
+}
+```
+
+Catalog API: `IdnFinLogos.all`, `byCategory(_:)`, `get(_:)`, `search(_:)`. Minimum platforms: iOS 13, macOS 11, tvOS 13, watchOS 6.
+
+---
+
+## Flutter
+
+```bash
+flutter pub add idn_finlogos flutter_svg
+```
+
+```dart
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:idn_finlogos/idn_finlogos.dart';
+
+class BcaLogo extends StatelessWidget {
+  const BcaLogo({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final bca = IdnFinLogos.get('bca');
+    if (bca == null) return const SizedBox.shrink();
+    return SvgPicture.asset(bca.assetPath, semanticsLabel: bca.name);
+  }
+}
+```
+
+Catalog API: `IdnFinLogos.all`, `byCategory(...)`, `get(...)`, `search(...)`. See [platforms/flutter/README.md](./platforms/flutter/README.md).
 
 ---
 

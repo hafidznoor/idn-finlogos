@@ -1,0 +1,13 @@
+# JitPack build configuration.
+# JitPack lazily builds on first consumer request — no workflow run is needed
+# on tag push. This file just pins the JDK and points JitPack at the Android
+# Gradle project (which lives under platforms/android/, not the repo root).
+
+jdk:
+  - openjdk17
+
+before_install:
+  - cd platforms/android
+
+install:
+  - ./gradlew :library:publishToMavenLocal -x signing -PVERSION_NAME=${VERSION:-0.0.0}

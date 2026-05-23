@@ -1,0 +1,1 @@
+See the [main CHANGELOG](https://github.com/hafidznoor/idn-finlogos/blob/main/CHANGELOG.md) for the full release history. The Flutter package version mirrors the npm package version, so the same release notes apply.

@@ -10,3 +10,29 @@ npm-debug.log*
 .env.local
 
 *.tgz
+
+# Swift Package Manager build outputs.
+# Note: Sources/IdnFinLogos/Icons/*.svg and Catalog.generated.swift ARE committed —
+# SPM consumers clone the tagged commit and build directly, no regeneration step.
+.build/
+.swiftpm/
+Package.resolved
+
+# Android / Gradle build outputs.
+# Note: platforms/android/library/src/main/assets/idn-finlogos/*.svg and
+# Catalog.kt ARE committed — JitPack consumers clone the tagged commit and
+# run Gradle directly.
+platforms/android/.gradle/
+platforms/android/build/
+platforms/android/**/build/
+platforms/android/local.properties
+platforms/android/.idea/
+
+# Flutter build outputs.
+# Note: platforms/flutter/assets/idn-finlogos/*.svg and catalog.g.dart ARE
+# committed — pub.dev publishes the package as-is from CI.
+platforms/flutter/.dart_tool/
+platforms/flutter/.flutter-plugins
+platforms/flutter/.flutter-plugins-dependencies
+platforms/flutter/build/
+platforms/flutter/pubspec.lock

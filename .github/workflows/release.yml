@@ -8,8 +8,14 @@ permissions:
   contents: write   # for gh release create
   id-token: write   # for npm provenance via OIDC
 
+# Each job is independent: the generated platform sources (Catalog.kt,
+# Catalog.generated.swift, catalog.g.dart) and SVG asset copies are committed
+# to the repo, so each toolchain reads what it needs directly from the
+# checked-out tag. The npm job re-runs `npm run build` to produce `dist/`
+# (gitignored) so OIDC provenance is tied to this run.
+
 jobs:
-  publish:
+  publish-npm:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -21,9 +27,7 @@ jobs:
           cache: npm
 
       - run: npm ci
-
       - run: npm run validate
-
       - run: npm run build
 
       - name: Publish to npm with provenance
@@ -31,12 +35,101 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      - name: Build SVG-only zip for GitHub Release
+  publish-android:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Publish to Maven Central
+        working-directory: platforms/android
+        env:
+          ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
+          ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
+          ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.SIGNING_KEY }}
+          ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ${{ secrets.SIGNING_PASSWORD }}
+        run: |
+          chmod +x ./gradlew 2>/dev/null || true
+          if [ -x ./gradlew ]; then
+            ./gradlew :library:publishAndReleaseToMavenCentral --no-configuration-cache
+          else
+            gradle :library:publishAndReleaseToMavenCentral --no-configuration-cache
+          fi
+
+      - name: Build AAR for the GitHub Release
+        working-directory: platforms/android
+        run: |
+          if [ -x ./gradlew ]; then
+            ./gradlew :library:assembleRelease
+          else
+            gradle :library:assembleRelease
+          fi
+
+      - name: Upload AAR artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-aar
+          path: platforms/android/library/build/outputs/aar/*.aar
+          retention-days: 7
+
+  publish-flutter:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Configure pub.dev credentials
+        run: |
+          mkdir -p ~/.config/dart
+          cat > ~/.config/dart/pub-credentials.json <<EOF
+          ${{ secrets.PUB_CREDENTIALS_JSON }}
+          EOF
+
+      - name: Publish to pub.dev
+        working-directory: platforms/flutter
+        run: |
+          flutter pub get
+          flutter pub publish --force
+
+  github-release:
+    needs: [publish-npm, publish-android, publish-flutter]
+    # Run even if mobile publish jobs fail (Maven Central / pub.dev may not be
+    # set up yet). Only skip if npm publish itself failed.
+    if: always() && needs.publish-npm.result == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+
+      - run: npm ci
+      - run: npm run build
+
+      - name: Download Android AAR (if built)
+        uses: actions/download-artifact@v4
+        continue-on-error: true
+        with:
+          name: android-aar
+          path: aar-out
+
+      - name: Build SVG-only zip + stage AAR
         run: |
           mkdir -p release-assets
           cd dist/icons
           zip -qr "../../release-assets/idn-finlogos-svg-${GITHUB_REF_NAME}.zip" ./*.svg
           cd ../..
+          cp aar-out/*.aar release-assets/ 2>/dev/null || true
 
       - name: Create GitHub Release
         env:
@@ -45,4 +138,4 @@ jobs:
           gh release create "${GITHUB_REF_NAME}" \
             --title "${GITHUB_REF_NAME}" \
             --generate-notes \
-            release-assets/idn-finlogos-svg-${GITHUB_REF_NAME}.zip
+            release-assets/*

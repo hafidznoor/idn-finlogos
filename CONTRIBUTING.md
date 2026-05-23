@@ -29,11 +29,17 @@ If you're a trademark holder asking for a logo to be removed or updated, please 
    ```bash
    npm run validate
    ```
-4. Build and inspect:
+4. **Regenerate every platform's output** — this is required for SPM and JitPack consumers, which clone the tagged commit directly and have no regeneration step of their own:
    ```bash
-   npm run build
+   npm run build:all
+   git add platforms Sources/IdnFinLogos dist
+   ```
+5. Inspect the npm tarball:
+   ```bash
    npm pack --dry-run
    ```
+
+CI (`ci.yml`) runs `npm run build:all` on every PR and fails if the committed `platforms/` or `Sources/IdnFinLogos/` files don't match what the generators would emit — so the regeneration is enforced, not optional.
 
 ## SVG hygiene
 
@@ -57,8 +63,43 @@ If two logos would slugify to the same value (e.g. one brand appearing in multip
 
 ## Release process (maintainers)
 
-1. `npm version <major|minor|patch>` — bumps version and tags.
-2. `git push origin main --tags`
-3. The `release.yml` workflow publishes to npm with provenance and creates a GitHub Release with the SVG zip attached.
+One git tag fans out to **four registries**: npm, Maven Central, JitPack, and pub.dev.
 
-The `NPM_TOKEN` repo secret needs to be set for publish. Use a granular access token scoped to `idn-finlogos` only.
+```bash
+# 1. Bump version everywhere (npm version writes package.json + creates a tag).
+npm version <major|minor|patch> --no-git-tag-version
+
+# 2. Regenerate every platform's output with the new version baked in.
+npm run build:all
+
+# 3. Commit + tag + push.
+git add package.json platforms Sources/IdnFinLogos dist
+git commit -m "release: v$(node -p 'require(\"./package.json\").version')"
+git tag "v$(node -p 'require(\"./package.json\").version')"
+git push origin main --tags
+```
+
+The `release.yml` workflow then runs four publish jobs in parallel after a shared `generate` step:
+
+| Job | Registry | Required secrets |
+|---|---|---|
+| `publish-npm` | npm | `NPM_TOKEN` (granular token scoped to `idn-finlogos`) |
+| `publish-android` | Maven Central | `MAVEN_CENTRAL_USERNAME`, `MAVEN_CENTRAL_PASSWORD`, `SIGNING_KEY`, `SIGNING_PASSWORD` |
+| `publish-flutter` | pub.dev | `PUB_CREDENTIALS_JSON` |
+| `github-release` | GitHub Releases | (uses `GITHUB_TOKEN`) |
+
+**JitPack** requires zero CI action — it lazily builds the Android AAR on first consumer request, using the [`jitpack.yml`](./jitpack.yml) at the repo root.
+
+### One-time setup before the first release
+
+1. **Sonatype Central Portal** ([central.sonatype.com](https://central.sonatype.com)) — register, verify the `io.github.hafidznoor` namespace by adding the assigned TXT record to your domain or via the GitHub-handle proof.
+2. **GPG signing key** — generate (`gpg --gen-key`), publish to `keys.openpgp.org`, then export the private key as ASCII-armored (`gpg --armor --export-secret-keys <KEY_ID>`) and store its contents in the `SIGNING_KEY` secret. Store the key's passphrase in `SIGNING_PASSWORD`.
+3. **pub.dev credentials** — run `dart pub token add https://pub.dev`, then copy the contents of `~/.config/dart/pub-credentials.json` into the `PUB_CREDENTIALS_JSON` secret.
+
+Once these are in place, releases are fully automated.
+
+## Why the platform files are committed
+
+Generated platform sources (`platforms/android/.../Catalog.kt`, `Sources/IdnFinLogos/Catalog.generated.swift`, `platforms/flutter/lib/src/catalog.g.dart`) and the duplicated SVG assets are committed to the repo, *not* gitignored.
+
+This is deliberate: **SPM and JitPack consumers clone the tagged commit and build directly** — they have no Node.js step that could regenerate. The committed files are the only way those ecosystems get a working package. CI enforces that the committed files match what the generators would emit, so they can never drift.

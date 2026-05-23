@@ -24,11 +24,19 @@ jobs:
       - name: Validate catalog
         run: npm run validate
 
-      - name: Build
-        run: npm run build
+      - name: Build (all platforms)
+        run: npm run build:all
 
       - name: Inspect publishable tarball
         run: npm pack --dry-run
+
+      - name: Verify generated files are in sync with sources
+        run: |
+          if ! git diff --quiet -- platforms Sources/IdnFinLogos; then
+            echo "::error::Generated platform files are out of sync with data/. Run 'npm run build:all' and commit the result."
+            git diff -- platforms Sources/IdnFinLogos | head -200
+            exit 1
+          fi
 
       - name: Upload dist/ artifact
         uses: actions/upload-artifact@v4
