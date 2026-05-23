@@ -78,21 +78,22 @@ jobs:
 
   publish-flutter:
     runs-on: ubuntu-latest
+    # id-token: write is inherited from the workflow-level permissions
+    # block and is required for pub.dev OIDC trusted publishing.
     steps:
       - uses: actions/checkout@v4
+
+      # setup-dart configures pub.dev OIDC by fetching the GitHub Actions
+      # ID token and registering it with `dart pub token add --env-var`.
+      - uses: dart-lang/setup-dart@v1
 
       - uses: subosito/flutter-action@v2
         with:
           channel: stable
           cache: true
 
-      - name: Configure pub.dev token
-        run: dart pub token add https://pub.dev --env-var PUB_DEV_TOKEN
-
       - name: Publish to pub.dev
         working-directory: platforms/flutter
-        env:
-          PUB_DEV_TOKEN: ${{ secrets.PUB_DEV_TOKEN }}
         run: |
           flutter pub get
           dart pub publish --force
