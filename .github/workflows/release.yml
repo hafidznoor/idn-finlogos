@@ -125,9 +125,9 @@ jobs:
         run: |
           chmod +x ./gradlew 2>/dev/null || true
           if [ -x ./gradlew ]; then
-            ./gradlew :library:publishReleasePublicationToGitHubPackagesRepository --no-configuration-cache
+            ./gradlew :library:publishAllPublicationsToGitHubPackagesRepository --no-configuration-cache
           else
-            gradle :library:publishReleasePublicationToGitHubPackagesRepository --no-configuration-cache
+            gradle :library:publishAllPublicationsToGitHubPackagesRepository --no-configuration-cache
           fi
 
   publish-flutter:
