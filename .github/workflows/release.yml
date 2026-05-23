@@ -7,6 +7,7 @@ on:
 permissions:
   contents: write   # for gh release create
   id-token: write   # for npm provenance via OIDC
+  packages: write   # for GitHub Packages (npm + Maven) publish
 
 # Each job is independent: the generated platform sources (Catalog.kt,
 # Catalog.generated.swift, catalog.g.dart) and SVG asset copies are committed
@@ -34,6 +35,34 @@ jobs:
         run: npm publish --access public --provenance
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+  # Mirror npm publish to GitHub Packages. The canonical npmjs.org package
+  # `idn-finlogos` is unscoped, but GHP only accepts scoped names that match
+  # the repo owner, so we rewrite `name` in-place on the runner before
+  # publishing. The on-disk package.json in the repo is not modified.
+  publish-npm-ghp:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@hafidznoor'
+          cache: npm
+
+      - run: npm ci
+      - run: npm run validate
+      - run: npm run build
+
+      - name: Rename package to scoped name for GitHub Packages
+        run: npm pkg set name=@hafidznoor/idn-finlogos
+
+      - name: Publish to GitHub Packages
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   publish-android:
     runs-on: ubuntu-latest
@@ -75,6 +104,31 @@ jobs:
           name: android-aar
           path: platforms/android/library/build/outputs/aar/*.aar
           retention-days: 7
+
+  # Mirror Android publish to GitHub Packages. GHP does not require signing,
+  # so the Maven Central signing secrets are intentionally omitted.
+  publish-android-ghp:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Publish to GitHub Packages
+        working-directory: platforms/android
+        env:
+          GITHUB_ACTOR: ${{ github.actor }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          chmod +x ./gradlew 2>/dev/null || true
+          if [ -x ./gradlew ]; then
+            ./gradlew :library:publishReleasePublicationToGitHubPackagesRepository --no-configuration-cache
+          else
+            gradle :library:publishReleasePublicationToGitHubPackagesRepository --no-configuration-cache
+          fi
 
   publish-flutter:
     runs-on: ubuntu-latest

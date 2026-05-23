@@ -67,3 +67,19 @@ mavenPublishing {
         }
     }
 }
+
+// Mirror to GitHub Packages alongside the vanniktech-managed Maven Central
+// publish. Gradle auto-generates `publishReleasePublicationToGitHubPackagesRepository`
+// from this block; credentials come from GITHUB_ACTOR / GITHUB_TOKEN in CI.
+publishing {
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/hafidznoor/idn-finlogos")
+            credentials {
+                username = System.getenv("GITHUB_ACTOR")
+                password = System.getenv("GITHUB_TOKEN")
+            }
+        }
+    }
+}
