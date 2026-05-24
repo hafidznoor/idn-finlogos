@@ -1,6 +1,6 @@
 {
   "name": "idn-finlogos",
-  "version": "2.1.6",
+  "version": "2.2.0",
   "description": "Indonesian financial institution logos (banks, e-wallets, payment gateways, and 20+ more categories) as optimized SVGs with per-logo ESM imports.",
   "keywords": [
     "indonesia",

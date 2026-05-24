@@ -1,7 +1,7 @@
 name: idn_finlogos
 description: Indonesian financial institution logos (banks, e-wallets, payment gateways, and 20+ more categories) as bundled SVG assets, with a typed Dart catalog API.
 # Rewritten by scripts/build-flutter.mjs to mirror the npm package version.
-version: 2.1.6
+version: 2.2.0
 homepage: https://github.com/hafidznoor/idn-finlogos
 repository: https://github.com/hafidznoor/idn-finlogos
 issue_tracker: https://github.com/hafidznoor/idn-finlogos/issues
@@ -28,21 +28,32 @@ flutter:
   assets:
     # >>> generated:assets
     - assets/idn-finlogos/2c2p.svg
+    - assets/idn-finlogos/2c2p-new.svg
+    - assets/idn-finlogos/2c2p-new-alt.svg
     - assets/idn-finlogos/acc.svg
     - assets/idn-finlogos/acc-alt.svg
     - assets/idn-finlogos/adakami.svg
     - assets/idn-finlogos/adakami-alt.svg
     - assets/idn-finlogos/adira-finance.svg
+    - assets/idn-finlogos/aeon.svg
     - assets/idn-finlogos/aeon-credit-service.svg
     - assets/idn-finlogos/aetra-tangerang.svg
     - assets/idn-finlogos/afpi.svg
+    - assets/idn-finlogos/aia.svg
     - assets/idn-finlogos/akulaku.svg
     - assets/idn-finlogos/akulaku-paylater.svg
     - assets/idn-finlogos/aladin.svg
+    - assets/idn-finlogos/alfa-express.svg
     - assets/idn-finlogos/alfamart.svg
     - assets/idn-finlogos/alfamidi.svg
+    - assets/idn-finlogos/alfamidi-super.svg
     - assets/idn-finlogos/alipay-new.svg
     - assets/idn-finlogos/alipay-old.svg
+    - assets/idn-finlogos/alipay-plus.svg
+    - assets/idn-finlogos/alipay-plus-old.svg
+    - assets/idn-finlogos/alipay-plus-old-alt.svg
+    - assets/idn-finlogos/allianz.svg
+    - assets/idn-finlogos/allianz-alt.svg
     - assets/idn-finlogos/allo.svg
     - assets/idn-finlogos/alto.svg
     - assets/idn-finlogos/amar-bank.svg
@@ -58,9 +69,14 @@ flutter:
     - assets/idn-finlogos/apple-pay.svg
     - assets/idn-finlogos/aspi.svg
     - assets/idn-finlogos/assa.svg
+    - assets/idn-finlogos/astra-life.svg
+    - assets/idn-finlogos/astra-life-alt.svg
     - assets/idn-finlogos/astra-pay.svg
+    - assets/idn-finlogos/asuransi-sinarmas-insurtech.svg
     - assets/idn-finlogos/atm-bersama.svg
+    - assets/idn-finlogos/axa.svg
     - assets/idn-finlogos/axis.svg
+    - assets/idn-finlogos/ayo-ke-bank.svg
     - assets/idn-finlogos/bangkok-bank.svg
     - assets/idn-finlogos/bank-artha-graha-internasional.svg
     - assets/idn-finlogos/bank-bengkulu.svg
@@ -98,6 +114,7 @@ flutter:
     - assets/idn-finlogos/bank-capital.svg
     - assets/idn-finlogos/bank-capital-alt.svg
     - assets/idn-finlogos/bank-dki.svg
+    - assets/idn-finlogos/bank-dki-1.svg
     - assets/idn-finlogos/bank-ganesha.svg
     - assets/idn-finlogos/bank-ina.svg
     - assets/idn-finlogos/bank-index-selindo.svg
@@ -121,6 +138,8 @@ flutter:
     - assets/idn-finlogos/bank-resona-perdania.svg
     - assets/idn-finlogos/bank-resona-perdania-alt.svg
     - assets/idn-finlogos/bank-sahabat-sampoerna.svg
+    - assets/idn-finlogos/bank-saqu.svg
+    - assets/idn-finlogos/bank-saqu-alt.svg
     - assets/idn-finlogos/bank-smbc-indonesia.svg
     - assets/idn-finlogos/bank-victoria.svg
     - assets/idn-finlogos/bank-victoria-syariah.svg
@@ -134,10 +153,13 @@ flutter:
     - assets/idn-finlogos/bca-finance.svg
     - assets/idn-finlogos/bca-flazz.svg
     - assets/idn-finlogos/bca-flazz-alt.svg
+    - assets/idn-finlogos/bca-flazz-new.svg
     - assets/idn-finlogos/bca-klikpay.svg
+    - assets/idn-finlogos/bca-life.svg
     - assets/idn-finlogos/bca-mobile.svg
     - assets/idn-finlogos/bca-syariah.svg
     - assets/idn-finlogos/bea-cukai.svg
+    - assets/idn-finlogos/bfi-finance.svg
     - assets/idn-finlogos/bhinneka.svg
     - assets/idn-finlogos/bi-fast.svg
     - assets/idn-finlogos/biznet.svg
@@ -151,17 +173,26 @@ flutter:
     - assets/idn-finlogos/bni-tapcash.svg
     - assets/idn-finlogos/bnp-paribas.svg
     - assets/idn-finlogos/bpd.svg
+    - assets/idn-finlogos/bpjs.svg
+    - assets/idn-finlogos/bpjs-alt.svg
+    - assets/idn-finlogos/bpjs-ketenagakerjaan.svg
     - assets/idn-finlogos/bri.svg
     - assets/idn-finlogos/bri-alt.svg
     - assets/idn-finlogos/bri-brizzi.svg
     - assets/idn-finlogos/bri-brizzi-alt.svg
     - assets/idn-finlogos/bri-direct-debit.svg
     - assets/idn-finlogos/bri-finance.svg
+    - assets/idn-finlogos/bri-insurance.svg
+    - assets/idn-finlogos/bri-life.svg
+    - assets/idn-finlogos/bri-new.svg
     - assets/idn-finlogos/bri-vertical.svg
     - assets/idn-finlogos/bright.svg
     - assets/idn-finlogos/brimo.svg
+    - assets/idn-finlogos/brins.svg
     - assets/idn-finlogos/bsi.svg
     - assets/idn-finlogos/bsi-mobile.svg
+    - assets/idn-finlogos/bsn.svg
+    - assets/idn-finlogos/bsn-alt.svg
     - assets/idn-finlogos/btn.svg
     - assets/idn-finlogos/btn-alt.svg
     - assets/idn-finlogos/btn-new.svg
@@ -170,14 +201,19 @@ flutter:
     - assets/idn-finlogos/btpn.svg
     - assets/idn-finlogos/btpn-syariah.svg
     - assets/idn-finlogos/bukalapak.svg
+    - assets/idn-finlogos/bukalapak-alt.svg
     - assets/idn-finlogos/bukalapak-new.svg
+    - assets/idn-finlogos/bumiputera.svg
     - assets/idn-finlogos/bussan-auto-finance.svg
     - assets/idn-finlogos/by-u.svg
+    - assets/idn-finlogos/byond-bsi.svg
+    - assets/idn-finlogos/byond-bsi-alt.svg
     - assets/idn-finlogos/catchplay.svg
     - assets/idn-finlogos/cbn.svg
     - assets/idn-finlogos/ccb-indonesia.svg
     - assets/idn-finlogos/ccb-indonesia-alt.svg
     - assets/idn-finlogos/cgv.svg
+    - assets/idn-finlogos/chubb.svg
     - assets/idn-finlogos/cimb-niaga.svg
     - assets/idn-finlogos/cimb-niaga-syariah.svg
     - assets/idn-finlogos/cinepolis.svg
@@ -188,6 +224,7 @@ flutter:
     - assets/idn-finlogos/citibank-alt.svg
     - assets/idn-finlogos/cititrans.svg
     - assets/idn-finlogos/commonwealth.svg
+    - assets/idn-finlogos/commonwealth-life.svg
     - assets/idn-finlogos/contactless.svg
     - assets/idn-finlogos/contactless-alt.svg
     - assets/idn-finlogos/credit-suisse.svg
@@ -203,6 +240,7 @@ flutter:
     - assets/idn-finlogos/danamon-syariah.svg
     - assets/idn-finlogos/daytrans.svg
     - assets/idn-finlogos/dbs.svg
+    - assets/idn-finlogos/dbs-paylah.svg
     - assets/idn-finlogos/deutsche-bank.svg
     - assets/idn-finlogos/dhl-express.svg
     - assets/idn-finlogos/digibank.svg
@@ -217,6 +255,8 @@ flutter:
     - assets/idn-finlogos/doku.svg
     - assets/idn-finlogos/dompet-dhuafa.svg
     - assets/idn-finlogos/dompet-dhuafa-alt.svg
+    - assets/idn-finlogos/duitnow.svg
+    - assets/idn-finlogos/duitnow-qr.svg
     - assets/idn-finlogos/dutamoney.svg
     - assets/idn-finlogos/e-toll-card.svg
     - assets/idn-finlogos/ea-play.svg
@@ -236,6 +276,8 @@ flutter:
     - assets/idn-finlogos/first-logistic.svg
     - assets/idn-finlogos/first-media.svg
     - assets/idn-finlogos/flip.svg
+    - assets/idn-finlogos/fwd.svg
+    - assets/idn-finlogos/generali.svg
     - assets/idn-finlogos/giant.svg
     - assets/idn-finlogos/google-pay.svg
     - assets/idn-finlogos/google-play.svg
@@ -256,11 +298,14 @@ flutter:
     - assets/idn-finlogos/ibk-bank.svg
     - assets/idn-finlogos/icbc.svg
     - assets/idn-finlogos/icbc-alt.svg
+    - assets/idn-finlogos/iconnet.svg
     - assets/idn-finlogos/id-express.svg
     - assets/idn-finlogos/im3.svg
+    - assets/idn-finlogos/indah-cargo.svg
     - assets/idn-finlogos/indihome-new.svg
     - assets/idn-finlogos/indihome-old.svg
     - assets/idn-finlogos/indodana.svg
+    - assets/idn-finlogos/indogrosir.svg
     - assets/idn-finlogos/indomaret.svg
     - assets/idn-finlogos/indosat-hifi.svg
     - assets/idn-finlogos/indosat-m2.svg
@@ -300,6 +345,7 @@ flutter:
     - assets/idn-finlogos/keb-hana-bank.svg
     - assets/idn-finlogos/keb-hana-bank-alt.svg
     - assets/idn-finlogos/kemenkeu.svg
+    - assets/idn-finlogos/khqr.svg
     - assets/idn-finlogos/kitabisa.svg
     - assets/idn-finlogos/kitabisa-alt.svg
     - assets/idn-finlogos/kominfo.svg
@@ -309,6 +355,7 @@ flutter:
     - assets/idn-finlogos/krom.svg
     - assets/idn-finlogos/lalamove.svg
     - assets/idn-finlogos/langitmusik.svg
+    - assets/idn-finlogos/lao-qr.svg
     - assets/idn-finlogos/lawson.svg
     - assets/idn-finlogos/lazada.svg
     - assets/idn-finlogos/lazada-express.svg
@@ -334,8 +381,12 @@ flutter:
     - assets/idn-finlogos/mandiri.svg
     - assets/idn-finlogos/mandiri-e-cash.svg
     - assets/idn-finlogos/mandiri-e-money.svg
+    - assets/idn-finlogos/mandiri-inhealth.svg
     - assets/idn-finlogos/mandiri-livin.svg
+    - assets/idn-finlogos/mandiri-livin-new.svg
     - assets/idn-finlogos/mandiri-taspen.svg
+    - assets/idn-finlogos/manulife.svg
+    - assets/idn-finlogos/manulife-alt.svg
     - assets/idn-finlogos/mastercard.svg
     - assets/idn-finlogos/mastercard-black.svg
     - assets/idn-finlogos/mastercard-contactless.svg
@@ -383,6 +434,7 @@ flutter:
     - assets/idn-finlogos/nintendo-online.svg
     - assets/idn-finlogos/nobu.svg
     - assets/idn-finlogos/ocbc-nisp.svg
+    - assets/idn-finlogos/ocbc-pay-anyone.svg
     - assets/idn-finlogos/octo-clicks.svg
     - assets/idn-finlogos/octo-clicks-direct-debit.svg
     - assets/idn-finlogos/ojk.svg
@@ -393,6 +445,8 @@ flutter:
     - assets/idn-finlogos/ovo-new-alt.svg
     - assets/idn-finlogos/ovo-old.svg
     - assets/idn-finlogos/ovo-old-alt.svg
+    - assets/idn-finlogos/oxygen-id.svg
+    - assets/idn-finlogos/oxygen-id-home.svg
     - assets/idn-finlogos/pam-jaya-new.svg
     - assets/idn-finlogos/pam-jaya-old.svg
     - assets/idn-finlogos/pandu-logistics.svg
@@ -401,6 +455,7 @@ flutter:
     - assets/idn-finlogos/paydia.svg
     - assets/idn-finlogos/payoneer.svg
     - assets/idn-finlogos/paypal.svg
+    - assets/idn-finlogos/paypal-new.svg
     - assets/idn-finlogos/paytren.svg
     - assets/idn-finlogos/pcp-express.svg
     - assets/idn-finlogos/pdam.svg
@@ -422,7 +477,10 @@ flutter:
     - assets/idn-finlogos/prima-debit.svg
     - assets/idn-finlogos/prime-video.svg
     - assets/idn-finlogos/prismalink.svg
+    - assets/idn-finlogos/prudential.svg
     - assets/idn-finlogos/qnb.svg
+    - assets/idn-finlogos/qoala.svg
+    - assets/idn-finlogos/qr-ph.svg
     - assets/idn-finlogos/qris.svg
     - assets/idn-finlogos/rex.svg
     - assets/idn-finlogos/ria-money.svg
@@ -435,6 +493,10 @@ flutter:
     - assets/idn-finlogos/sap-express.svg
     - assets/idn-finlogos/sbi-indonesia.svg
     - assets/idn-finlogos/seabank.svg
+    - assets/idn-finlogos/seabank-alt.svg
+    - assets/idn-finlogos/sequis.svg
+    - assets/idn-finlogos/sgqr.svg
+    - assets/idn-finlogos/sgqr-plus.svg
     - assets/idn-finlogos/shinhan-bank.svg
     - assets/idn-finlogos/shinhan-bank-alt.svg
     - assets/idn-finlogos/shopee.svg
@@ -442,6 +504,7 @@ flutter:
     - assets/idn-finlogos/shopee-pay.svg
     - assets/idn-finlogos/sicepat-ekspres.svg
     - assets/idn-finlogos/simpati.svg
+    - assets/idn-finlogos/simpati-new.svg
     - assets/idn-finlogos/sinarmas.svg
     - assets/idn-finlogos/sinarmas-syariah.svg
     - assets/idn-finlogos/skrill.svg
@@ -454,16 +517,28 @@ flutter:
     - assets/idn-finlogos/standard-chartered.svg
     - assets/idn-finlogos/steam.svg
     - assets/idn-finlogos/stripe.svg
+    - assets/idn-finlogos/sun-life.svg
+    - assets/idn-finlogos/super-indo.svg
     - assets/idn-finlogos/superbank.svg
     - assets/idn-finlogos/superbank-alt.svg
+    - assets/idn-finlogos/swift.svg
+    - assets/idn-finlogos/swift-alt.svg
     - assets/idn-finlogos/taf-toyota-astra-financial.svg
+    - assets/idn-finlogos/taspen.svg
     - assets/idn-finlogos/telkomsel.svg
     - assets/idn-finlogos/telkomsel-alt.svg
     - assets/idn-finlogos/telkomsel-halo.svg
     - assets/idn-finlogos/telkomsel-orbit.svg
     - assets/idn-finlogos/telkomsel-prabayar.svg
+    - assets/idn-finlogos/thai-qr-payment.svg
+    - assets/idn-finlogos/thai-qr-payment-alt.svg
+    - assets/idn-finlogos/the-foodhall.svg
     - assets/idn-finlogos/tiki.svg
+    - assets/idn-finlogos/tiktok-shop.svg
     - assets/idn-finlogos/tokopedia.svg
+    - assets/idn-finlogos/tokopedia-alt.svg
+    - assets/idn-finlogos/topremit.svg
+    - assets/idn-finlogos/topremit-1.svg
     - assets/idn-finlogos/toserba-yogya.svg
     - assets/idn-finlogos/toyota-financial-service.svg
     - assets/idn-finlogos/transfez.svg
@@ -484,7 +559,10 @@ flutter:
     - assets/idn-finlogos/uob-tmrw.svg
     - assets/idn-finlogos/verified-by-visa.svg
     - assets/idn-finlogos/verified-by-visa-new.svg
+    - assets/idn-finlogos/verifone.svg
+    - assets/idn-finlogos/verifone-new.svg
     - assets/idn-finlogos/vidio.svg
+    - assets/idn-finlogos/vietqr.svg
     - assets/idn-finlogos/visa.svg
     - assets/idn-finlogos/visa-checkout.svg
     - assets/idn-finlogos/visa-debit.svg
@@ -497,6 +575,8 @@ flutter:
     - assets/idn-finlogos/viu.svg
     - assets/idn-finlogos/wahana-express.svg
     - assets/idn-finlogos/wahana-express-alt.svg
+    - assets/idn-finlogos/wechat-pay.svg
+    - assets/idn-finlogos/wechat-pay-alt.svg
     - assets/idn-finlogos/welab-bank.svg
     - assets/idn-finlogos/western-union.svg
     - assets/idn-finlogos/whoosh.svg
@@ -512,8 +592,13 @@ flutter:
     - assets/idn-finlogos/xendit.svg
     - assets/idn-finlogos/xl.svg
     - assets/idn-finlogos/xl-prioritas.svg
+    - assets/idn-finlogos/xl-satu.svg
+    - assets/idn-finlogos/xl-smart.svg
+    - assets/idn-finlogos/xl-smart-alt.svg
     - assets/idn-finlogos/xxi-21.svg
     - assets/idn-finlogos/yomart.svg
     - assets/idn-finlogos/yukk.svg
     - assets/idn-finlogos/zalora.svg
+    - assets/idn-finlogos/zurich.svg
+    - assets/idn-finlogos/zurich-alt.svg
   # <<< generated:assets

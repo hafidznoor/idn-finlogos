@@ -6,6 +6,12 @@
 - slug: 2c2p
   name: 2c2p
   category: payment-gateway
+- slug: 2c2p-new
+  name: 2c2p (New)
+  category: payment-gateway
+- slug: 2c2p-new-alt
+  name: 2c2p (New-Alt)
+  category: payment-gateway
 - slug: acc
   name: ACC
   category: financing
@@ -21,6 +27,9 @@
 - slug: adira-finance
   name: Adira Finance
   category: financing
+- slug: aeon
+  name: AEON
+  category: supermarket
 - slug: aeon-credit-service
   name: AEON Credit Service
   category: financing
@@ -30,6 +39,9 @@
 - slug: afpi
   name: AFPI
   category: regulatory
+- slug: aia
+  name: AIA
+  category: insurance
 - slug: akulaku
   name: Akulaku
   category: financing
@@ -39,11 +51,17 @@
 - slug: aladin
   name: Aladin
   category: bank-logo
+- slug: alfa-express
+  name: Alfa Express
+  category: supermarket
 - slug: alfamart
   name: Alfamart
   category: supermarket
 - slug: alfamidi
   name: Alfamidi
+  category: supermarket
+- slug: alfamidi-super
+  name: Alfamidi Super
   category: supermarket
 - slug: alipay-new
   name: Alipay (New)
@@ -51,6 +69,21 @@
 - slug: alipay-old
   name: Alipay (Old)
   category: miscellaneous
+- slug: alipay-plus
+  name: Alipay+
+  category: miscellaneous
+- slug: alipay-plus-old
+  name: Alipay+ (Old)
+  category: miscellaneous
+- slug: alipay-plus-old-alt
+  name: Alipay+ (Old Alt)
+  category: miscellaneous
+- slug: allianz
+  name: Allianz
+  category: insurance
+- slug: allianz-alt
+  name: Allianz (Alt)
+  category: insurance
 - slug: allo
   name: Allo
   category: bank-logo
@@ -96,15 +129,30 @@
 - slug: assa
   name: ASSA
   category: logistic
+- slug: astra-life
+  name: Astra Life
+  category: insurance
+- slug: astra-life-alt
+  name: Astra Life (Alt)
+  category: insurance
 - slug: astra-pay
   name: Astra Pay
   category: e-wallet
+- slug: asuransi-sinarmas-insurtech
+  name: Asuransi Sinarmas Insurtech
+  category: insurance
 - slug: atm-bersama
   name: ATM Bersama
   category: switching
+- slug: axa
+  name: AXA
+  category: insurance
 - slug: axis
   name: AXIS
   category: mobile-telco
+- slug: ayo-ke-bank
+  name: AYO ke Bank
+  category: regulatory
 - slug: bangkok-bank
   name: Bangkok Bank
   category: bank-logo
@@ -216,6 +264,9 @@
 - slug: bank-dki
   name: Bank DKI
   category: bank-logo
+- slug: bank-dki-1
+  name: Bank DKI-1
+  category: bank-logo
 - slug: bank-ganesha
   name: Bank Ganesha
   category: bank-logo
@@ -285,6 +336,12 @@
 - slug: bank-sahabat-sampoerna
   name: Bank Sahabat Sampoerna
   category: bank-logo
+- slug: bank-saqu
+  name: Bank Saqu
+  category: bank-logo
+- slug: bank-saqu-alt
+  name: Bank Saqu (Alt)
+  category: bank-logo
 - slug: bank-smbc-indonesia
   name: Bank SMBC Indonesia
   category: bank-logo
@@ -324,9 +381,15 @@
 - slug: bca-flazz-alt
   name: BCA Flazz (Alt)
   category: prepaid-card
+- slug: bca-flazz-new
+  name: BCA Flazz (New)
+  category: prepaid-card
 - slug: bca-klikpay
   name: BCA KlikPay
   category: direct-debit
+- slug: bca-life
+  name: BCA Life
+  category: insurance
 - slug: bca-mobile
   name: BCA Mobile
   category: bank-app
@@ -336,6 +399,9 @@
 - slug: bea-cukai
   name: Bea Cukai
   category: government
+- slug: bfi-finance
+  name: BFI Finance
+  category: financing
 - slug: bhinneka
   name: Bhinneka
   category: e-commerce
@@ -375,6 +441,15 @@
 - slug: bpd
   name: BPD
   category: regulatory
+- slug: bpjs
+  name: BPJS
+  category: insurance
+- slug: bpjs-alt
+  name: BPJS (Alt)
+  category: insurance
+- slug: bpjs-ketenagakerjaan
+  name: BPJS Ketenagakerjaan
+  category: insurance
 - slug: bri
   name: BRI
   category: bank-logo
@@ -393,6 +468,15 @@
 - slug: bri-finance
   name: BRI Finance
   category: financing
+- slug: bri-insurance
+  name: BRI Insurance
+  category: insurance
+- slug: bri-life
+  name: BRI Life
+  category: insurance
+- slug: bri-new
+  name: BRI (New)
+  category: bank-logo
 - slug: bri-vertical
   name: BRI (Vertical)
   category: bank-logo
@@ -402,12 +486,21 @@
 - slug: brimo
   name: BRImo
   category: bank-app
+- slug: brins
+  name: BRINS
+  category: insurance
 - slug: bsi
   name: BSI
   category: bank-logo
 - slug: bsi-mobile
   name: BSI Mobile
   category: bank-app
+- slug: bsn
+  name: BSN
+  category: bank-logo
+- slug: bsn-alt
+  name: BSN (Alt)
+  category: bank-logo
 - slug: btn
   name: BTN
   category: bank-logo
@@ -432,15 +525,27 @@
 - slug: bukalapak
   name: Bukalapak
   category: e-commerce
+- slug: bukalapak-alt
+  name: Bukalapak (Alt)
+  category: e-commerce
 - slug: bukalapak-new
   name: Bukalapak (New)
   category: e-commerce
+- slug: bumiputera
+  name: Bumiputera
+  category: insurance
 - slug: bussan-auto-finance
   name: Bussan Auto Finance
   category: financing
 - slug: by-u
   name: by.U
   category: mobile-telco
+- slug: byond-bsi
+  name: BYOND BSI
+  category: bank-app
+- slug: byond-bsi-alt
+  name: BYOND BSI (Alt)
+  category: bank-app
 - slug: catchplay
   name: Catchplay
   category: entertainment
@@ -456,6 +561,9 @@
 - slug: cgv
   name: CGV
   category: entertainment
+- slug: chubb
+  name: CHUBB
+  category: insurance
 - slug: cimb-niaga
   name: CIMB Niaga
   category: bank-logo
@@ -486,6 +594,9 @@
 - slug: commonwealth
   name: Commonwealth
   category: bank-logo
+- slug: commonwealth-life
+  name: Commonwealth Life
+  category: insurance
 - slug: contactless
   name: Contactless
   category: card-payment
@@ -531,6 +642,9 @@
 - slug: dbs
   name: DBS
   category: bank-logo
+- slug: dbs-paylah
+  name: DBS Paylah
+  category: miscellaneous
 - slug: deutsche-bank
   name: Deutsche Bank
   category: bank-logo
@@ -573,6 +687,12 @@
 - slug: dompet-dhuafa-alt
   name: Dompet Dhuafa (Alt)
   category: donation
+- slug: duitnow
+  name: DuitNow
+  category: qr-payment
+- slug: duitnow-qr
+  name: DuitNow QR
+  category: qr-payment
 - slug: dutamoney
   name: Dutamoney
   category: e-wallet
@@ -630,6 +750,12 @@
 - slug: flip
   name: Flip
   category: remittance
+- slug: fwd
+  name: FWD
+  category: insurance
+- slug: generali
+  name: Generali
+  category: insurance
 - slug: giant
   name: Giant
   category: supermarket
@@ -690,12 +816,18 @@
 - slug: icbc-alt
   name: ICBC (Alt)
   category: bank-logo
+- slug: iconnet
+  name: Iconnet
+  category: isp
 - slug: id-express
   name: ID Express
   category: logistic
 - slug: im3
   name: IM3
   category: mobile-telco
+- slug: indah-cargo
+  name: Indah Cargo
+  category: logistic
 - slug: indihome-new
   name: IndiHome (New)
   category: isp
@@ -705,6 +837,9 @@
 - slug: indodana
   name: Indodana
   category: financing
+- slug: indogrosir
+  name: Indogrosir
+  category: supermarket
 - slug: indomaret
   name: Indomaret
   category: supermarket
@@ -822,6 +957,9 @@
 - slug: kemenkeu
   name: Kemenkeu
   category: government
+- slug: khqr
+  name: KHQR
+  category: qr-payment
 - slug: kitabisa
   name: Kitabisa
   category: donation
@@ -849,6 +987,9 @@
 - slug: langitmusik
   name: Langitmusik
   category: entertainment
+- slug: lao-qr
+  name: LAO QR
+  category: qr-payment
 - slug: lawson
   name: Lawson
   category: supermarket
@@ -924,12 +1065,24 @@
 - slug: mandiri-e-money
   name: Mandiri e-money
   category: prepaid-card
+- slug: mandiri-inhealth
+  name: Mandiri Inhealth
+  category: insurance
 - slug: mandiri-livin
   name: Mandiri Livin
+  category: bank-app
+- slug: mandiri-livin-new
+  name: Mandiri Livin (New)
   category: bank-app
 - slug: mandiri-taspen
   name: Mandiri Taspen
   category: bank-logo
+- slug: manulife
+  name: Manulife
+  category: insurance
+- slug: manulife-alt
+  name: Manulife (Alt)
+  category: insurance
 - slug: mastercard
   name: Mastercard
   category: card-payment
@@ -1071,6 +1224,9 @@
 - slug: ocbc-nisp
   name: OCBC NISP
   category: bank-logo
+- slug: ocbc-pay-anyone
+  name: OCBC Pay Anyone
+  category: miscellaneous
 - slug: octo-clicks
   name: OCTO Clicks
   category: bank-app
@@ -1101,6 +1257,12 @@
 - slug: ovo-old-alt
   name: OVO (Old Alt)
   category: e-wallet
+- slug: oxygen-id
+  name: Oxygen.id
+  category: isp
+- slug: oxygen-id-home
+  name: Oxygen.id Home
+  category: isp
 - slug: pam-jaya-new
   name: PAM Jaya (New)
   category: utilities
@@ -1124,6 +1286,9 @@
   category: remittance
 - slug: paypal
   name: PayPal
+  category: remittance
+- slug: paypal-new
+  name: PayPal (New)
   category: remittance
 - slug: paytren
   name: Paytren
@@ -1188,9 +1353,18 @@
 - slug: prismalink
   name: PrismaLink
   category: payment-gateway
+- slug: prudential
+  name: Prudential
+  category: insurance
 - slug: qnb
   name: QNB
   category: bank-logo
+- slug: qoala
+  name: Qoala
+  category: insurance
+- slug: qr-ph
+  name: QR Ph
+  category: qr-payment
 - slug: qris
   name: QRIS
   category: government
@@ -1227,6 +1401,18 @@
 - slug: seabank
   name: SeaBank
   category: bank-logo
+- slug: seabank-alt
+  name: SeaBank (Alt)
+  category: bank-logo
+- slug: sequis
+  name: Sequis
+  category: insurance
+- slug: sgqr
+  name: SGQR
+  category: qr-payment
+- slug: sgqr-plus
+  name: SGQR+
+  category: qr-payment
 - slug: shinhan-bank
   name: Shinhan Bank
   category: bank-logo
@@ -1247,6 +1433,9 @@
   category: logistic
 - slug: simpati
   name: Simpati
+  category: mobile-telco
+- slug: simpati-new
+  name: Simpati (New)
   category: mobile-telco
 - slug: sinarmas
   name: Sinarmas
@@ -1284,15 +1473,30 @@
 - slug: stripe
   name: Stripe
   category: payment-gateway
+- slug: sun-life
+  name: Sun Life
+  category: insurance
+- slug: super-indo
+  name: Super Indo
+  category: supermarket
 - slug: superbank
   name: Superbank
   category: bank-logo
 - slug: superbank-alt
   name: Superbank (Alt)
   category: bank-logo
+- slug: swift
+  name: SWIFT
+  category: remittance
+- slug: swift-alt
+  name: SWIFT (Alt)
+  category: remittance
 - slug: taf-toyota-astra-financial
   name: TAF - Toyota Astra Financial
   category: financing
+- slug: taspen
+  name: Taspen
+  category: insurance
 - slug: telkomsel
   name: Telkomsel
   category: mobile-telco
@@ -1308,12 +1512,33 @@
 - slug: telkomsel-prabayar
   name: Telkomsel Prabayar
   category: mobile-telco
+- slug: thai-qr-payment
+  name: Thai QR Payment
+  category: qr-payment
+- slug: thai-qr-payment-alt
+  name: Thai QR Payment (Alt)
+  category: qr-payment
+- slug: the-foodhall
+  name: The Foodhall
+  category: supermarket
 - slug: tiki
   name: TIKI
   category: logistic
+- slug: tiktok-shop
+  name: TikTok Shop
+  category: e-commerce
 - slug: tokopedia
   name: Tokopedia
   category: e-commerce
+- slug: tokopedia-alt
+  name: Tokopedia (Alt)
+  category: e-commerce
+- slug: topremit
+  name: Topremit
+  category: remittance
+- slug: topremit-1
+  name: Topremit-1
+  category: remittance
 - slug: toserba-yogya
   name: Toserba Yogya
   category: supermarket
@@ -1374,9 +1599,18 @@
 - slug: verified-by-visa-new
   name: Verified by VISA (New)
   category: card-payment
+- slug: verifone
+  name: Verifone
+  category: miscellaneous
+- slug: verifone-new
+  name: Verifone (New)
+  category: miscellaneous
 - slug: vidio
   name: Vidio
   category: entertainment
+- slug: vietqr
+  name: VietQR
+  category: qr-payment
 - slug: visa
   name: VISA
   category: card-payment
@@ -1413,6 +1647,12 @@
 - slug: wahana-express-alt
   name: Wahana Express (Alt)
   category: logistic
+- slug: wechat-pay
+  name: WeChat Pay
+  category: miscellaneous
+- slug: wechat-pay-alt
+  name: WeChat Pay (Alt)
+  category: miscellaneous
 - slug: welab-bank
   name: Welab Bank
   category: bank-logo
@@ -1458,6 +1698,15 @@
 - slug: xl-prioritas
   name: XL Prioritas
   category: mobile-telco
+- slug: xl-satu
+  name: XL Satu
+  category: isp
+- slug: xl-smart
+  name: XL Smart
+  category: mobile-telco
+- slug: xl-smart-alt
+  name: XL SMART (Alt)
+  category: mobile-telco
 - slug: xxi-21
   name: XXI (21)
   category: entertainment
@@ -1470,3 +1719,9 @@
 - slug: zalora
   name: Zalora
   category: e-commerce
+- slug: zurich
+  name: Zurich
+  category: insurance
+- slug: zurich-alt
+  name: Zurich (Alt)
+  category: insurance

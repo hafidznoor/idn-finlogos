@@ -4,6 +4,60 @@ All notable changes to this project will be documented in this file. Format foll
 
 ## [Unreleased]
 
+## [2.2.0]
+
+### Added
+
+- **Insurance** category (`insurance`) — 29 logos: AIA, AXA, Allianz, Astra Life, BPJS, BPJS Ketenagakerjaan, BCA Life, BRI Insurance, BRI Life, BRINS, Bumiputera, CHUBB, Commonwealth Life, FWD, Generali, Mandiri Inhealth, Manulife, Prudential, Qoala, Sequis, Sun Life, Taspen, Zurich, and more.
+- **QR Payment** category (`qr-payment`) — 10 logos: DuitNow, DuitNow QR, KHQR, LAO QR, QR Ph, SGQR, SGQR+, Thai QR Payment, Thai QR Payment (Alt), VietQR.
+- 46 logos across existing categories: Bank Logo (+7: Bank DKI-1, Bank Saqu, Bank Saqu (Alt), BSN, BSN (Alt), BRI (New), SeaBank (Alt)), Supermarket (+6: AEON, Alfa Express, Alfamidi Super, Indogrosir, Super Indo, The Foodhall), Miscellaneous (+7: Alipay+, Alipay+ (Old), Alipay+ (Old Alt), DBS Paylah, OCBC Pay Anyone, Verifone, Verifone (New)), Remittance (+5: PayPal (New), SWIFT, SWIFT (Alt), Topremit, Topremit-1), ISP (+4: Iconnet, Oxygen.id, Oxygen.id Home, XL Satu), Bank App (+3: BYOND BSI, BYOND BSI (Alt), Mandiri Livin (New)), E-Commerce (+3: Bukalapak (Alt), TikTok Shop, Tokopedia (Alt)), Mobile Telco (+3: Simpati (New), XL Smart, XL SMART (Alt)), Payment Gateway (+2: 2c2p (New), 2c2p (New-Alt)), Logistic (+1: Indah Cargo), Financing (+1: BFI Finance), Regulatory (+1: AYO ke Bank), Prepaid Card (+1: BCA Flazz (New)).
+
+### Fixed
+
+- Re-exported SVG artwork across the full 574-logo catalog to resolve clip-path and mask rendering issues that caused logos to display incorrectly on GitHub's SVG viewer and certain mobile SVG renderers.
+
+## [2.1.6]
+
+### Fixed
+
+- Skipped GPG signing when publishing Android artifacts to GitHub Packages (the global `signAllPublications()` hook was attaching the `signMavenPublication` task to the GHP job; GHP does not require signatures).
+
+## [2.1.5]
+
+### Fixed
+
+- Used `publishAllPublicationsToGitHubPackagesRepository` Gradle task for Android GitHub Packages publishing — the per-publication task name guessed in 2.1.4 was invalid for `com.android.library` projects using the vanniktech plugin.
+
+## [2.1.4]
+
+### Added
+
+- **GitHub Packages mirror** — npm package published as `@hafidznoor/idn-finlogos` (scoped, GHP requires a scoped name) and Android AAR published alongside the canonical npmjs.org and Maven Central releases.
+
+## [2.1.3]
+
+### Fixed
+
+- pub.dev publish workflow: replaced `--stdin` flag (which does not exist) with `--env-var` for passing the secret token. The v2.1.2 tag was created but all registry publishes failed before completing; 2.1.3 is the effective successor to 2.1.1.
+
+## [2.1.1]
+
+### Fixed
+
+- Added `LICENSE` file to the Flutter package (required by pub.dev).
+- Fixed pub.dev release workflow to use the correct `PUB_DEV_TOKEN` secret format.
+
+## [2.1.0]
+
+### Added
+
+- **Android** library (`io.github.hafidznoor:idn-finlogos`) — 489 SVGs shipped as `assets/idn-finlogos/*.svg` with a Kotlin API (`IdnFinLogos.all`, `IdnFinLogos.get`, `IdnFinLogos.search`). Publishes to Maven Central and JitPack.
+- **iOS** Swift Package — `Package.swift` at repo root; SVGs as `Bundle.module` resources; iOS 13+ / macOS 11+ / tvOS 13+ / watchOS 6+.
+- **Flutter** package (`idn_finlogos` on pub.dev) — `const` logo catalog with `assetPath` values compatible with `flutter_svg`.
+- Generator scripts `build-android.mjs`, `build-ios.mjs`, `build-flutter.mjs`, `build-all.mjs` — all driven by the same `data/*.yml` source of truth.
+- Release workflow fans out to all four registries (npm, Maven Central, SPM, pub.dev) on tag push; GitHub Release runs even if a registry job fails.
+- CI check enforces that generated platform files (`Catalog.kt`, `Catalog.generated.swift`, `catalog.g.dart`) stay in sync with `data/*.yml`.
+
 ## [2.0.1]
 
 ### Changed
@@ -70,6 +124,13 @@ First release. Initially published as `@hafidznoor/idn-finlogos`; renamed to `id
 - `paypal` (Remittance); Misc copy dropped.
 - `western-union` (Remittance); Misc copy dropped.
 
-[Unreleased]: https://github.com/hafidznoor/idn-finlogos/compare/v2.0.1...HEAD
+[Unreleased]: https://github.com/hafidznoor/idn-finlogos/compare/v2.2.0...HEAD
+[2.2.0]: https://github.com/hafidznoor/idn-finlogos/compare/v2.1.6...v2.2.0
+[2.1.6]: https://github.com/hafidznoor/idn-finlogos/releases/tag/v2.1.6
+[2.1.5]: https://github.com/hafidznoor/idn-finlogos/compare/v2.1.4...v2.1.5
+[2.1.4]: https://github.com/hafidznoor/idn-finlogos/compare/v2.1.3...v2.1.4
+[2.1.3]: https://github.com/hafidznoor/idn-finlogos/releases/tag/v2.1.3
+[2.1.1]: https://github.com/hafidznoor/idn-finlogos/compare/v2.1.0...v2.1.1
+[2.1.0]: https://github.com/hafidznoor/idn-finlogos/compare/v2.0.1...v2.1.0
 [2.0.1]: https://github.com/hafidznoor/idn-finlogos/releases/tag/v2.0.1
 [2.0.0]: https://github.com/hafidznoor/idn-finlogos/releases/tag/v2.0.0

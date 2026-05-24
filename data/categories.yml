@@ -23,6 +23,8 @@ game:
   displayName: Game
 government:
   displayName: Government
+insurance:
+  displayName: Insurance
 isp:
   displayName: ISP
 logistic:
@@ -35,6 +37,8 @@ payment-gateway:
   displayName: Payment Gateway
 prepaid-card:
   displayName: Prepaid Card
+qr-payment:
+  displayName: QR Payment
 regulatory:
   displayName: Regulatory
 remittance:
