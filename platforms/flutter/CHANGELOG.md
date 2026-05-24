@@ -1,3 +1,9 @@
+## 2.3.0
+
+Added `korlantas-polri` (Government). Moved `qris` from `government` → `qr-payment`. Removed 3 duplicates (`octo-clicks-direct-debit`, `wirecard-1`, `wirecard-2`). Re-exported `ibk-bank` and `qris` to fix broken clip-path masks. Total: **572 logos across 25 categories**. No Flutter API changes.
+
+(JS/TS consumers also get first-party React, React Native, Vue, and Svelte components in this release — see the [main CHANGELOG](https://github.com/hafidznoor/idn-finlogos/blob/main/CHANGELOG.md#230). The Flutter package is unaffected.)
+
 ## 2.2.1
 
 Re-exported 5 logos with broken or missing clip-path masks: `alto`, `ibk-bank`, `netflix-alt`, `payoneer`, `visa-checkout`. Some viewBox dimensions changed where artwork was trimmed.

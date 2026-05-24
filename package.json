@@ -1,6 +1,6 @@
 {
   "name": "idn-finlogos",
-  "version": "2.2.1",
+  "version": "2.3.0",
   "description": "Indonesian financial institution logos (banks, e-wallets, payment gateways, and 20+ more categories) as optimized SVGs with per-logo ESM imports.",
   "keywords": [
     "indonesia",
@@ -48,21 +48,61 @@
       "import": "./dist/icons/*.mjs",
       "require": "./dist/icons/*.js"
     },
+    "./react": {
+      "types": "./dist/react/index.d.ts",
+      "import": "./dist/react/index.mjs",
+      "require": "./dist/react/index.js"
+    },
+    "./react-native": {
+      "types": "./dist/react-native/index.d.ts",
+      "react-native": "./dist/react-native/index.mjs",
+      "import": "./dist/react-native/index.mjs",
+      "require": "./dist/react-native/index.js"
+    },
+    "./vue": {
+      "types": "./dist/vue/index.d.ts",
+      "import": "./dist/vue/index.mjs",
+      "require": "./dist/vue/index.js"
+    },
+    "./svelte": {
+      "types": "./dist/svelte/Logo.svelte.d.ts",
+      "svelte": "./dist/svelte/Logo.svelte"
+    },
+    "./vanilla": {
+      "types": "./dist/vanilla/index.d.ts",
+      "import": "./dist/vanilla/index.mjs",
+      "require": "./dist/vanilla/index.js"
+    },
     "./package.json": "./package.json"
   },
   "scripts": {
     "bootstrap": "node scripts/bootstrap.mjs",
     "validate": "node scripts/validate.mjs",
     "build": "node scripts/build.mjs",
+    "build:frameworks": "node scripts/build-frameworks.mjs",
     "build:android": "node scripts/build-android.mjs",
     "build:ios": "node scripts/build-ios.mjs",
     "build:flutter": "node scripts/build-flutter.mjs",
     "build:all": "node scripts/build-all.mjs",
-    "prepublishOnly": "npm run validate && npm run build"
+    "prepublishOnly": "npm run validate && npm run build && npm run build:frameworks"
   },
   "devDependencies": {
     "js-yaml": "^4.1.0",
     "svgo": "^3.3.0"
+  },
+  "peerDependencies": {
+    "react": ">=16.8",
+    "react-native": ">=0.60",
+    "react-native-svg": ">=12.0",
+    "svelte": ">=4.0",
+    "vue": ">=3.0"
+  },
+  "peerDependenciesMeta": {
+    "react": { "optional": true },
+    "react-native": { "optional": true },
+    "react-native-svg": { "optional": true },
+    "svelte": { "optional": true },
+    "vue": { "optional": true }
   },
   "engines": {
     "node": ">=18"

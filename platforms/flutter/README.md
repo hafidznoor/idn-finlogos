@@ -2,7 +2,7 @@
 
 Flutter package for the [idn-finlogos](https://github.com/hafidznoor/idn-finlogos) catalog of Indonesian financial institution logos.
 
-**574 logos · 25 categories · raw SVG assets · zero runtime dependencies**
+**572 logos · 25 categories · raw SVG assets · zero runtime dependencies**
 
 [![Support on Lemon Squeezy](https://img.shields.io/badge/Support-Lemon%20Squeezy-FFC233?logo=lemonsqueezy&logoColor=white)](https://hafidznoor.lemonsqueezy.com/checkout/buy/f2b81ada-e8a9-4e29-b35c-7b7249b78404)
 
@@ -36,7 +36,7 @@ class BcaLogo extends StatelessWidget {
 ## Browse the catalog
 
 ```dart
-IdnFinLogos.all                          // all 574 logos
+IdnFinLogos.all                          // all 572 logos
 IdnFinLogos.categories                   // 25 categories
 IdnFinLogos.byCategory('bank-logo')      // 160 banks
 IdnFinLogos.get('gopay')                 // single lookup
@@ -45,7 +45,7 @@ IdnFinLogos.search('syariah')            // fuzzy match: name / slug / aliases
 
 ## Categories
 
-574 logos across 25 categories.
+572 logos across 25 categories.
 
 | Category slug | Display name | Count | What's in it |
 |---|---|---:|---|
@@ -57,7 +57,7 @@ IdnFinLogos.search('syariah')            // fuzzy match: name / slug / aliases
 | `financing` | Financing | 27 | Multifinance, paylater, and consumer credit (Adira, FIF, BFI, Akulaku, Kredivo, etc.) |
 | `entertainment` | Entertainment | 26 | Streaming and content services (Netflix, Disney+, Spotify, Vidio, etc.) |
 | `supermarket` | Supermarket | 24 | Modern retail (Indomaret, Alfamart, Hypermart, Super Indo, AEON, etc.) |
-| `miscellaneous` | Miscellaneous | 23 | Cross-category brand marks that don't fit a single bucket |
+| `miscellaneous` | Miscellaneous | 21 | Cross-category brand marks that don't fit a single bucket |
 | `mobile-telco` | Mobile Telco | 20 | Telkomsel, Indosat, XL, Smartfren, by.U, and other operators |
 | `bank-app` | Bank App | 17 | Mobile banking app marks distinct from the parent bank logo (Livin', BYOND, blu, etc.) |
 | `isp` | ISP | 15 | Fixed-line broadband (IndiHome, Biznet, MyRepublic, Iconnet, etc.) |
@@ -68,12 +68,12 @@ IdnFinLogos.search('syariah')            // fuzzy match: name / slug / aliases
 | `e-commerce` | E-Commerce | 12 | Tokopedia, Shopee, Bukalapak, Lazada, Blibli, TikTok Shop, etc. |
 | `transportation` | Transportation | 12 | Ride-hailing and transit ticketing (Gojek, Grab, KAI, MRT Jakarta, etc.) |
 | `payment-gateway` | Payment Gateway | 10 | DOKU, Midtrans, Xendit, iPaymu, 2C2P, etc. |
-| `qr-payment` | QR Payment | 10 | Cross-border QR rails (QRIS, DuitNow QR, SGQR, VietQR, Thai QR, KHQR, etc.) |
+| `qr-payment` | QR Payment | 11 | QR payment standards including Indonesia's QRIS plus regional rails (DuitNow QR, SGQR, VietQR, Thai QR, KHQR, etc.) |
 | `prepaid-card` | Prepaid Card | 9 | Closed-loop transit and toll cards (Flazz, e-Money, Brizzi, TapCash, etc.) |
-| `direct-debit` | Direct Debit | 7 | Account-linked debit channels (BCA OneKlik, OCTO Clicks, etc.) |
+| `direct-debit` | Direct Debit | 6 | Account-linked debit channels (BCA KlikPay, BCA OneKlik, BRI Direct Debit, Jenius Pay, etc.) |
 | `donation` | Donation | 7 | Zakat, infaq, and charity platforms (Dompet Dhuafa, Kitabisa, Rumah Zakat, etc.) |
 | `utilities` | Utilities | 7 | PLN, PDAM, PGN, and other public utility brands |
-| `government` | Government | 5 | State agencies and government services (QRIS, Bukalapak Mitra Government, etc.) |
+| `government` | Government | 5 | State agencies and government services (Bea Cukai, DJP Online, Kemenkeu, Korlantas Polri) |
 
 Use `IdnFinLogos.categories` to get the list at runtime, or `IdnFinLogos.byCategory('<slug>')` to filter.
 

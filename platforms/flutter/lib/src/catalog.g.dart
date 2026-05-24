@@ -7,7 +7,7 @@
 import 'logo_meta.dart';
 import 'category.dart';
 
-const String catalogVersion = '2.2.1';
+const String catalogVersion = '2.3.0';
 
 const List<LogoMeta> catalogLogos = <LogoMeta>[
   LogoMeta(slug: '2c2p', name: '2c2p', category: 'payment-gateway', aliases: const <String>[], tags: const <String>[]),
@@ -332,6 +332,7 @@ const List<LogoMeta> catalogLogos = <LogoMeta>[
   LogoMeta(slug: 'kitabisa', name: 'Kitabisa', category: 'donation', aliases: const <String>[], tags: const <String>[]),
   LogoMeta(slug: 'kitabisa-alt', name: 'Kitabisa (Alt)', category: 'donation', aliases: const <String>[], tags: const <String>[]),
   LogoMeta(slug: 'kominfo', name: 'KOMINFO', category: 'regulatory', aliases: const <String>[], tags: const <String>[]),
+  LogoMeta(slug: 'korlantas-polri', name: 'Korlantas Polri', category: 'government', aliases: const <String>[], tags: const <String>[]),
   LogoMeta(slug: 'kredit-pintar', name: 'Kredit Pintar', category: 'financing', aliases: const <String>[], tags: const <String>[]),
   LogoMeta(slug: 'kreditplus', name: 'KreditPlus', category: 'financing', aliases: const <String>[], tags: const <String>[]),
   LogoMeta(slug: 'kredivo', name: 'Kredivo', category: 'financing', aliases: const <String>[], tags: const <String>[]),
@@ -419,7 +420,6 @@ const List<LogoMeta> catalogLogos = <LogoMeta>[
   LogoMeta(slug: 'ocbc-nisp', name: 'OCBC NISP', category: 'bank-logo', aliases: const <String>[], tags: const <String>[]),
   LogoMeta(slug: 'ocbc-pay-anyone', name: 'OCBC Pay Anyone', category: 'miscellaneous', aliases: const <String>[], tags: const <String>[]),
   LogoMeta(slug: 'octo-clicks', name: 'OCTO Clicks', category: 'bank-app', aliases: const <String>[], tags: const <String>[]),
-  LogoMeta(slug: 'octo-clicks-direct-debit', name: 'OCTO Clicks', category: 'direct-debit', aliases: const <String>[], tags: const <String>[]),
   LogoMeta(slug: 'ojk', name: 'OJK', category: 'regulatory', aliases: const <String>[], tags: const <String>[]),
   LogoMeta(slug: 'ok-bank', name: 'OK Bank', category: 'bank-logo', aliases: const <String>[], tags: const <String>[]),
   LogoMeta(slug: 'oneklik', name: 'OneKlik', category: 'direct-debit', aliases: const <String>[], tags: const <String>[]),
@@ -464,7 +464,7 @@ const List<LogoMeta> catalogLogos = <LogoMeta>[
   LogoMeta(slug: 'qnb', name: 'QNB', category: 'bank-logo', aliases: const <String>[], tags: const <String>[]),
   LogoMeta(slug: 'qoala', name: 'Qoala', category: 'insurance', aliases: const <String>[], tags: const <String>[]),
   LogoMeta(slug: 'qr-ph', name: 'QR Ph', category: 'qr-payment', aliases: const <String>[], tags: const <String>[]),
-  LogoMeta(slug: 'qris', name: 'QRIS', category: 'government', aliases: const <String>[], tags: const <String>[]),
+  LogoMeta(slug: 'qris', name: 'QRIS', category: 'qr-payment', aliases: const <String>[], tags: const <String>[]),
   LogoMeta(slug: 'rex', name: 'REX', category: 'logistic', aliases: const <String>[], tags: const <String>[]),
   LogoMeta(slug: 'ria-money', name: 'Ria Money', category: 'remittance', aliases: const <String>[], tags: const <String>[]),
   LogoMeta(slug: 'rpx', name: 'RPX', category: 'logistic', aliases: const <String>[], tags: const <String>[]),
@@ -564,8 +564,6 @@ const List<LogoMeta> catalogLogos = <LogoMeta>[
   LogoMeta(slug: 'western-union', name: 'Western Union', category: 'remittance', aliases: const <String>[], tags: const <String>[]),
   LogoMeta(slug: 'whoosh', name: 'Whoosh', category: 'transportation', aliases: const <String>[], tags: const <String>[]),
   LogoMeta(slug: 'wirecard', name: 'Wirecard', category: 'miscellaneous', aliases: const <String>[], tags: const <String>[]),
-  LogoMeta(slug: 'wirecard-1', name: 'Wirecard-1', category: 'miscellaneous', aliases: const <String>[], tags: const <String>[]),
-  LogoMeta(slug: 'wirecard-2', name: 'Wirecard-2', category: 'miscellaneous', aliases: const <String>[], tags: const <String>[]),
   LogoMeta(slug: 'wise', name: 'Wise', category: 'remittance', aliases: const <String>[], tags: const <String>[]),
   LogoMeta(slug: 'wom-finance', name: 'WOM Finance', category: 'financing', aliases: const <String>[], tags: const <String>[]),
   LogoMeta(slug: 'wondr-by-bni', name: 'Wondr by BNI', category: 'bank-app', aliases: const <String>[], tags: const <String>[]),
@@ -590,7 +588,7 @@ const List<Category> catalogCategories = <Category>[
   Category(slug: 'bank-app', displayName: 'Bank App', count: 17),
   Category(slug: 'bank-logo', displayName: 'Bank Logo', count: 160),
   Category(slug: 'card-payment', displayName: 'Card Payment', count: 37),
-  Category(slug: 'direct-debit', displayName: 'Direct Debit', count: 7),
+  Category(slug: 'direct-debit', displayName: 'Direct Debit', count: 6),
   Category(slug: 'donation', displayName: 'Donation', count: 7),
   Category(slug: 'e-commerce', displayName: 'E-Commerce', count: 12),
   Category(slug: 'e-wallet', displayName: 'E-Wallet', count: 27),
@@ -601,11 +599,11 @@ const List<Category> catalogCategories = <Category>[
   Category(slug: 'insurance', displayName: 'Insurance', count: 29),
   Category(slug: 'isp', displayName: 'ISP', count: 15),
   Category(slug: 'logistic', displayName: 'Logistic', count: 33),
-  Category(slug: 'miscellaneous', displayName: 'Miscellaneous', count: 23),
+  Category(slug: 'miscellaneous', displayName: 'Miscellaneous', count: 21),
   Category(slug: 'mobile-telco', displayName: 'Mobile Telco', count: 20),
   Category(slug: 'payment-gateway', displayName: 'Payment Gateway', count: 10),
   Category(slug: 'prepaid-card', displayName: 'Prepaid Card', count: 9),
-  Category(slug: 'qr-payment', displayName: 'QR Payment', count: 10),
+  Category(slug: 'qr-payment', displayName: 'QR Payment', count: 11),
   Category(slug: 'regulatory', displayName: 'Regulatory', count: 15),
   Category(slug: 'remittance', displayName: 'Remittance', count: 14),
   Category(slug: 'supermarket', displayName: 'Supermarket', count: 24),

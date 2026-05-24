@@ -7,7 +7,7 @@
 package com.hafidznoor.idnfinlogos
 
 internal object Catalog {
-    const val VERSION: String = "2.2.1"
+    const val VERSION: String = "2.3.0"
 
     val LOGOS: List<LogoMeta> = listOf(
         LogoMeta(slug="2c2p", name="2c2p", category="payment-gateway", aliases=emptyList(), tags=emptyList(), assetPath="idn-finlogos/2c2p.svg"),
@@ -332,6 +332,7 @@ internal object Catalog {
         LogoMeta(slug="kitabisa", name="Kitabisa", category="donation", aliases=emptyList(), tags=emptyList(), assetPath="idn-finlogos/kitabisa.svg"),
         LogoMeta(slug="kitabisa-alt", name="Kitabisa (Alt)", category="donation", aliases=emptyList(), tags=emptyList(), assetPath="idn-finlogos/kitabisa-alt.svg"),
         LogoMeta(slug="kominfo", name="KOMINFO", category="regulatory", aliases=emptyList(), tags=emptyList(), assetPath="idn-finlogos/kominfo.svg"),
+        LogoMeta(slug="korlantas-polri", name="Korlantas Polri", category="government", aliases=emptyList(), tags=emptyList(), assetPath="idn-finlogos/korlantas-polri.svg"),
         LogoMeta(slug="kredit-pintar", name="Kredit Pintar", category="financing", aliases=emptyList(), tags=emptyList(), assetPath="idn-finlogos/kredit-pintar.svg"),
         LogoMeta(slug="kreditplus", name="KreditPlus", category="financing", aliases=emptyList(), tags=emptyList(), assetPath="idn-finlogos/kreditplus.svg"),
         LogoMeta(slug="kredivo", name="Kredivo", category="financing", aliases=emptyList(), tags=emptyList(), assetPath="idn-finlogos/kredivo.svg"),
@@ -419,7 +420,6 @@ internal object Catalog {
         LogoMeta(slug="ocbc-nisp", name="OCBC NISP", category="bank-logo", aliases=emptyList(), tags=emptyList(), assetPath="idn-finlogos/ocbc-nisp.svg"),
         LogoMeta(slug="ocbc-pay-anyone", name="OCBC Pay Anyone", category="miscellaneous", aliases=emptyList(), tags=emptyList(), assetPath="idn-finlogos/ocbc-pay-anyone.svg"),
         LogoMeta(slug="octo-clicks", name="OCTO Clicks", category="bank-app", aliases=emptyList(), tags=emptyList(), assetPath="idn-finlogos/octo-clicks.svg"),
-        LogoMeta(slug="octo-clicks-direct-debit", name="OCTO Clicks", category="direct-debit", aliases=emptyList(), tags=emptyList(), assetPath="idn-finlogos/octo-clicks-direct-debit.svg"),
         LogoMeta(slug="ojk", name="OJK", category="regulatory", aliases=emptyList(), tags=emptyList(), assetPath="idn-finlogos/ojk.svg"),
         LogoMeta(slug="ok-bank", name="OK Bank", category="bank-logo", aliases=emptyList(), tags=emptyList(), assetPath="idn-finlogos/ok-bank.svg"),
         LogoMeta(slug="oneklik", name="OneKlik", category="direct-debit", aliases=emptyList(), tags=emptyList(), assetPath="idn-finlogos/oneklik.svg"),
@@ -464,7 +464,7 @@ internal object Catalog {
         LogoMeta(slug="qnb", name="QNB", category="bank-logo", aliases=emptyList(), tags=emptyList(), assetPath="idn-finlogos/qnb.svg"),
         LogoMeta(slug="qoala", name="Qoala", category="insurance", aliases=emptyList(), tags=emptyList(), assetPath="idn-finlogos/qoala.svg"),
         LogoMeta(slug="qr-ph", name="QR Ph", category="qr-payment", aliases=emptyList(), tags=emptyList(), assetPath="idn-finlogos/qr-ph.svg"),
-        LogoMeta(slug="qris", name="QRIS", category="government", aliases=emptyList(), tags=emptyList(), assetPath="idn-finlogos/qris.svg"),
+        LogoMeta(slug="qris", name="QRIS", category="qr-payment", aliases=emptyList(), tags=emptyList(), assetPath="idn-finlogos/qris.svg"),
         LogoMeta(slug="rex", name="REX", category="logistic", aliases=emptyList(), tags=emptyList(), assetPath="idn-finlogos/rex.svg"),
         LogoMeta(slug="ria-money", name="Ria Money", category="remittance", aliases=emptyList(), tags=emptyList(), assetPath="idn-finlogos/ria-money.svg"),
         LogoMeta(slug="rpx", name="RPX", category="logistic", aliases=emptyList(), tags=emptyList(), assetPath="idn-finlogos/rpx.svg"),
@@ -564,8 +564,6 @@ internal object Catalog {
         LogoMeta(slug="western-union", name="Western Union", category="remittance", aliases=emptyList(), tags=emptyList(), assetPath="idn-finlogos/western-union.svg"),
         LogoMeta(slug="whoosh", name="Whoosh", category="transportation", aliases=emptyList(), tags=emptyList(), assetPath="idn-finlogos/whoosh.svg"),
         LogoMeta(slug="wirecard", name="Wirecard", category="miscellaneous", aliases=emptyList(), tags=emptyList(), assetPath="idn-finlogos/wirecard.svg"),
-        LogoMeta(slug="wirecard-1", name="Wirecard-1", category="miscellaneous", aliases=emptyList(), tags=emptyList(), assetPath="idn-finlogos/wirecard-1.svg"),
-        LogoMeta(slug="wirecard-2", name="Wirecard-2", category="miscellaneous", aliases=emptyList(), tags=emptyList(), assetPath="idn-finlogos/wirecard-2.svg"),
         LogoMeta(slug="wise", name="Wise", category="remittance", aliases=emptyList(), tags=emptyList(), assetPath="idn-finlogos/wise.svg"),
         LogoMeta(slug="wom-finance", name="WOM Finance", category="financing", aliases=emptyList(), tags=emptyList(), assetPath="idn-finlogos/wom-finance.svg"),
         LogoMeta(slug="wondr-by-bni", name="Wondr by BNI", category="bank-app", aliases=emptyList(), tags=emptyList(), assetPath="idn-finlogos/wondr-by-bni.svg"),
@@ -590,7 +588,7 @@ internal object Catalog {
         Category(slug="bank-app", displayName="Bank App", count=17),
         Category(slug="bank-logo", displayName="Bank Logo", count=160),
         Category(slug="card-payment", displayName="Card Payment", count=37),
-        Category(slug="direct-debit", displayName="Direct Debit", count=7),
+        Category(slug="direct-debit", displayName="Direct Debit", count=6),
         Category(slug="donation", displayName="Donation", count=7),
         Category(slug="e-commerce", displayName="E-Commerce", count=12),
         Category(slug="e-wallet", displayName="E-Wallet", count=27),
@@ -601,11 +599,11 @@ internal object Catalog {
         Category(slug="insurance", displayName="Insurance", count=29),
         Category(slug="isp", displayName="ISP", count=15),
         Category(slug="logistic", displayName="Logistic", count=33),
-        Category(slug="miscellaneous", displayName="Miscellaneous", count=23),
+        Category(slug="miscellaneous", displayName="Miscellaneous", count=21),
         Category(slug="mobile-telco", displayName="Mobile Telco", count=20),
         Category(slug="payment-gateway", displayName="Payment Gateway", count=10),
         Category(slug="prepaid-card", displayName="Prepaid Card", count=9),
-        Category(slug="qr-payment", displayName="QR Payment", count=10),
+        Category(slug="qr-payment", displayName="QR Payment", count=11),
         Category(slug="regulatory", displayName="Regulatory", count=15),
         Category(slug="remittance", displayName="Remittance", count=14),
         Category(slug="supermarket", displayName="Supermarket", count=24),

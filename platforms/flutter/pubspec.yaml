@@ -1,7 +1,7 @@
 name: idn_finlogos
 description: Indonesian financial institution logos (banks, e-wallets, payment gateways, and 20+ more categories) as bundled SVG assets, with a typed Dart catalog API.
 # Rewritten by scripts/build-flutter.mjs to mirror the npm package version.
-version: 2.2.1
+version: 2.3.0
 homepage: https://github.com/hafidznoor/idn-finlogos
 repository: https://github.com/hafidznoor/idn-finlogos
 issue_tracker: https://github.com/hafidznoor/idn-finlogos/issues
@@ -349,6 +349,7 @@ flutter:
     - assets/idn-finlogos/kitabisa.svg
     - assets/idn-finlogos/kitabisa-alt.svg
     - assets/idn-finlogos/kominfo.svg
+    - assets/idn-finlogos/korlantas-polri.svg
     - assets/idn-finlogos/kredit-pintar.svg
     - assets/idn-finlogos/kreditplus.svg
     - assets/idn-finlogos/kredivo.svg
@@ -436,7 +437,6 @@ flutter:
     - assets/idn-finlogos/ocbc-nisp.svg
     - assets/idn-finlogos/ocbc-pay-anyone.svg
     - assets/idn-finlogos/octo-clicks.svg
-    - assets/idn-finlogos/octo-clicks-direct-debit.svg
     - assets/idn-finlogos/ojk.svg
     - assets/idn-finlogos/ok-bank.svg
     - assets/idn-finlogos/oneklik.svg
@@ -581,8 +581,6 @@ flutter:
     - assets/idn-finlogos/western-union.svg
     - assets/idn-finlogos/whoosh.svg
     - assets/idn-finlogos/wirecard.svg
-    - assets/idn-finlogos/wirecard-1.svg
-    - assets/idn-finlogos/wirecard-2.svg
     - assets/idn-finlogos/wise.svg
     - assets/idn-finlogos/wom-finance.svg
     - assets/idn-finlogos/wondr-by-bni.svg

@@ -11,9 +11,9 @@
 
 [![Support on Lemon Squeezy](https://img.shields.io/badge/Support-Lemon%20Squeezy-FFC233?logo=lemonsqueezy&logoColor=white)](https://hafidznoor.lemonsqueezy.com/checkout/buy/f2b81ada-e8a9-4e29-b35c-7b7249b78404)
 
-> **574 logos · 25 categories · SVG only · zero runtime dependencies · published to 4 registries**
+> **572 logos · 25 categories · SVG only · zero runtime dependencies · published to 4 registries · first-party React, React Native, Vue & Svelte components**
 
-The single source of truth for Indonesian fintech and financial brand marks across **BCA, Mandiri, BRI, BNI, BSI, DANA, GoPay, OVO, ShopeePay, LinkAja, BI-FAST, QRIS, OJK, Bank Indonesia, LPS** and 557+ more — all hand-curated, SVGO-optimized, and shipped as native packages on **npm, Maven Central, Swift Package Manager, and pub.dev**.
+The single source of truth for Indonesian fintech and financial brand marks across **BCA, Mandiri, BRI, BNI, BSI, DANA, GoPay, OVO, ShopeePay, LinkAja, BI-FAST, QRIS, OJK, Bank Indonesia, LPS** and 555+ more — all hand-curated, SVGO-optimized, and shipped as native packages on **npm, Maven Central, Swift Package Manager, and pub.dev**.
 
 > v2 of the original `indo-financial-logolibrary`. See [MIGRATION.md](./MIGRATION.md) if you're upgrading.
 
@@ -27,6 +27,7 @@ The single source of truth for Indonesian fintech and financial brand marks acro
 - [Install](#install)
 - [Usage](#usage)
   - [Web (npm)](#web-npm)
+  - [Framework components — React, React Native, Vue, Svelte, vanilla](#framework-components--react-react-native-vue-svelte-vanilla)
   - [TypeScript](#typescript)
   - [Android](#android)
   - [iOS](#ios)
@@ -46,12 +47,13 @@ The single source of truth for Indonesian fintech and financial brand marks acro
 | Platform | Install | Coordinate |
 |---|---|---|
 | **Web (npm)** | `npm install idn-finlogos` | `idn-finlogos` |
-| **Android (Gradle)** | `implementation("io.github.hafidznoor:idn-finlogos:2.2.1")` | `io.github.hafidznoor:idn-finlogos` |
-| **iOS (SPM)** | `.package(url: "https://github.com/hafidznoor/idn-finlogos", from: "2.2.1")` | `IdnFinLogos` |
+| **React / RN / Vue / Svelte** | `npm install idn-finlogos` + framework subpath | `idn-finlogos/{react,react-native,vue,svelte}` |
+| **Android (Gradle)** | `implementation("io.github.hafidznoor:idn-finlogos:2.3.0")` | `io.github.hafidznoor:idn-finlogos` |
+| **iOS (SPM)** | `.package(url: "https://github.com/hafidznoor/idn-finlogos", from: "2.3.0")` | `IdnFinLogos` |
 | **Flutter** | `flutter pub add idn_finlogos` | `idn_finlogos` |
 | **Web (CDN, zero install)** | `<img src="https://cdn.jsdelivr.net/npm/idn-finlogos@2/dist/icons/bca.svg" />` | jsDelivr / unpkg |
 
-All packages ship the same 574 SVGs from a single source of truth (`data/logos.yml` + `icons/`). Mobile packages bundle SVGs as platform-native resources; web packages ship them as both ESM modules and raw files.
+All packages ship the same 572 SVGs from a single source of truth (`data/logos.yml` + `icons/`). Mobile packages bundle SVGs as platform-native resources; web packages ship them as both ESM modules and raw files.
 
 ---
 
@@ -101,9 +103,10 @@ The recommended install paths. Same artifact, same coordinates, no auth required
 | Platform | Command |
 |---|---|
 | **Web (npm)** | `npm install idn-finlogos` |
-| **Android (Maven Central)** | `implementation("io.github.hafidznoor:idn-finlogos:2.2.1")` |
-| **Android (JitPack, no wait)** | Add `maven { url = uri("https://jitpack.io") }`, then `implementation("com.github.hafidznoor:idn-finlogos:2.2.1")` |
-| **iOS (Swift Package Manager)** | `.package(url: "https://github.com/hafidznoor/idn-finlogos", from: "2.2.1")` |
+| **React / React Native / Vue / Svelte** | `npm install idn-finlogos` — components import from `idn-finlogos/{react,react-native,vue,svelte}`; React Native also needs `react-native-svg` |
+| **Android (Maven Central)** | `implementation("io.github.hafidznoor:idn-finlogos:2.3.0")` |
+| **Android (JitPack, no wait)** | Add `maven { url = uri("https://jitpack.io") }`, then `implementation("com.github.hafidznoor:idn-finlogos:2.3.0")` |
+| **iOS (Swift Package Manager)** | `.package(url: "https://github.com/hafidznoor/idn-finlogos", from: "2.3.0")` |
 | **Flutter (pub.dev)** | `flutter pub add idn_finlogos` |
 | **Web (jsDelivr CDN)** | `https://cdn.jsdelivr.net/npm/idn-finlogos@2/dist/icons/<slug>.svg` |
 | **Web (unpkg CDN)** | `https://unpkg.com/idn-finlogos@2/dist/icons/<slug>.svg` |
@@ -145,7 +148,7 @@ dependencyResolutionManagement {
 Then use the same coordinate as Maven Central:
 
 ```kotlin
-implementation("io.github.hafidznoor:idn-finlogos:2.2.1")
+implementation("io.github.hafidznoor:idn-finlogos:2.3.0")
 ```
 
 ---
@@ -169,17 +172,7 @@ import doku from 'idn-finlogos/icons/doku';
 document.getElementById('logo').innerHTML = bca;
 ```
 
-**In React:**
-
-```jsx
-import bca from 'idn-finlogos/icons/bca';
-
-function BcaLogo() {
-  return <span dangerouslySetInnerHTML={{ __html: bca }} />;
-}
-```
-
-**In Vue / Svelte / Solid:** same idea — the import is a string, drop it into your framework's HTML-injection primitive.
+**In React / Vue / Svelte:** prefer the first-party components below — they handle the injection, sizing, and accessibility attributes for you.
 
 #### 2. Raw SVG file as URL
 
@@ -197,18 +190,18 @@ import bcaUrl from 'idn-finlogos/icons/bca.svg';
 ```js
 import { listLogos, getLogo, getLogoUrl, getCategories } from 'idn-finlogos';
 
-listLogos();                                // → all 574
+listLogos();                                // → all 572
 listLogos({ category: 'bank-logo' });       // → 160 banks
 listLogos({ search: 'syariah' });           // → fuzzy match by name/slug/alias
 
 getCategories();
-// → [{ slug: 'bank-logo', displayName: 'Bank Logo', count: 153 }, ...]
+// → [{ slug: 'bank-logo', displayName: 'Bank Logo', count: 160 }, ...]
 
 await getLogo('bca');
 // → { slug, name, category, svg: '<svg>...</svg>', ... }
 
 getLogoUrl('bca');
-// → 'https://cdn.jsdelivr.net/npm/idn-finlogos@2.2.1/dist/icons/bca.svg'
+// → 'https://cdn.jsdelivr.net/npm/idn-finlogos@2.3.0/dist/icons/bca.svg'
 ```
 
 #### 4. CDN — no install, no build step
@@ -218,7 +211,88 @@ getLogoUrl('bca');
 <img src="https://unpkg.com/idn-finlogos@2/dist/icons/gopay.svg" alt="GoPay" />
 ```
 
-Pin a major (`@2`), minor (`@2.1`), or exact version (`@2.2.1`). jsDelivr and unpkg both work.
+Pin a major (`@2`), minor (`@2.3`), or exact version (`@2.3.0`). jsDelivr and unpkg both work.
+
+---
+
+### Framework components — React, React Native, Vue, Svelte, vanilla
+
+The npm package ships first-party `<Logo>` components for the major web/native frameworks under subpath exports. They wrap the same SVG assets used everywhere else and accept either a `slug` (looks up via the bundled icons map) or a pre-imported `svg` string (tree-shake friendly).
+
+Peer deps (`react`, `react-native`, `react-native-svg`, `vue`, `svelte`) are declared **optional** — `npm install idn-finlogos` won't pull them in. Install whichever you need alongside.
+
+#### React
+
+```jsx
+import { Logo } from 'idn-finlogos/react';
+import bcaSvg from 'idn-finlogos/icons/bca'; // tree-shake friendly
+
+<Logo slug="bca" size={32} title="BCA" />          // by slug
+<Logo svg={bcaSvg} size={32} className="..." />    // by pre-imported SVG
+```
+
+Forwards all standard `HTMLAttributes<HTMLSpanElement>` props (`style`, `className`, `aria-*`, click handlers, etc.).
+
+#### React Native
+
+```jsx
+import { Logo } from 'idn-finlogos/react-native';
+
+<Logo slug="bca" width={80} height={26} />
+<Logo slug="mandiri" size={40} />                  // size shorthand for width+height
+<Logo slug="bri" size={40} color="#fff" style={{ margin: 4 }} />
+```
+
+Wraps `react-native-svg`'s [`SvgXml`](https://github.com/software-mansion/react-native-svg#svgxml). Install the peer dep:
+
+```bash
+npm install react-native-svg
+```
+
+#### Vue
+
+```vue
+<script setup>
+import { Logo } from 'idn-finlogos/vue';
+import bcaSvg from 'idn-finlogos/icons/bca';
+</script>
+
+<template>
+  <Logo slug="bca" :size="32" title="BCA" />
+  <Logo :svg="bcaSvg" :size="32" />
+</template>
+```
+
+Requires Vue 3+.
+
+#### Svelte
+
+```svelte
+<script>
+  import Logo from 'idn-finlogos/svelte';
+  import bcaSvg from 'idn-finlogos/icons/bca';
+</script>
+
+<Logo slug="bca" size={32} title="BCA" />
+<Logo svg={bcaSvg} size={32} />
+```
+
+Svelte 4 and Svelte 5 (legacy mode) both supported.
+
+#### Vanilla JS
+
+```js
+import { createLogo, renderLogo, getLogoSvg } from 'idn-finlogos/vanilla';
+
+document.body.appendChild(createLogo({ slug: 'bca', size: 32, title: 'BCA' }));
+renderLogo('#mount', { slug: 'mandiri', size: 24, className: 'logo' });
+const raw = getLogoSvg('bca'); // synchronous string, or null
+```
+
+#### Tree-shaking notes
+
+- The `slug` prop conveniently looks up any icon by name, but pulls in the bundled `dist/icons-map.{mjs,js}` — which transitively imports **every** per-slug module. Use it for catalog pages or pickers where the slug is dynamic.
+- For production app bundles where you only use a handful of logos, prefer the `svg` prop with pre-imported strings from `idn-finlogos/icons/<slug>` — modern bundlers will tree-shake away the rest.
 
 ---
 
@@ -243,7 +317,7 @@ Each `LogoMeta` carries: `slug`, `name`, `category`, `aliases`, `tags`, plus acc
 ```kotlin
 // app/build.gradle.kts
 dependencies {
-    implementation("io.github.hafidznoor:idn-finlogos:2.2.1")
+    implementation("io.github.hafidznoor:idn-finlogos:2.3.0")
     // Recommended SVG renderer:
     implementation("io.coil-kt:coil-compose:2.6.0")
     implementation("io.coil-kt:coil-svg:2.6.0")
@@ -283,7 +357,7 @@ fun BcaLogo() {
 
 ```swift
 // Package.swift
-.package(url: "https://github.com/hafidznoor/idn-finlogos", from: "2.2.1")
+.package(url: "https://github.com/hafidznoor/idn-finlogos", from: "2.3.0")
 ```
 
 ```swift
@@ -339,7 +413,7 @@ class BcaLogo extends StatelessWidget {
 
 ## Coverage
 
-**574 logos across 25 categories**, browseable via `getCategories()` or [`data/categories.yml`](./data/categories.yml).
+**572 logos across 25 categories**, browseable via `getCategories()` or [`data/categories.yml`](./data/categories.yml).
 
 | # | Category | Slug | Logos |
 |---:|---|---|---:|
@@ -347,35 +421,35 @@ class BcaLogo extends StatelessWidget {
 | 2 | Card Payment | `card-payment` | 37 |
 | 3 | Logistic | `logistic` | 33 |
 | 4 | Insurance | `insurance` | 29 |
-| 5 | Financing | `financing` | 27 |
-| 6 | E-Wallet | `e-wallet` | 27 |
+| 5 | E-Wallet | `e-wallet` | 27 |
+| 6 | Financing | `financing` | 27 |
 | 7 | Entertainment | `entertainment` | 26 |
 | 8 | Supermarket | `supermarket` | 24 |
-| 9 | Miscellaneous | `miscellaneous` | 23 |
+| 9 | Miscellaneous | `miscellaneous` | 21 |
 | 10 | Mobile Telco | `mobile-telco` | 20 |
 | 11 | Bank App | `bank-app` | 17 |
-| 12 | Regulatory | `regulatory` | 15 |
-| 13 | Game | `game` | 15 |
-| 14 | ISP | `isp` | 15 |
+| 12 | Game | `game` | 15 |
+| 13 | ISP | `isp` | 15 |
+| 14 | Regulatory | `regulatory` | 15 |
 | 15 | Remittance | `remittance` | 14 |
 | 16 | Switching | `switching` | 13 |
 | 17 | E-Commerce | `e-commerce` | 12 |
 | 18 | Transportation | `transportation` | 12 |
-| 19 | Payment Gateway | `payment-gateway` | 10 |
-| 20 | QR Payment | `qr-payment` | 10 |
+| 19 | QR Payment | `qr-payment` | 11 |
+| 20 | Payment Gateway | `payment-gateway` | 10 |
 | 21 | Prepaid Card | `prepaid-card` | 9 |
-| 22 | Direct Debit | `direct-debit` | 7 |
-| 23 | Donation | `donation` | 7 |
-| 24 | Utilities | `utilities` | 7 |
+| 22 | Donation | `donation` | 7 |
+| 23 | Utilities | `utilities` | 7 |
+| 24 | Direct Debit | `direct-debit` | 6 |
 | 25 | Government | `government` | 5 |
 
-**Notable brands covered:** BCA, Mandiri, BRI, BNI, BSI, BTN, CIMB Niaga, Danamon, Permata, OCBC NISP, UOB, HSBC, Standard Chartered, Citibank, DBS, Maybank, DANA, GoPay, OVO, ShopeePay, LinkAja, DOKU, Midtrans, Xendit, Stripe, 2c2p, ipay88, BI-FAST, QRIS, PRIMA, ALTO, Jalin, GPN, Visa, Mastercard, JCB, OJK, Bank Indonesia, LPS, AFPI, Telkomsel, IndiHome, MyRepublic, JNE, J&T, SiCepat, Tokopedia, Shopee, Lazada, Bukalapak, Blibli, Pegadaian, PLN, PGN, KAI, TransJakarta, MRT Jakarta, Netflix, Spotify, Disney+ Hotstar, AIA, Prudential, Manulife, BPJS, DuitNow, SGQR — and 510+ more in the full catalog below.
+**Notable brands covered:** BCA, Mandiri, BRI, BNI, BSI, BTN, CIMB Niaga, Danamon, Permata, OCBC NISP, UOB, HSBC, Standard Chartered, Citibank, DBS, Maybank, DANA, GoPay, OVO, ShopeePay, LinkAja, DOKU, Midtrans, Xendit, Stripe, 2c2p, ipay88, BI-FAST, QRIS, PRIMA, ALTO, Jalin, GPN, Visa, Mastercard, JCB, OJK, Bank Indonesia, LPS, AFPI, Korlantas Polri, Telkomsel, IndiHome, MyRepublic, JNE, J&T, SiCepat, Tokopedia, Shopee, Lazada, Bukalapak, Blibli, Pegadaian, PLN, PGN, KAI, TransJakarta, MRT Jakarta, Netflix, Spotify, Disney+ Hotstar, AIA, Prudential, Manulife, BPJS, DuitNow, SGQR — and 505+ more in the full catalog below.
 
 ---
 
 ## Complete logo catalog
 
-All 574 logos, grouped by category and sorted by name. Click a section to expand. The `code` is the slug you pass to `getLogo()`, `IdnFinLogos.get(...)`, or use as a file name (`icons/<slug>.svg`).
+All 572 logos, grouped by category and sorted by name. Click a section to expand. The `code` is the slug you pass to `getLogo()`, `IdnFinLogos.get(...)`, or use as a file name (`icons/<slug>.svg`).
 
 <details>
 <summary><b>Bank Logo</b> · 160 logos · <code>bank-logo</code></summary>
@@ -434,9 +508,9 @@ All 574 logos, grouped by category and sorted by name. Click a section to expand
 </details>
 
 <details>
-<summary><b>Miscellaneous</b> · 23 logos · <code>miscellaneous</code></summary>
+<summary><b>Miscellaneous</b> · 21 logos · <code>miscellaneous</code></summary>
 
-`alipay-new` Alipay (New) · `alipay-old` Alipay (Old) · `alipay-plus` Alipay+ · `alipay-plus-old` Alipay+ (Old) · `alipay-plus-old-alt` Alipay+ (Old Alt) · `apple-pay` Apple Pay · `dbs-paylah` DBS Paylah · `google-pay` Google Pay · `grab-pay` Grab Pay · `interlink` Interlink · `line-pay` LINE Pay · `line-pay-alt` LINE Pay (Alt) · `nets` NETS · `ocbc-pay-anyone` OCBC Pay Anyone · `samsung-pay` Samsung Pay · `samsung-pay-alt` Samsung Pay (Alt) · `verifone` Verifone · `verifone-new` Verifone (New) · `wechat-pay` WeChat Pay · `wechat-pay-alt` WeChat Pay (Alt) · `wirecard` Wirecard · `wirecard-1` Wirecard-1 · `wirecard-2` Wirecard-2
+`alipay-new` Alipay (New) · `alipay-old` Alipay (Old) · `alipay-plus` Alipay+ · `alipay-plus-old` Alipay+ (Old) · `alipay-plus-old-alt` Alipay+ (Old Alt) · `apple-pay` Apple Pay · `dbs-paylah` DBS Paylah · `google-pay` Google Pay · `grab-pay` Grab Pay · `interlink` Interlink · `line-pay` LINE Pay · `line-pay-alt` LINE Pay (Alt) · `nets` NETS · `ocbc-pay-anyone` OCBC Pay Anyone · `samsung-pay` Samsung Pay · `samsung-pay-alt` Samsung Pay (Alt) · `verifone` Verifone · `verifone-new` Verifone (New) · `wechat-pay` WeChat Pay · `wechat-pay-alt` WeChat Pay (Alt) · `wirecard` Wirecard
 
 </details>
 
@@ -511,9 +585,9 @@ All 574 logos, grouped by category and sorted by name. Click a section to expand
 </details>
 
 <details>
-<summary><b>QR Payment</b> · 10 logos · <code>qr-payment</code></summary>
+<summary><b>QR Payment</b> · 11 logos · <code>qr-payment</code></summary>
 
-`duitnow` DuitNow · `duitnow-qr` DuitNow QR · `khqr` KHQR · `lao-qr` LAO QR · `qr-ph` QR Ph · `sgqr` SGQR · `sgqr-plus` SGQR+ · `thai-qr-payment` Thai QR Payment · `thai-qr-payment-alt` Thai QR Payment (Alt) · `vietqr` VietQR
+`duitnow` DuitNow · `duitnow-qr` DuitNow QR · `khqr` KHQR · `lao-qr` LAO QR · `qr-ph` QR Ph · `qris` QRIS · `sgqr` SGQR · `sgqr-plus` SGQR+ · `thai-qr-payment` Thai QR Payment · `thai-qr-payment-alt` Thai QR Payment (Alt) · `vietqr` VietQR
 
 </details>
 
@@ -525,9 +599,9 @@ All 574 logos, grouped by category and sorted by name. Click a section to expand
 </details>
 
 <details>
-<summary><b>Direct Debit</b> · 7 logos · <code>direct-debit</code></summary>
+<summary><b>Direct Debit</b> · 6 logos · <code>direct-debit</code></summary>
 
-`bca-klikpay` BCA KlikPay · `bri-direct-debit` BRI Direct Debit · `jenius-pay` Jenius Pay · `mandiri-e-cash` Mandiri E-Cash · `octo-clicks-direct-debit` OCTO Clicks · `oneklik` OneKlik · `uob-ez-pay` UOB EZ Pay
+`bca-klikpay` BCA KlikPay · `bri-direct-debit` BRI Direct Debit · `jenius-pay` Jenius Pay · `mandiri-e-cash` Mandiri E-Cash · `oneklik` OneKlik · `uob-ez-pay` UOB EZ Pay
 
 </details>
 
@@ -548,7 +622,7 @@ All 574 logos, grouped by category and sorted by name. Click a section to expand
 <details>
 <summary><b>Government</b> · 5 logos · <code>government</code></summary>
 
-`bea-cukai` Bea Cukai · `djp-online` DJP Online · `djp-online-alt` DJP Online (Alt) · `kemenkeu` Kemenkeu · `qris` QRIS
+`bea-cukai` Bea Cukai · `djp-online` DJP Online · `djp-online-alt` DJP Online (Alt) · `kemenkeu` Kemenkeu · `korlantas-polri` Korlantas Polri
 
 </details>
 
@@ -582,7 +656,7 @@ Historical slugs are preserved for backwards compatibility with v1 (`indo-financ
 Yes — open an issue at [github.com/hafidznoor/idn-finlogos/issues](https://github.com/hafidznoor/idn-finlogos/issues) with the brand name, your source for the vector, and the trademark holder. PRs against [`data/logos.yml`](./data/logos.yml) and `icons/<slug>.svg` welcome.
 
 **Q: Why are mobile packages so big?**
-Each platform bundles all 489 SVGs as native resources (~4 MB optimized). If you only need a few, the npm package is tree-shakeable — pick the per-logo ESM import path on the web. On mobile, the assets are stored as platform resources and lazily decoded.
+Each platform bundles all 572 SVGs as native resources (~8.5 MB optimized). If you only need a few, the npm package is tree-shakeable — pick the per-logo ESM import path on the web. On mobile, the assets are stored as platform resources and lazily decoded.
 
 **Q: Do I need a separate SVG renderer on Android, iOS, or Flutter?**
 Yes — this package ships only the SVG files plus a catalog. Pair with **Coil** + `coil-svg` on Android, **SVGKit** on iOS, **flutter_svg** on Flutter (or any equivalent).

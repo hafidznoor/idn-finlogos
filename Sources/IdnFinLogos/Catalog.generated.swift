@@ -7,7 +7,7 @@
 import Foundation
 
 internal enum Catalog {
-    static let version: String = "2.2.1"
+    static let version: String = "2.3.0"
 
     static let logos: [LogoMeta] = [
         LogoMeta(slug: "2c2p", name: "2c2p", category: "payment-gateway", aliases: [], tags: []),
@@ -332,6 +332,7 @@ internal enum Catalog {
         LogoMeta(slug: "kitabisa", name: "Kitabisa", category: "donation", aliases: [], tags: []),
         LogoMeta(slug: "kitabisa-alt", name: "Kitabisa (Alt)", category: "donation", aliases: [], tags: []),
         LogoMeta(slug: "kominfo", name: "KOMINFO", category: "regulatory", aliases: [], tags: []),
+        LogoMeta(slug: "korlantas-polri", name: "Korlantas Polri", category: "government", aliases: [], tags: []),
         LogoMeta(slug: "kredit-pintar", name: "Kredit Pintar", category: "financing", aliases: [], tags: []),
         LogoMeta(slug: "kreditplus", name: "KreditPlus", category: "financing", aliases: [], tags: []),
         LogoMeta(slug: "kredivo", name: "Kredivo", category: "financing", aliases: [], tags: []),
@@ -419,7 +420,6 @@ internal enum Catalog {
         LogoMeta(slug: "ocbc-nisp", name: "OCBC NISP", category: "bank-logo", aliases: [], tags: []),
         LogoMeta(slug: "ocbc-pay-anyone", name: "OCBC Pay Anyone", category: "miscellaneous", aliases: [], tags: []),
         LogoMeta(slug: "octo-clicks", name: "OCTO Clicks", category: "bank-app", aliases: [], tags: []),
-        LogoMeta(slug: "octo-clicks-direct-debit", name: "OCTO Clicks", category: "direct-debit", aliases: [], tags: []),
         LogoMeta(slug: "ojk", name: "OJK", category: "regulatory", aliases: [], tags: []),
         LogoMeta(slug: "ok-bank", name: "OK Bank", category: "bank-logo", aliases: [], tags: []),
         LogoMeta(slug: "oneklik", name: "OneKlik", category: "direct-debit", aliases: [], tags: []),
@@ -464,7 +464,7 @@ internal enum Catalog {
         LogoMeta(slug: "qnb", name: "QNB", category: "bank-logo", aliases: [], tags: []),
         LogoMeta(slug: "qoala", name: "Qoala", category: "insurance", aliases: [], tags: []),
         LogoMeta(slug: "qr-ph", name: "QR Ph", category: "qr-payment", aliases: [], tags: []),
-        LogoMeta(slug: "qris", name: "QRIS", category: "government", aliases: [], tags: []),
+        LogoMeta(slug: "qris", name: "QRIS", category: "qr-payment", aliases: [], tags: []),
         LogoMeta(slug: "rex", name: "REX", category: "logistic", aliases: [], tags: []),
         LogoMeta(slug: "ria-money", name: "Ria Money", category: "remittance", aliases: [], tags: []),
         LogoMeta(slug: "rpx", name: "RPX", category: "logistic", aliases: [], tags: []),
@@ -564,8 +564,6 @@ internal enum Catalog {
         LogoMeta(slug: "western-union", name: "Western Union", category: "remittance", aliases: [], tags: []),
         LogoMeta(slug: "whoosh", name: "Whoosh", category: "transportation", aliases: [], tags: []),
         LogoMeta(slug: "wirecard", name: "Wirecard", category: "miscellaneous", aliases: [], tags: []),
-        LogoMeta(slug: "wirecard-1", name: "Wirecard-1", category: "miscellaneous", aliases: [], tags: []),
-        LogoMeta(slug: "wirecard-2", name: "Wirecard-2", category: "miscellaneous", aliases: [], tags: []),
         LogoMeta(slug: "wise", name: "Wise", category: "remittance", aliases: [], tags: []),
         LogoMeta(slug: "wom-finance", name: "WOM Finance", category: "financing", aliases: [], tags: []),
         LogoMeta(slug: "wondr-by-bni", name: "Wondr by BNI", category: "bank-app", aliases: [], tags: []),
@@ -590,7 +588,7 @@ internal enum Catalog {
         Category(slug: "bank-app", displayName: "Bank App", count: 17),
         Category(slug: "bank-logo", displayName: "Bank Logo", count: 160),
         Category(slug: "card-payment", displayName: "Card Payment", count: 37),
-        Category(slug: "direct-debit", displayName: "Direct Debit", count: 7),
+        Category(slug: "direct-debit", displayName: "Direct Debit", count: 6),
         Category(slug: "donation", displayName: "Donation", count: 7),
         Category(slug: "e-commerce", displayName: "E-Commerce", count: 12),
         Category(slug: "e-wallet", displayName: "E-Wallet", count: 27),
@@ -601,11 +599,11 @@ internal enum Catalog {
         Category(slug: "insurance", displayName: "Insurance", count: 29),
         Category(slug: "isp", displayName: "ISP", count: 15),
         Category(slug: "logistic", displayName: "Logistic", count: 33),
-        Category(slug: "miscellaneous", displayName: "Miscellaneous", count: 23),
+        Category(slug: "miscellaneous", displayName: "Miscellaneous", count: 21),
         Category(slug: "mobile-telco", displayName: "Mobile Telco", count: 20),
         Category(slug: "payment-gateway", displayName: "Payment Gateway", count: 10),
         Category(slug: "prepaid-card", displayName: "Prepaid Card", count: 9),
-        Category(slug: "qr-payment", displayName: "QR Payment", count: 10),
+        Category(slug: "qr-payment", displayName: "QR Payment", count: 11),
         Category(slug: "regulatory", displayName: "Regulatory", count: 15),
         Category(slug: "remittance", displayName: "Remittance", count: 14),
         Category(slug: "supermarket", displayName: "Supermarket", count: 24),

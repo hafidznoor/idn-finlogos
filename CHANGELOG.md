@@ -4,6 +4,34 @@ All notable changes to this project will be documented in this file. Format foll
 
 ## [Unreleased]
 
+## [2.3.0]
+
+### Added
+
+- **Framework wrappers** — first-party `<Logo>` components for **React**, **React Native**, **Vue**, and **Svelte**, plus a vanilla DOM helper. All ship under subpath exports of the same `idn-finlogos` package; peer deps (`react`, `react-native`, `react-native-svg`, `vue`, `svelte`) are declared optional so consumers only install what they use.
+  - `idn-finlogos/react` — `<Logo slug="bca" size={32} />`
+  - `idn-finlogos/react-native` — `<Logo slug="bca" width={80} height={26} />` (wraps `react-native-svg`'s `SvgXml`)
+  - `idn-finlogos/vue` — `<Logo slug="bca" :size="32" />`
+  - `idn-finlogos/svelte` — `<Logo slug="bca" size={32} />` (Svelte 4/5 compatible)
+  - `idn-finlogos/vanilla` — `createLogo({ slug, size })`, `renderLogo(target, options)`, `getLogoSvg(slug)`
+- Each component accepts either `slug` (looks up via the bundled icons map — convenient) or `svg` (a pre-imported per-icon string from `idn-finlogos/icons/<slug>` — tree-shake friendly).
+- New `dist/icons-map.{mjs,js,d.ts}` shared by all wrappers — re-exports the existing per-slug modules, so no SVG content is duplicated on disk.
+- New build script: `npm run build:frameworks` (also runs as part of `build:all` and `prepublishOnly`).
+- `Korlantas Polri` logo added under the **Government** category.
+
+### Changed
+
+- **QRIS** moved from `government` → `qr-payment` to match its actual function and group it with KHQR, SGQR, VietQR, and other QR-payment standards.
+- **Total logos: 574 → 572** (see Removed below).
+
+### Removed
+
+- 3 duplicate logos: `octo-clicks-direct-debit` (visually identical to `octo-clicks` for our purposes), `wirecard-1`, and `wirecard-2` (both visually identical to `wirecard`).
+
+### Fixed
+
+- Re-exported `ibk-bank` and `qris` from source — the previous exports had broken clip-path masks (same class of bug fixed in 2.2.1 for `alto`, `netflix-alt`, `payoneer`, `visa-checkout`).
+
 ## [2.2.1]
 
 ### Fixed
@@ -130,7 +158,9 @@ First release. Initially published as `@hafidznoor/idn-finlogos`; renamed to `id
 - `paypal` (Remittance); Misc copy dropped.
 - `western-union` (Remittance); Misc copy dropped.
 
-[Unreleased]: https://github.com/hafidznoor/idn-finlogos/compare/v2.2.0...HEAD
+[Unreleased]: https://github.com/hafidznoor/idn-finlogos/compare/v2.3.0...HEAD
+[2.3.0]: https://github.com/hafidznoor/idn-finlogos/compare/v2.2.1...v2.3.0
+[2.2.1]: https://github.com/hafidznoor/idn-finlogos/compare/v2.2.0...v2.2.1
 [2.2.0]: https://github.com/hafidznoor/idn-finlogos/compare/v2.1.6...v2.2.0
 [2.1.6]: https://github.com/hafidznoor/idn-finlogos/releases/tag/v2.1.6
 [2.1.5]: https://github.com/hafidznoor/idn-finlogos/compare/v2.1.4...v2.1.5

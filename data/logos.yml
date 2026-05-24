@@ -969,6 +969,9 @@
 - slug: kominfo
   name: KOMINFO
   category: regulatory
+- slug: korlantas-polri
+  name: Korlantas Polri
+  category: government
 - slug: kredit-pintar
   name: Kredit Pintar
   category: financing
@@ -1230,9 +1233,6 @@
 - slug: octo-clicks
   name: OCTO Clicks
   category: bank-app
-- slug: octo-clicks-direct-debit
-  name: OCTO Clicks
-  category: direct-debit
 - slug: ojk
   name: OJK
   category: regulatory
@@ -1367,7 +1367,7 @@
   category: qr-payment
 - slug: qris
   name: QRIS
-  category: government
+  category: qr-payment
 - slug: rex
   name: REX
   category: logistic
@@ -1664,12 +1664,6 @@
   category: transportation
 - slug: wirecard
   name: Wirecard
-  category: miscellaneous
-- slug: wirecard-1
-  name: Wirecard-1
-  category: miscellaneous
-- slug: wirecard-2
-  name: Wirecard-2
   category: miscellaneous
 - slug: wise
   name: Wise
