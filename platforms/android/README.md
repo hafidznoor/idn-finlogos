@@ -12,7 +12,7 @@ Android library for the [idn-finlogos](https://github.com/hafidznoor/idn-finlogo
 
 ```kotlin
 dependencies {
-    implementation("io.github.hafidznoor:idn-finlogos:2.2.0")
+    implementation("io.github.hafidznoor:idn-finlogos:2.2.1")
 }
 ```
 
@@ -28,7 +28,7 @@ dependencyResolutionManagement {
 
 // app/build.gradle.kts
 dependencies {
-    implementation("com.github.hafidznoor:idn-finlogos:2.2.0")
+    implementation("com.github.hafidznoor:idn-finlogos:2.2.1")
 }
 ```
 

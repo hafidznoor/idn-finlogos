@@ -1,3 +1,7 @@
+## 2.2.1
+
+Re-exported 5 logos with broken or missing clip-path masks: `alto`, `ibk-bank`, `netflix-alt`, `payoneer`, `visa-checkout`. Some viewBox dimensions changed where artwork was trimmed.
+
 ## 2.2.0
 
 Added **Insurance** (29 logos) and **QR Payment** (10 logos) categories, plus 46 logos across existing categories — 574 logos across 25 categories total. Re-exported every SVG to fix clip-path / mask rendering issues that affected GitHub's viewer and some mobile SVG renderers. No API changes.

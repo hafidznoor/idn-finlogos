@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file. Format foll
 
 ## [Unreleased]
 
+## [2.2.1]
+
+### Fixed
+
+- Re-exported 5 logos with broken or missing clip-path masks: `alto`, `ibk-bank`, `netflix-alt`, `payoneer`, `visa-checkout`. Some `viewBox` dimensions changed where the source artwork was trimmed (`alto` 80×118 → 80×54 dropped the wordmark below the badge; `ibk-bank` 80×78 → 74×72; `visa-checkout` no longer has a leading black background rect). Consumers respecting `viewBox` will render correctly; pixel-locked layouts may need adjustment.
+
 ## [2.2.0]
 
 ### Added

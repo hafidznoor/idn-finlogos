@@ -46,8 +46,8 @@ The single source of truth for Indonesian fintech and financial brand marks acro
 | Platform | Install | Coordinate |
 |---|---|---|
 | **Web (npm)** | `npm install idn-finlogos` | `idn-finlogos` |
-| **Android (Gradle)** | `implementation("io.github.hafidznoor:idn-finlogos:2.2.0")` | `io.github.hafidznoor:idn-finlogos` |
-| **iOS (SPM)** | `.package(url: "https://github.com/hafidznoor/idn-finlogos", from: "2.2.0")` | `IdnFinLogos` |
+| **Android (Gradle)** | `implementation("io.github.hafidznoor:idn-finlogos:2.2.1")` | `io.github.hafidznoor:idn-finlogos` |
+| **iOS (SPM)** | `.package(url: "https://github.com/hafidznoor/idn-finlogos", from: "2.2.1")` | `IdnFinLogos` |
 | **Flutter** | `flutter pub add idn_finlogos` | `idn_finlogos` |
 | **Web (CDN, zero install)** | `<img src="https://cdn.jsdelivr.net/npm/idn-finlogos@2/dist/icons/bca.svg" />` | jsDelivr / unpkg |
 
@@ -101,9 +101,9 @@ The recommended install paths. Same artifact, same coordinates, no auth required
 | Platform | Command |
 |---|---|
 | **Web (npm)** | `npm install idn-finlogos` |
-| **Android (Maven Central)** | `implementation("io.github.hafidznoor:idn-finlogos:2.2.0")` |
-| **Android (JitPack, no wait)** | Add `maven { url = uri("https://jitpack.io") }`, then `implementation("com.github.hafidznoor:idn-finlogos:2.2.0")` |
-| **iOS (Swift Package Manager)** | `.package(url: "https://github.com/hafidznoor/idn-finlogos", from: "2.2.0")` |
+| **Android (Maven Central)** | `implementation("io.github.hafidznoor:idn-finlogos:2.2.1")` |
+| **Android (JitPack, no wait)** | Add `maven { url = uri("https://jitpack.io") }`, then `implementation("com.github.hafidznoor:idn-finlogos:2.2.1")` |
+| **iOS (Swift Package Manager)** | `.package(url: "https://github.com/hafidznoor/idn-finlogos", from: "2.2.1")` |
 | **Flutter (pub.dev)** | `flutter pub add idn_finlogos` |
 | **Web (jsDelivr CDN)** | `https://cdn.jsdelivr.net/npm/idn-finlogos@2/dist/icons/<slug>.svg` |
 | **Web (unpkg CDN)** | `https://unpkg.com/idn-finlogos@2/dist/icons/<slug>.svg` |
@@ -145,7 +145,7 @@ dependencyResolutionManagement {
 Then use the same coordinate as Maven Central:
 
 ```kotlin
-implementation("io.github.hafidznoor:idn-finlogos:2.2.0")
+implementation("io.github.hafidznoor:idn-finlogos:2.2.1")
 ```
 
 ---
@@ -208,7 +208,7 @@ await getLogo('bca');
 // → { slug, name, category, svg: '<svg>...</svg>', ... }
 
 getLogoUrl('bca');
-// → 'https://cdn.jsdelivr.net/npm/idn-finlogos@2.2.0/dist/icons/bca.svg'
+// → 'https://cdn.jsdelivr.net/npm/idn-finlogos@2.2.1/dist/icons/bca.svg'
 ```
 
 #### 4. CDN — no install, no build step
@@ -218,7 +218,7 @@ getLogoUrl('bca');
 <img src="https://unpkg.com/idn-finlogos@2/dist/icons/gopay.svg" alt="GoPay" />
 ```
 
-Pin a major (`@2`), minor (`@2.1`), or exact version (`@2.2.0`). jsDelivr and unpkg both work.
+Pin a major (`@2`), minor (`@2.1`), or exact version (`@2.2.1`). jsDelivr and unpkg both work.
 
 ---
 
@@ -243,7 +243,7 @@ Each `LogoMeta` carries: `slug`, `name`, `category`, `aliases`, `tags`, plus acc
 ```kotlin
 // app/build.gradle.kts
 dependencies {
-    implementation("io.github.hafidznoor:idn-finlogos:2.2.0")
+    implementation("io.github.hafidznoor:idn-finlogos:2.2.1")
     // Recommended SVG renderer:
     implementation("io.coil-kt:coil-compose:2.6.0")
     implementation("io.coil-kt:coil-svg:2.6.0")
@@ -283,7 +283,7 @@ fun BcaLogo() {
 
 ```swift
 // Package.swift
-.package(url: "https://github.com/hafidznoor/idn-finlogos", from: "2.2.0")
+.package(url: "https://github.com/hafidznoor/idn-finlogos", from: "2.2.1")
 ```
 
 ```swift
