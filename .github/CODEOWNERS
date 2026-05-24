@@ -1,0 +1,3 @@
+# Every file in this repo requires review from @hafidznoor.
+# The `protect-main` ruleset enforces code-owner approval on all PRs.
+* @hafidznoor
