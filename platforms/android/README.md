@@ -1,6 +1,6 @@
-# idn-finlogos (Android)
+# Indonesia Fintech Logos — Android
 
-Android library for the [idn-finlogos](https://github.com/hafidznoor/idn-finlogos) catalog of Indonesian financial institution logos.
+Android library (`idn-finlogos`) for the [Indonesia Fintech Logos](https://github.com/hafidznoor/idn-finlogos) catalog — Indonesian fintech & financial institution logos: banks, e-wallets, payment gateways, switching networks, regulators, and more.
 
 **572 logos · 25 categories · zero runtime dependencies · raw SVG assets**
 

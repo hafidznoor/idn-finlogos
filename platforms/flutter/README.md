@@ -1,6 +1,6 @@
-# idn_finlogos
+# Indonesia Fintech Logos — Flutter
 
-Flutter package for the [idn-finlogos](https://github.com/hafidznoor/idn-finlogos) catalog of Indonesian financial institution logos.
+Flutter package (`idn_finlogos`) for the [Indonesia Fintech Logos](https://github.com/hafidznoor/idn-finlogos) catalog — Indonesian fintech & financial institution logos: banks, e-wallets, payment gateways, switching networks, regulators, and more.
 
 **572 logos · 25 categories · raw SVG assets · zero runtime dependencies**
 

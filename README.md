@@ -1,6 +1,6 @@
-# idn-finlogos
+# Indonesia Fintech Logos
 
-**Indonesian financial institution logos** — banks, e-wallets, payment gateways, switching networks, regulators, and more, as **optimized SVGs** ready to drop into web, Android, iOS, and Flutter projects.
+> The package **`idn-finlogos`** — **Indonesian fintech & financial institution logos**: banks, e-wallets, payment gateways, switching networks, regulators, and more, as **optimized SVGs** ready to drop into web, Android, iOS, and Flutter projects.
 
 [![npm version](https://img.shields.io/npm/v/idn-finlogos?logo=npm&label=npm)](https://www.npmjs.com/package/idn-finlogos)
 [![npm downloads](https://img.shields.io/npm/dm/idn-finlogos?logo=npm&label=downloads)](https://www.npmjs.com/package/idn-finlogos)
@@ -717,4 +717,4 @@ Every contribution directly funds new logos, faster turnaround on rebrand reques
 
 ## Keywords
 
-`indonesia` · `indonesian banks` · `bank logos` · `e-wallet icons` · `payment gateway logos` · `fintech` · `svg` · `icons` · `react` · `vue` · `svelte` · `nextjs` · `android` · `ios` · `swift` · `kotlin` · `flutter` · `dart` · `bca` · `mandiri` · `bri` · `bni` · `dana` · `gopay` · `ovo` · `shopeepay` · `bi-fast` · `qris` · `ojk` · `bank indonesia` · `npm package` · `maven central` · `pub.dev`
+`indonesia fintech logos` · `indonesia` · `indonesian banks` · `bank logos` · `e-wallet icons` · `payment gateway logos` · `fintech` · `svg` · `icons` · `react` · `vue` · `svelte` · `nextjs` · `android` · `ios` · `swift` · `kotlin` · `flutter` · `dart` · `bca` · `mandiri` · `bri` · `bni` · `dana` · `gopay` · `ovo` · `shopeepay` · `bi-fast` · `qris` · `ojk` · `bank indonesia` · `npm package` · `maven central` · `pub.dev`
