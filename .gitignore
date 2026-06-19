@@ -36,3 +36,10 @@ platforms/flutter/.flutter-plugins
 platforms/flutter/.flutter-plugins-dependencies
 platforms/flutter/build/
 platforms/flutter/pubspec.lock
+
+# Playwright visual-regression: transient run output only.
+# The baseline snapshots under tests/visual/icons.spec.ts-snapshots/ ARE committed —
+# they are the approved reference each future run is diffed against.
+test-results/
+tests/visual/report/
+tests/visual/vr-results.json

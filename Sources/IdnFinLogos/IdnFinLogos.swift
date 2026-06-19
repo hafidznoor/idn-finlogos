@@ -15,9 +15,35 @@ public enum IdnFinLogos {
     /// Every category with its display name and count.
     public static let categories: [Category] = Catalog.categories
 
-    /// Lookup by canonical kebab-case slug.
+    /// Lookup by canonical kebab-case slug, falling back to `aliases`
+    /// (retired slugs from past renames) and finally the brand name in any
+    /// casing — `get("bri")`, `get("bri-new")`, `get("BRI")`, and
+    /// `get("Bank Rakyat Indonesia")` all resolve to the same logo.
     public static func get(_ slug: String) -> LogoMeta? {
-        Catalog.logos.first { $0.slug == slug }
+        if let direct = Catalog.logos.first(where: { $0.slug == slug })
+            ?? Catalog.logos.first(where: { $0.aliases.contains(slug) }) {
+            return direct
+        }
+        let q = slug.trimmingCharacters(in: .whitespaces).lowercased()
+        if let byName = Catalog.logos.first(where: { $0.name.lowercased() == q }) {
+            return byName
+        }
+        let s = slugified(slug)
+        guard !s.isEmpty else { return nil }
+        return Catalog.logos.first { $0.slug == s }
+            ?? Catalog.logos.first { $0.aliases.contains(s) }
+            ?? Catalog.logos.first { slugified($0.name) == s }
+    }
+
+    /// Mirrors `scripts/slugify.mjs` in the upstream repo — keep in sync.
+    private static func slugified(_ input: String) -> String {
+        input.lowercased()
+            .replacingOccurrences(of: "&", with: " and ")
+            .replacingOccurrences(of: "+", with: " plus ")
+            .replacingOccurrences(of: "[()]", with: " ", options: .regularExpression)
+            .replacingOccurrences(of: "[\u{2018}\u{2019}\u{201B}'`]", with: "", options: .regularExpression)
+            .replacingOccurrences(of: "[^a-z0-9]+", with: "-", options: .regularExpression)
+            .replacingOccurrences(of: "^-+|-+$", with: "", options: .regularExpression)
     }
 
     /// All logos in one category.

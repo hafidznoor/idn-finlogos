@@ -4,6 +4,89 @@ All notable changes to this project will be documented in this file. Format foll
 
 ## [Unreleased]
 
+## [2.4.0]
+
+### Changed — slug cleanup, bare slug = newest logo
+
+The bare brand slug now always resolves to the **newest** official logo. Previously the newest art hid behind a `-new` suffix, so `getLogo('bri')` or `<Logo slug="bri" />` silently returned the *old* BRI logo. The `-new` suffix is retired for good — superseded art now lives under `-old`.
+
+39 slugs renamed:
+
+| old slug | new slug | name |
+|---|---|---|
+| `bri-new` | `bri` | BRI |
+| `bri` | `bri-old` | BRI (Old) |
+| `btn-new` | `btn` | BTN |
+| `btn` | `btn-old` | BTN (Old) |
+| `btn-syariah-new` | `btn-syariah` | BTN Syariah |
+| `btn-syariah` | `btn-syariah-old` | BTN Syariah (Old) |
+| `bca-flazz-new` | `bca-flazz` | BCA Flazz |
+| `bca-flazz` | `bca-flazz-old` | BCA Flazz (Old) |
+| `bukalapak-new` | `bukalapak` | Bukalapak |
+| `bukalapak` | `bukalapak-old` | Bukalapak (Old) |
+| `mandiri-livin-new` | `mandiri-livin` | Mandiri Livin |
+| `mandiri-livin` | `mandiri-livin-old` | Mandiri Livin (Old) |
+| `mastercard-securecode-new` | `mastercard-securecode` | Mastercard SecureCode |
+| `mastercard-securecode` | `mastercard-securecode-old` | Mastercard SecureCode (Old) |
+| `paypal-new` | `paypal` | PayPal |
+| `paypal` | `paypal-old` | PayPal (Old) |
+| `simpati-new` | `simpati` | Simpati |
+| `simpati` | `simpati-old` | Simpati (Old) |
+| `verified-by-visa-new` | `verified-by-visa` | Verified by VISA |
+| `verified-by-visa` | `verified-by-visa-old` | Verified by VISA (Old) |
+| `verifone-new` | `verifone` | Verifone |
+| `verifone` | `verifone-old` | Verifone (Old) |
+| `2c2p-new` | `2c2p` | 2c2p |
+| `2c2p-new-alt` | `2c2p-alt` | 2c2p (Alt) |
+| `2c2p` | `2c2p-old` | 2c2p (Old) |
+| `alipay-new` | `alipay` | Alipay |
+| `indihome-new` | `indihome` | IndiHome |
+| `kai-commuter-new` | `kai-commuter` | KAI Commuter |
+| `ovo-new` | `ovo` | OVO |
+| `ovo-new-alt` | `ovo-alt` | OVO (Alt) |
+| `pam-jaya-new` | `pam-jaya` | PAM Jaya |
+| `pos-indonesia-new` | `pos-indonesia` | Pos Indonesia |
+| `transvision-new` | `transvision` | TransVision |
+| `permata-bank-new` | `permata` | Permata Bank |
+| `permata-bank-alt` | `permata-alt` | Permata Bank (Alt) |
+| `permata` | `permata-old` | Permata Bank (Old) |
+| `link-new` | `link` | Link |
+| `link-new-alt` | `link-alt` | Link (Alt) |
+| `link` | `atm-link` | ATM Link — distinct "ATM Link" badge lockup, not a rebrand generation |
+
+**What changes:** bare slugs in the left column (`bri`, `btn`, `paypal`, `permata`, `link`, …) now render the **current** logo instead of the old one. If you deliberately want the superseded art, switch to the `-old` slug.
+
+**What keeps working:**
+
+- Every retired slug whose art still exists under a new name (`bri-new`, `ovo-new`, `permata-bank-alt`, …) is recorded in that entry's `aliases`. `getLogo()` / `getLogoUrl()` (JS), `IdnFinLogos.get()` (Swift / Kotlin / Dart), the framework `<Logo slug>` lookup, and `listLogos({ search })` all resolve aliases.
+- `dist/icons/<retired-slug>.{svg,mjs,js,d.ts}` ship as deprecated shims re-exporting the canonical module, so per-icon imports and CDN URLs using e.g. `bri-new` keep working. These shims will be removed in the next major (v3).
+
+### Changed — typo & convention slug fixes
+
+Long-frozen misspellings and ad-hoc numbered slugs are corrected. The old slug is kept as an alias on each entry, so existing lookups (`getLogo('mualamat')`, `getLogo('bank-dki-1')`) keep resolving.
+
+| old slug | new slug | name |
+|---|---|---|
+| `mualamat` | `muamalat` | Bank Muamalat |
+| `amercian-express-alt` | `american-express-alt` | American Express (Alt) |
+| `topremit-1` | `topremit-alt` | Topremit (Alt) |
+| `lexus-financial-service-1` | `lexus-financial-service-alt` | Lexus Financial Service (Alt) |
+| `bank-bpd-sumsel-babel-alt-1` | `bank-bpd-sumsel-babel-alt` | Bank BPD Sumsel Babel (Alt) |
+
+**Bank DKI → Bank Jakarta rebrand.** Bank DKI rebranded to **Bank Jakarta**. The new logo becomes the canonical `bank-jakarta` entry and inherits the bank's identifiers (kode bank `111`, SWIFT `bdkiidj1`); the pre-rebrand mark moves to `bank-dki-old`. The retired slugs `bank-dki`, `bank-dki-alt`, and `bank-dki-1` all resolve to `bank-jakarta` as aliases, so `getLogo('bank-dki')` and `getLogo('111')` return the current Bank Jakarta logo.
+
+Display names were also restyled to match official brand stylization (slugs unchanged): `Gopay` → `GoPay`, `Mandiri Livin` → `Livin' by Mandiri`, `Simpati` → `simPATI`, `Blu BCA` → `blu by BCA Digital`, `BYOND BSI` → `BYOND by BSI`, `Anteraja` → `AnterAja`, `Sicepat Ekspres` → `SiCepat Ekspres`, `Union Pay` → `UnionPay`, `I.Saku` → `i.saku`, `MTIX` → `m.tix`, `Playstation Plus`/`Store` → `PlayStation Plus`/`Store` (and their `(Alt)`/`(Old)`/`(EN)` variants).
+
+### Added
+
+- **PNG renders at 1x/2x/3x/4x** for environments that can't display SVG (emails, legacy webviews, native apps without an SVG renderer). Every canonical logo ships as `dist/png/<slug>@{1x,2x,3x,4x}.png` — square 80/160/240/320 px canvases with the logo centered on transparent padding. Importable via the new `idn-finlogos/png/<slug>@<scale>x.png` subpath export or fetched from the CDN. Generated by the new `npm run build:png` (wired into `build:all` and `prepublishOnly`).
+- **Lookup by brand name** — `getLogo()` / `getLogoUrl()` (JS) and `IdnFinLogos.get()` (Swift / Kotlin / Dart) now accept the brand name in any casing, not just the slug: `getLogo('BRI')`, `getLogo('Bank Rakyat Indonesia')`, `getLogo('PayPal')`, and `getLogo('Alipay+')` all resolve. Resolution order: exact slug → alias (retired slug) → display name (case-insensitive) → slugified input. Unknown input still returns `null`.
+- Official full company names added as aliases for major banks (`bank-rakyat-indonesia` → `bri`, `bank-central-asia` → `bca`, `bank-mandiri` → `mandiri`, `bank-muamalat` → `muamalat`, and 9 more).
+- **SWIFT/BIC and kode-bank lookup** — banks carry their **SWIFT/BIC** (lowercased, e.g. `bca` → `cenaidja`) and **3-digit kode bank** (e.g. `bca` → `014`, `bri` → `002`) as aliases, so `getLogo('CENAIDJA')` and `getLogo('014')` both resolve to BCA. Codes are taken from Bank Indonesia's official **Tabel Sandi Bank (update 31 Maret 2026)**. Each bank also gets its official name and nickname (`getLogo('Panin Bank')`, `getLogo('bank-bni')`), and regional banks (BPD) their common trade name (`bank-bpd-jateng` → `bank-jateng`). 107 banks covered.
+- **Genuine aliases across the catalog** — spelling/spacing variants (`shopee-pay` → `shopeepay`, `linkaja` → `link-aja`), Indonesian official long forms (`pln` → `perusahaan-listrik-negara`, `ojk` → `otoritas-jasa-keuangan`, `qris` → `quick-response-code-indonesian-standard`), and common abbreviations (`bca-flazz` → `flazz`, `american-express` → `amex`). 126 non-bank entries covered. Brands with no genuine alternate name are intentionally left alias-less.
+- Slug conventions documented in CONTRIBUTING.md: bare slug = newest logo, `-old` for superseded art, never a `-new` suffix; renames must leave an alias behind; alias guidance (SWIFT/kode bank for banks, genuine keys only).
+- `npm run validate` now rejects aliases that collide with a live slug or another alias, and prints a non-fatal alias-coverage report.
+
 ## [2.3.0]
 
 ### Added
@@ -158,7 +241,8 @@ First release. Initially published as `@hafidznoor/idn-finlogos`; renamed to `id
 - `paypal` (Remittance); Misc copy dropped.
 - `western-union` (Remittance); Misc copy dropped.
 
-[Unreleased]: https://github.com/hafidznoor/idn-finlogos/compare/v2.3.0...HEAD
+[Unreleased]: https://github.com/hafidznoor/idn-finlogos/compare/v2.4.0...HEAD
+[2.4.0]: https://github.com/hafidznoor/idn-finlogos/compare/v2.3.0...v2.4.0
 [2.3.0]: https://github.com/hafidznoor/idn-finlogos/compare/v2.2.1...v2.3.0
 [2.2.1]: https://github.com/hafidznoor/idn-finlogos/compare/v2.2.0...v2.2.1
 [2.2.0]: https://github.com/hafidznoor/idn-finlogos/compare/v2.1.6...v2.2.0

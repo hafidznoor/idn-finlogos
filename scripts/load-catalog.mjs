@@ -75,6 +75,26 @@ export function validateCatalog({ logos, categories, iconsDir }) {
     }
   }
 
+  // Aliases are alternate lookup keys (e.g. retired slugs), so they share the
+  // slug namespace: an alias must not collide with any slug or another alias.
+  const seenAliases = new Map();
+  for (const [i, logo] of logos.entries()) {
+    for (const alias of (Array.isArray(logo?.aliases) ? logo.aliases : [])) {
+      const where = `data/logos.yml[${i}] (slug=${logo.slug})`;
+      if (typeof alias !== 'string' || !slugRe.test(alias)) {
+        errors.push(`${where}: alias "${alias}" isn't a kebab-case slug`);
+        continue;
+      }
+      if (seenSlugs.has(alias)) {
+        errors.push(`${where}: alias "${alias}" collides with an existing slug`);
+      }
+      if (seenAliases.has(alias)) {
+        errors.push(`${where}: alias "${alias}" already used by slug "${seenAliases.get(alias)}"`);
+      }
+      seenAliases.set(alias, logo.slug);
+    }
+  }
+
   // Orphan check: every icons/*.svg must have a matching data/logos.yml entry.
   if (fs.existsSync(iconsDir)) {
     const onDisk = fs.readdirSync(iconsDir).filter((f) => f.endsWith('.svg'));

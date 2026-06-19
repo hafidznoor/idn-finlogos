@@ -13,6 +13,7 @@ const REPO = path.resolve(import.meta.dirname, '..');
 const steps = [
   ['build.mjs', 'npm distribution (dist/)'],
   ['build-frameworks.mjs', 'Framework wrappers (react, vue, svelte, vanilla)'],
+  ['build-png.mjs', 'PNG renders (1x/2x/3x/4x)'],
   ['build-android.mjs', 'Android library'],
   ['build-ios.mjs', 'iOS Swift Package'],
   ['build-flutter.mjs', 'Flutter package']

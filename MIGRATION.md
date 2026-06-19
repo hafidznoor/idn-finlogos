@@ -1,3 +1,31 @@
+# Migration guides
+
+## v2.3 → v2.4: slug cleanup (bare slug = newest logo)
+
+v2.4 retires the `-new` suffix: the bare brand slug (`bri`, `paypal`, `ovo`, …) now always resolves to the newest official logo, and superseded art moved to `-old`. 39 slugs were renamed — the full old → new table is in [CHANGELOG.md under 2.4.0](./CHANGELOG.md#240).
+
+Rules of thumb:
+
+- You used the bare slug (`bri`) and want the **current** logo → no change needed; you now get the new art automatically.
+- You used a `-new` slug (`bri-new`) → it still resolves everywhere (alias + deprecated `dist/icons/` shims), but switch to the bare slug (`bri`) before v3.
+- You used the bare slug and deliberately wanted the **old** art → switch to `<brand>-old` (e.g. `bri-old`).
+
+v2.4 also fixed long-frozen misspellings and ad-hoc numbered slugs. Each old slug stays as an alias, so lookups keep resolving — but switch to the new slug before v3:
+
+| old slug | new slug | name |
+|---|---|---|
+| `mualamat` | `muamalat` | Bank Muamalat |
+| `amercian-express-alt` | `american-express-alt` | American Express (Alt) |
+| `topremit-1` | `topremit-alt` | Topremit (Alt) |
+| `lexus-financial-service-1` | `lexus-financial-service-alt` | Lexus Financial Service (Alt) |
+| `bank-bpd-sumsel-babel-alt-1` | `bank-bpd-sumsel-babel-alt` | Bank BPD Sumsel Babel (Alt) |
+
+**Bank DKI → Bank Jakarta.** Bank DKI rebranded to Bank Jakarta. The current logo is now `bank-jakarta` (with kode bank `111` and SWIFT `bdkiidj1`); the old mark is `bank-dki-old`. `bank-dki`, `bank-dki-alt`, and `bank-dki-1` all resolve to `bank-jakarta` as aliases — switch to `bank-jakarta` before v3.
+
+New in v2.4: banks resolve by **SWIFT/BIC** and **3-digit kode bank** (`getLogo('CENAIDJA')` ≡ `getLogo('014')` ≡ `getLogo('bca')`). See [CHANGELOG.md under 2.4.0](./CHANGELOG.md#240).
+
+Some v2 slugs in the table below have since been renamed by v2.4 — cross-check the 2.4.0 table when migrating directly from v1.
+
 # Migration from v1 (`indo-financial-logolibrary`) to v2 (`idn-finlogos`)
 
 ## tl;dr

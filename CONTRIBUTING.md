@@ -49,6 +49,19 @@ CI (`ci.yml`) runs `npm run build:all` on every PR and fails if the committed `p
 - Preserve the brand's official colors. Don't recolor for "monochrome" variants.
 - Reasonable file size: aim for under 30 KB raw. If a logo is much larger, simplify gradients/paths rather than over-detailing.
 
+## Slug conventions
+
+- **The bare brand slug always carries the newest official logo** (`bri` = current BRI logo). When a brand rebrands, the new art takes over the bare slug and the previous art moves to `<brand>-old`. Never add a `-new` suffix — "new" goes stale the moment the next rebrand lands.
+- Superseded art gets `-old` (or `-old-alt` for its alternates). Alternate lockups of the current logo use `-alt`.
+- When a slug is renamed, record the retired slug in that entry's `aliases` so `getLogo()`/`get()` lookups and search keep resolving it. An alias must never collide with a live slug (`npm run validate` enforces this).
+
+### Aliases
+
+Aliases are alternate lookup keys, kebab-case, sharing the slug namespace. Add only **genuine** keys a developer might actually type — no filler. `npm run validate` prints a coverage report (`N/471 canonical logos have ≥1 alias`) but never fails on gaps; a brand with no real alternate name (most global brands) is correctly left alias-less.
+
+- **Banks** get their **SWIFT/BIC** code (lowercased, e.g. `cenaidja`) and **3-digit kode bank** (as a string with leading zeros, e.g. `'014'`). Numeric/SWIFT input resolves because `getLogo('CENAIDJA')`/`getLogo('014')` slugify to the alias. Verify both against ≥2 published sources (Bank Indonesia / SWIFT directory / reputable kode-bank lists); **skip when in doubt** rather than guess — wrong routing codes mislead. Regional banks (BPD) may also carry their common trade name (`bank-bpd-jateng` → `bank-jateng`). Attach codes only to the canonical `bank-logo` entry, not sibling app/card entries.
+- **Other logos**: spelling/spacing variants (`shopee-pay` → `shopeepay`), Indonesian official long forms (`pln` → `perusahaan-listrik-negara`, `ojk` → `otoritas-jasa-keuangan`), or well-known abbreviations (`bca-flazz` → `flazz`).
+
 ## Slug collisions
 
 If two logos would slugify to the same value (e.g. one brand appearing in multiple categories), see how the v1 → v2 migration handled this in [`scripts/bootstrap.mjs`](./scripts/bootstrap.mjs) under `OVERRIDES`. Same pattern applies:

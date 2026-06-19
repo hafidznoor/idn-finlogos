@@ -48,8 +48,8 @@ The single source of truth for Indonesian fintech and financial brand marks acro
 |---|---|---|
 | **Web (npm)** | `npm install idn-finlogos` | `idn-finlogos` |
 | **React / RN / Vue / Svelte** | `npm install idn-finlogos` + framework subpath | `idn-finlogos/{react,react-native,vue,svelte}` |
-| **Android (Gradle)** | `implementation("io.github.hafidznoor:idn-finlogos:2.3.0")` | `io.github.hafidznoor:idn-finlogos` |
-| **iOS (SPM)** | `.package(url: "https://github.com/hafidznoor/idn-finlogos", from: "2.3.0")` | `IdnFinLogos` |
+| **Android (Gradle)** | `implementation("io.github.hafidznoor:idn-finlogos:2.4.0")` | `io.github.hafidznoor:idn-finlogos` |
+| **iOS (SPM)** | `.package(url: "https://github.com/hafidznoor/idn-finlogos", from: "2.4.0")` | `IdnFinLogos` |
 | **Flutter** | `flutter pub add idn_finlogos` | `idn_finlogos` |
 | **Web (CDN, zero install)** | `<img src="https://cdn.jsdelivr.net/npm/idn-finlogos@2/dist/icons/bca.svg" />` | jsDelivr / unpkg |
 
@@ -104,9 +104,9 @@ The recommended install paths. Same artifact, same coordinates, no auth required
 |---|---|
 | **Web (npm)** | `npm install idn-finlogos` |
 | **React / React Native / Vue / Svelte** | `npm install idn-finlogos` — components import from `idn-finlogos/{react,react-native,vue,svelte}`; React Native also needs `react-native-svg` |
-| **Android (Maven Central)** | `implementation("io.github.hafidznoor:idn-finlogos:2.3.0")` |
-| **Android (JitPack, no wait)** | Add `maven { url = uri("https://jitpack.io") }`, then `implementation("com.github.hafidznoor:idn-finlogos:2.3.0")` |
-| **iOS (Swift Package Manager)** | `.package(url: "https://github.com/hafidznoor/idn-finlogos", from: "2.3.0")` |
+| **Android (Maven Central)** | `implementation("io.github.hafidznoor:idn-finlogos:2.4.0")` |
+| **Android (JitPack, no wait)** | Add `maven { url = uri("https://jitpack.io") }`, then `implementation("com.github.hafidznoor:idn-finlogos:2.4.0")` |
+| **iOS (Swift Package Manager)** | `.package(url: "https://github.com/hafidznoor/idn-finlogos", from: "2.4.0")` |
 | **Flutter (pub.dev)** | `flutter pub add idn_finlogos` |
 | **Web (jsDelivr CDN)** | `https://cdn.jsdelivr.net/npm/idn-finlogos@2/dist/icons/<slug>.svg` |
 | **Web (unpkg CDN)** | `https://unpkg.com/idn-finlogos@2/dist/icons/<slug>.svg` |
@@ -148,7 +148,7 @@ dependencyResolutionManagement {
 Then use the same coordinate as Maven Central:
 
 ```kotlin
-implementation("io.github.hafidznoor:idn-finlogos:2.3.0")
+implementation("io.github.hafidznoor:idn-finlogos:2.4.0")
 ```
 
 ---
@@ -200,8 +200,19 @@ getCategories();
 await getLogo('bca');
 // → { slug, name, category, svg: '<svg>...</svg>', ... }
 
+// Slug, retired slug, or brand name in any casing — all resolve:
+await getLogo('BRI');
+await getLogo('Bank Rakyat Indonesia');
+await getLogo('bri-new');                   // retired slug (alias)
+// → same logo as getLogo('bri'); unknown input → null
+
+// Banks also resolve by SWIFT/BIC and 3-digit kode bank:
+await getLogo('CENAIDJA');                  // → bca (SWIFT, any casing)
+await getLogo('014');                       // → bca (kode bank)
+await getLogo('002');                       // → bri
+
 getLogoUrl('bca');
-// → 'https://cdn.jsdelivr.net/npm/idn-finlogos@2.3.0/dist/icons/bca.svg'
+// → 'https://cdn.jsdelivr.net/npm/idn-finlogos@2.4.0/dist/icons/bca.svg'
 ```
 
 #### 4. CDN — no install, no build step
@@ -211,7 +222,29 @@ getLogoUrl('bca');
 <img src="https://unpkg.com/idn-finlogos@2/dist/icons/gopay.svg" alt="GoPay" />
 ```
 
-Pin a major (`@2`), minor (`@2.3`), or exact version (`@2.3.0`). jsDelivr and unpkg both work.
+Pin a major (`@2`), minor (`@2.4`), or exact version (`@2.4.0`). jsDelivr and unpkg both work.
+
+#### 5. PNG fallbacks (for environments that can't render SVG)
+
+Every logo also ships as pre-rendered PNGs at four pixel densities — `@1x` (80×80), `@2x` (160×160), `@3x` (240×240), and `@4x` (320×320). Each PNG is a square with the logo centered on transparent padding, so mixed aspect ratios line up in grids. Useful for emails, OG images, native apps without an SVG renderer, or legacy webviews.
+
+```js
+import bcaPng from 'idn-finlogos/png/bca@2x.png';
+
+<img src={bcaPng} width="80" height="80" alt="BCA" />
+```
+
+```html
+<!-- Or straight from the CDN, with a srcset for retina displays: -->
+<img
+  src="https://cdn.jsdelivr.net/npm/idn-finlogos@2/dist/png/bca@1x.png"
+  srcset="https://cdn.jsdelivr.net/npm/idn-finlogos@2/dist/png/bca@2x.png 2x,
+          https://cdn.jsdelivr.net/npm/idn-finlogos@2/dist/png/bca@3x.png 3x"
+  width="80" height="80" alt="BCA"
+/>
+```
+
+PNGs are available for canonical slugs only (not retired aliases) — prefer the SVGs everywhere SVG works; they're sharper and usually smaller.
 
 ---
 
@@ -317,7 +350,7 @@ Each `LogoMeta` carries: `slug`, `name`, `category`, `aliases`, `tags`, plus acc
 ```kotlin
 // app/build.gradle.kts
 dependencies {
-    implementation("io.github.hafidznoor:idn-finlogos:2.3.0")
+    implementation("io.github.hafidznoor:idn-finlogos:2.4.0")
     // Recommended SVG renderer:
     implementation("io.coil-kt:coil-compose:2.6.0")
     implementation("io.coil-kt:coil-svg:2.6.0")
@@ -357,7 +390,7 @@ fun BcaLogo() {
 
 ```swift
 // Package.swift
-.package(url: "https://github.com/hafidznoor/idn-finlogos", from: "2.3.0")
+.package(url: "https://github.com/hafidznoor/idn-finlogos", from: "2.4.0")
 ```
 
 ```swift
@@ -449,26 +482,28 @@ class BcaLogo extends StatelessWidget {
 
 ## Complete logo catalog
 
-All 572 logos, grouped by category and sorted by name. Click a section to expand. The `code` is the slug you pass to `getLogo()`, `IdnFinLogos.get(...)`, or use as a file name (`icons/<slug>.svg`).
+All 572 logos, grouped by category and sorted by name. Click a section to expand. The `code` is the slug you pass to `getLogo()`, `IdnFinLogos.get(...)`, or use as a file name (`icons/<slug>.svg`). Both lookup functions also accept the brand name in any casing (`getLogo('Bank Rakyat Indonesia')` ≡ `getLogo('bri')`), and banks additionally resolve by their SWIFT/BIC code and 3-digit kode bank (`getLogo('CENAIDJA')` ≡ `getLogo('014')` ≡ `getLogo('bca')`).
+
+**Slug convention:** the bare brand slug always carries the **newest** official logo (`bri` = current BRI logo). Superseded art from before a rebrand lives under `-old` (`bri-old`); alternate lockups of the current logo use `-alt`. Retired slugs from past renames (e.g. `bri-new`) keep resolving via aliases.
 
 <details>
 <summary><b>Bank Logo</b> · 160 logos · <code>bank-logo</code></summary>
 
-`aladin` Aladin · `allo` Allo · `amar-bank` Amar Bank · `anz` ANZ · `bangkok-bank` Bangkok Bank · `bank-artha-graha-internasional` Bank Artha Graha Internasional · `bank-bengkulu` Bank Bengkulu · `bank-bjb` Bank BJB · `bank-bjb-syariah` Bank BJB Syariah · `bank-bpd-aceh` Bank BPD Aceh · `bank-bpd-bali` Bank BPD Bali · `bank-bpd-banten` Bank BPD Banten · `bank-bpd-diy` Bank BPD DIY · `bank-bpd-jambi` Bank BPD Jambi · `bank-bpd-jateng` Bank BPD Jateng · `bank-bpd-jatim` Bank BPD Jatim · `bank-bpd-kalbar` Bank BPD Kalbar · `bank-bpd-kalbar-alt` Bank BPD Kalbar (Alt) · `bank-bpd-kalimantan-timur` Bank BPD Kalimantan Timur · `bank-bpd-kalsel` Bank BPD Kalsel · `bank-bpd-kalteng` Bank BPD Kalteng · `bank-bpd-lampung` Bank BPD Lampung · `bank-bpd-maluku-malut` Bank BPD Maluku Malut · `bank-bpd-ntb-syariah` Bank BPD NTB Syariah · `bank-bpd-ntb-syariah-alt` Bank BPD NTB Syariah (Alt) · `bank-bpd-ntt` Bank BPD NTT · `bank-bpd-papua` Bank BPD Papua · `bank-bpd-riau-kepri` Bank BPD Riau Kepri · `bank-bpd-riau-kepri-syariah` Bank BPD Riau Kepri Syariah · `bank-bpd-sulselbar` Bank BPD Sulselbar · `bank-bpd-sulteng` Bank BPD Sulteng · `bank-bpd-sultra` Bank BPD Sultra · `bank-bpd-sulutgo` Bank BPD Sulutgo · `bank-bpd-sumsel-babel` Bank BPD Sumsel Babel · `bank-bpd-sumsel-babel-alt-1` Bank BPD Sumsel Babel (Alt-1) · `bank-bpd-sumsel-babel-alt-2` Bank BPD Sumsel Babel (Alt-2) · `bank-bpd-sumut` Bank BPD Sumut · `bank-bumi-artha` Bank Bumi Artha · `bank-capital` Bank Capital · `bank-capital-alt` Bank Capital (Alt) · `bank-dki` Bank DKI · `bank-dki-1` Bank DKI-1 · `bank-ganesha` Bank Ganesha · `bank-ina` Bank INA · `bank-index-selindo` Bank Index Selindo · `bank-index-selindo-alt` Bank Index Selindo (Alt) · `bank-jasa-jakarta` Bank Jasa Jakarta · `bank-lampung` Bank Lampung · `bank-mas` Bank Mas · `bank-maspion` Bank Maspion · `bank-maspion-alt` Bank Maspion (Alt) · `bank-mayapada` Bank Mayapada · `bank-mayapada-alt` Bank Mayapada (Alt) · `bank-mayora` Bank Mayora · `bank-mestika-dharma` Bank Mestika Dharma · `bank-nagari` Bank Nagari · `bank-of-america` Bank of America · `bank-of-china` Bank of China · `bank-of-india` Bank of India · `bank-of-india-indonesia` Bank of India Indonesia · `bank-raya` Bank Raya · `bank-resona-perdania` Bank Resona Perdania · `bank-resona-perdania-alt` Bank Resona Perdania (Alt) · `bank-sahabat-sampoerna` Bank Sahabat Sampoerna · `bank-saqu` Bank Saqu · `bank-saqu-alt` Bank Saqu (Alt) · `bank-smbc-indonesia` Bank SMBC Indonesia · `bank-victoria` Bank Victoria · `bank-victoria-syariah` Bank Victoria Syariah · `bank-woori-saudara` Bank Woori Saudara · `bca` BCA · `bca-digital` BCA Digital · `bca-syariah` BCA Syariah · `blu-bca` Blu BCA · `bnc` BNC · `bni` BNI · `bnp-paribas` BNP Paribas · `bri` BRI · `bri-alt` BRI (Alt) · `bri-new` BRI (New) · `bri-vertical` BRI (Vertical) · `bsi` BSI · `bsn` BSN · `bsn-alt` BSN (Alt) · `btn` BTN · `btn-alt` BTN (Alt) · `btn-new` BTN (New) · `btn-syariah` BTN Syariah · `btn-syariah-new` BTN Syariah (New) · `btpn` BTPN · `btpn-syariah` BTPN Syariah · `ccb-indonesia` CCB Indonesia · `ccb-indonesia-alt` CCB Indonesia (Alt) · `cimb-niaga` CIMB Niaga · `cimb-niaga-syariah` CIMB Niaga Syariah · `citibank` Citibank · `citibank-alt` Citibank (Alt) · `commonwealth` Commonwealth · `credit-suisse` Credit Suisse · `ctbc-bank` CTBC Bank · `danamon` Danamon · `danamon-mufg` Danamon (MUFG) · `danamon-syariah` Danamon Syariah · `dbs` DBS · `deutsche-bank` Deutsche Bank · `hibank` hibank · `hsbc` HSBC · `ibk-bank` IBK Bank · `icbc` ICBC · `icbc-alt` ICBC (Alt) · `ing-bank` ING Bank · `j-trust-bank` J Trust Bank · `jago` Jago · `jenius` Jenius · `jp-morgan-chase` JP Morgan Chase · `kb-bukopin` KB Bukopin · `kb-bukopin-alt` KB Bukopin (Alt) · `kb-bukopin-syariah` KB Bukopin Syariah · `keb-hana-bank` KEB Hana Bank · `keb-hana-bank-alt` KEB Hana Bank (Alt) · `krom` Krom · `line-bank` LINE Bank · `line-bank-alt` LINE Bank (Alt) · `mandiri` Mandiri · `mandiri-taspen` Mandiri Taspen · `maybank` Maybank · `mega` Mega · `mega-syariah` Mega Syariah · `mizuho-bank` Mizuho Bank · `mnc` MNC · `mnc-bank` MNC Bank · `motion-banking` Motion Banking · `motion-banking-alt` Motion Banking (Alt) · `mualamat` Mualamat · `mufg` MUFG · `mufg-alt` MUFG (Alt) · `nanobank-syariah` Nanobank Syariah · `nanobank-syariah-alt` Nanobank Syariah (Alt) · `nobu` NOBU · `ocbc-nisp` OCBC NISP · `ok-bank` OK Bank · `panin-dubai-syariah` Panin Dubai Syariah · `paninbank` PaninBank · `permata` Permata · `permata-bank-alt` Permata Bank (Alt) · `permata-bank-new` Permata Bank (New) · `prima-bank` PRIMA Bank · `qnb` QNB · `sbi-indonesia` SBI Indonesia · `seabank` SeaBank · `seabank-alt` SeaBank (Alt) · `shinhan-bank` Shinhan Bank · `shinhan-bank-alt` Shinhan Bank (Alt) · `sinarmas` Sinarmas · `sinarmas-syariah` Sinarmas Syariah · `standard-chartered` Standard Chartered · `superbank` Superbank · `superbank-alt` Superbank (Alt) · `uob` UOB · `welab-bank` Welab Bank
+`aladin` Aladin · `allo` Allo · `amar-bank` Amar Bank · `anz` ANZ · `bangkok-bank` Bangkok Bank · `bank-artha-graha-internasional` Bank Artha Graha Internasional · `bank-bengkulu` Bank Bengkulu · `bank-bjb` Bank BJB · `bank-bjb-syariah` Bank BJB Syariah · `bank-bpd-aceh` Bank BPD Aceh · `bank-bpd-bali` Bank BPD Bali · `bank-bpd-banten` Bank BPD Banten · `bank-bpd-diy` Bank BPD DIY · `bank-bpd-jambi` Bank BPD Jambi · `bank-bpd-jateng` Bank BPD Jateng · `bank-bpd-jatim` Bank BPD Jatim · `bank-bpd-kalbar` Bank BPD Kalbar · `bank-bpd-kalbar-alt` Bank BPD Kalbar (Alt) · `bank-bpd-kalimantan-timur` Bank BPD Kalimantan Timur · `bank-bpd-kalsel` Bank BPD Kalsel · `bank-bpd-kalteng` Bank BPD Kalteng · `bank-bpd-lampung` Bank BPD Lampung · `bank-bpd-maluku-malut` Bank BPD Maluku Malut · `bank-bpd-ntb-syariah` Bank BPD NTB Syariah · `bank-bpd-ntb-syariah-alt` Bank BPD NTB Syariah (Alt) · `bank-bpd-ntt` Bank BPD NTT · `bank-bpd-papua` Bank BPD Papua · `bank-bpd-riau-kepri` Bank BPD Riau Kepri · `bank-bpd-riau-kepri-syariah` Bank BPD Riau Kepri Syariah · `bank-bpd-sulselbar` Bank BPD Sulselbar · `bank-bpd-sulteng` Bank BPD Sulteng · `bank-bpd-sultra` Bank BPD Sultra · `bank-bpd-sulutgo` Bank BPD Sulutgo · `bank-bpd-sumsel-babel` Bank BPD Sumsel Babel · `bank-bpd-sumsel-babel-alt` Bank BPD Sumsel Babel (Alt) · `bank-bpd-sumsel-babel-alt-2` Bank BPD Sumsel Babel (Alt-2) · `bank-bpd-sumut` Bank BPD Sumut · `bank-bumi-artha` Bank Bumi Artha · `bank-capital` Bank Capital · `bank-capital-alt` Bank Capital (Alt) · `bank-dki-old` Bank DKI (Old) · `bank-ganesha` Bank Ganesha · `bank-ina` Bank INA · `bank-index-selindo` Bank Index Selindo · `bank-index-selindo-alt` Bank Index Selindo (Alt) · `bank-jakarta` Bank Jakarta · `bank-jasa-jakarta` Bank Jasa Jakarta · `bank-lampung` Bank Lampung · `bank-mas` Bank Mas · `bank-maspion` Bank Maspion · `bank-maspion-alt` Bank Maspion (Alt) · `bank-mayapada` Bank Mayapada · `bank-mayapada-alt` Bank Mayapada (Alt) · `bank-mayora` Bank Mayora · `bank-mestika-dharma` Bank Mestika Dharma · `bank-nagari` Bank Nagari · `bank-of-america` Bank of America · `bank-of-china` Bank of China · `bank-of-india` Bank of India · `bank-of-india-indonesia` Bank of India Indonesia · `bank-raya` Bank Raya · `bank-resona-perdania` Bank Resona Perdania · `bank-resona-perdania-alt` Bank Resona Perdania (Alt) · `bank-sahabat-sampoerna` Bank Sahabat Sampoerna · `bank-saqu` Bank Saqu · `bank-saqu-alt` Bank Saqu (Alt) · `bank-smbc-indonesia` Bank SMBC Indonesia · `bank-victoria` Bank Victoria · `bank-victoria-syariah` Bank Victoria Syariah · `bank-woori-saudara` Bank Woori Saudara · `bca` BCA · `bca-digital` BCA Digital · `bca-syariah` BCA Syariah · `blu-bca` blu by BCA Digital · `bnc` BNC · `bni` BNI · `bnp-paribas` BNP Paribas · `bri` BRI · `bri-alt` BRI (Alt) · `bri-old` BRI (Old) · `bri-vertical` BRI (Vertical) · `bsi` BSI · `bsn` BSN · `bsn-alt` BSN (Alt) · `btn` BTN · `btn-alt` BTN (Alt) · `btn-old` BTN (Old) · `btn-syariah` BTN Syariah · `btn-syariah-old` BTN Syariah (Old) · `btpn` BTPN · `btpn-syariah` BTPN Syariah · `ccb-indonesia` CCB Indonesia · `ccb-indonesia-alt` CCB Indonesia (Alt) · `cimb-niaga` CIMB Niaga · `cimb-niaga-syariah` CIMB Niaga Syariah · `citibank` Citibank · `citibank-alt` Citibank (Alt) · `commonwealth` Commonwealth · `credit-suisse` Credit Suisse · `ctbc-bank` CTBC Bank · `danamon` Danamon · `danamon-mufg` Danamon (MUFG) · `danamon-syariah` Danamon Syariah · `dbs` DBS · `deutsche-bank` Deutsche Bank · `hibank` hibank · `hsbc` HSBC · `ibk-bank` IBK Bank · `icbc` ICBC · `icbc-alt` ICBC (Alt) · `ing-bank` ING Bank · `j-trust-bank` J Trust Bank · `jago` Jago · `jenius` Jenius · `jp-morgan-chase` JP Morgan Chase · `kb-bukopin` KB Bukopin · `kb-bukopin-alt` KB Bukopin (Alt) · `kb-bukopin-syariah` KB Bukopin Syariah · `keb-hana-bank` KEB Hana Bank · `keb-hana-bank-alt` KEB Hana Bank (Alt) · `krom` Krom · `line-bank` LINE Bank · `line-bank-alt` LINE Bank (Alt) · `mandiri` Mandiri · `mandiri-taspen` Mandiri Taspen · `maybank` Maybank · `mega` Mega · `mega-syariah` Mega Syariah · `mizuho-bank` Mizuho Bank · `mnc` MNC · `mnc-bank` MNC Bank · `motion-banking` Motion Banking · `motion-banking-alt` Motion Banking (Alt) · `muamalat` Bank Muamalat · `mufg` MUFG · `mufg-alt` MUFG (Alt) · `nanobank-syariah` Nanobank Syariah · `nanobank-syariah-alt` Nanobank Syariah (Alt) · `nobu` NOBU · `ocbc-nisp` OCBC NISP · `ok-bank` OK Bank · `panin-dubai-syariah` Panin Dubai Syariah · `paninbank` PaninBank · `permata` Permata Bank · `permata-alt` Permata Bank (Alt) · `permata-old` Permata Bank (Old) · `prima-bank` PRIMA Bank · `qnb` QNB · `sbi-indonesia` SBI Indonesia · `seabank` SeaBank · `seabank-alt` SeaBank (Alt) · `shinhan-bank` Shinhan Bank · `shinhan-bank-alt` Shinhan Bank (Alt) · `sinarmas` Sinarmas · `sinarmas-syariah` Sinarmas Syariah · `standard-chartered` Standard Chartered · `superbank` Superbank · `superbank-alt` Superbank (Alt) · `uob` UOB · `welab-bank` Welab Bank
 
 </details>
 
 <details>
 <summary><b>Card Payment</b> · 37 logos · <code>card-payment</code></summary>
 
-`amercian-express-alt` Amercian Express (Alt) · `american-express` American Express · `american-express-alt-2` American Express (Alt-2) · `apple-card` Apple Card · `cirrus` Cirrus · `contactless` Contactless · `contactless-alt` Contactless (Alt) · `discover` Discover · `discover-alt` Discover (Alt) · `gpn` GPN · `jcb` JCB · `maestro` Maestro · `mastercard` Mastercard · `mastercard-black` Mastercard Black · `mastercard-contactless` Mastercard Contactless · `mastercard-contactless-alt` Mastercard Contactless (Alt) · `mastercard-debit` Mastercard Debit · `mastercard-debit-alt` Mastercard Debit (Alt) · `mastercard-securecode` Mastercard SecureCode · `mastercard-securecode-new` Mastercard SecureCode (New) · `masterpass` Masterpass · `masterpass-alt` Masterpass (Alt) · `samsung-card` Samsung Card · `union-pay` Union Pay · `union-pay-en` Union Pay (EN) · `union-pay-contactless` Union Pay Contactless · `union-pay-contactless-en` Union Pay Contactless (EN) · `verified-by-visa` Verified by VISA · `verified-by-visa-new` Verified by VISA (New) · `visa` VISA · `visa-checkout` VISA Checkout · `visa-debit` VISA Debit · `visa-pay` VISA Pay · `visa-paywave` VISA PayWave · `visa-plus` VISA Plus · `visa-secure-3ds` VISA Secure (3DS) · `visa-signature` VISA Signature
+`american-express` American Express · `american-express-alt` American Express (Alt) · `american-express-alt-2` American Express (Alt-2) · `apple-card` Apple Card · `cirrus` Cirrus · `contactless` Contactless · `contactless-alt` Contactless (Alt) · `discover` Discover · `discover-alt` Discover (Alt) · `gpn` GPN · `jcb` JCB · `maestro` Maestro · `mastercard` Mastercard · `mastercard-black` Mastercard Black · `mastercard-contactless` Mastercard Contactless · `mastercard-contactless-alt` Mastercard Contactless (Alt) · `mastercard-debit` Mastercard Debit · `mastercard-debit-alt` Mastercard Debit (Alt) · `mastercard-securecode` Mastercard SecureCode · `mastercard-securecode-old` Mastercard SecureCode (Old) · `masterpass` Masterpass · `masterpass-alt` Masterpass (Alt) · `samsung-card` Samsung Card · `union-pay` UnionPay · `union-pay-contactless` UnionPay Contactless · `union-pay-contactless-en` UnionPay Contactless (EN) · `union-pay-en` UnionPay (EN) · `verified-by-visa` Verified by VISA · `verified-by-visa-old` Verified by VISA (Old) · `visa` VISA · `visa-checkout` VISA Checkout · `visa-debit` VISA Debit · `visa-pay` VISA Pay · `visa-paywave` VISA PayWave · `visa-plus` VISA Plus · `visa-secure-3ds` VISA Secure (3DS) · `visa-signature` VISA Signature
 
 </details>
 
 <details>
 <summary><b>Logistic</b> · 33 logos · <code>logistic</code></summary>
 
-`anteraja` Anteraja · `assa` ASSA · `dakota-cargo` Dakota Cargo · `dakota-logistik` Dakota Logistik · `dhl-express` DHL Express · `ems` EMS · `esl-express` ESL Express · `fedex-express` FedEx Express · `first-logistic` First Logistic · `id-express` ID Express · `indah-cargo` Indah Cargo · `j-and-t-cargo` J&T Cargo · `j-and-t-express` J&T Express · `jne` JNE · `jne-alt` JNE (Alt) · `kai-logistik` KAI Logistik · `lalamove` Lalamove · `lazada-express` Lazada Express · `lion-parcel` Lion Parcel · `ncs` NCS · `ninja-xpress` Ninja Xpress · `pandu-logistics` Pandu Logistics · `pcp-express` PCP Express · `pos-indonesia-new` Pos Indonesia (New) · `pos-indonesia-old` Pos Indonesia (Old) · `rex` REX · `rpx` RPX · `sap-express` SAP Express · `sicepat-ekspres` Sicepat Ekspres · `spx-express` SPX Express · `tiki` TIKI · `wahana-express` Wahana Express · `wahana-express-alt` Wahana Express (Alt)
+`anteraja` AnterAja · `assa` ASSA · `dakota-cargo` Dakota Cargo · `dakota-logistik` Dakota Logistik · `dhl-express` DHL Express · `ems` EMS · `esl-express` ESL Express · `fedex-express` FedEx Express · `first-logistic` First Logistic · `id-express` ID Express · `indah-cargo` Indah Cargo · `j-and-t-cargo` J&T Cargo · `j-and-t-express` J&T Express · `jne` JNE · `jne-alt` JNE (Alt) · `kai-logistik` KAI Logistik · `lalamove` Lalamove · `lazada-express` Lazada Express · `lion-parcel` Lion Parcel · `ncs` NCS · `ninja-xpress` Ninja Xpress · `pandu-logistics` Pandu Logistics · `pcp-express` PCP Express · `pos-indonesia` Pos Indonesia · `pos-indonesia-old` Pos Indonesia (Old) · `rex` REX · `rpx` RPX · `sap-express` SAP Express · `sicepat-ekspres` SiCepat Ekspres · `spx-express` SPX Express · `tiki` TIKI · `wahana-express` Wahana Express · `wahana-express-alt` Wahana Express (Alt)
 
 </details>
 
@@ -482,21 +517,21 @@ All 572 logos, grouped by category and sorted by name. Click a section to expand
 <details>
 <summary><b>Financing</b> · 27 logos · <code>financing</code></summary>
 
-`acc` ACC · `acc-alt` ACC (Alt) · `adakami` AdaKami · `adakami-alt` AdaKami (Alt) · `adira-finance` Adira Finance · `aeon-credit-service` AEON Credit Service · `akulaku` Akulaku · `akulaku-paylater` Akulaku Paylater · `bca-finance` BCA Finance · `bfi-finance` BFI Finance · `bri-finance` BRI Finance · `bussan-auto-finance` Bussan Auto Finance · `daihatsu-financial-service` Daihatsu Financial Service · `fif-astra` FIF Astra · `finmas` Finmas · `gopaylater` Gopaylater · `home-credit` Home Credit · `indodana` Indodana · `kredit-pintar` Kredit Pintar · `kreditplus` KreditPlus · `kredivo` Kredivo · `lexus-financial-service` Lexus Financial Service · `lexus-financial-service-1` Lexus Financial Service-1 · `pegadaian` Pegadaian · `taf-toyota-astra-financial` TAF - Toyota Astra Financial · `toyota-financial-service` Toyota Financial Service · `wom-finance` WOM Finance
+`acc` ACC · `acc-alt` ACC (Alt) · `adakami` AdaKami · `adakami-alt` AdaKami (Alt) · `adira-finance` Adira Finance · `aeon-credit-service` AEON Credit Service · `akulaku` Akulaku · `akulaku-paylater` Akulaku Paylater · `bca-finance` BCA Finance · `bfi-finance` BFI Finance · `bri-finance` BRI Finance · `bussan-auto-finance` Bussan Auto Finance · `daihatsu-financial-service` Daihatsu Financial Service · `fif-astra` FIF Astra · `finmas` Finmas · `gopaylater` GoPay Later · `home-credit` Home Credit · `indodana` Indodana · `kredit-pintar` Kredit Pintar · `kreditplus` KreditPlus · `kredivo` Kredivo · `lexus-financial-service` Lexus Financial Service · `lexus-financial-service-alt` Lexus Financial Service (Alt) · `pegadaian` Pegadaian · `taf-toyota-astra-financial` TAF - Toyota Astra Financial · `toyota-financial-service` Toyota Financial Service · `wom-finance` WOM Finance
 
 </details>
 
 <details>
 <summary><b>E-Wallet</b> · 27 logos · <code>e-wallet</code></summary>
 
-`astra-pay` Astra Pay · `bluepay` Bluepay · `dana` DANA · `dipay` Dipay · `doku` DOKU · `dutamoney` Dutamoney · `gopay` Gopay · `gopay-alt` Gopay (Alt) · `i-saku` I.Saku · `jakone-pay` JakOne Pay · `kaspro` Kaspro · `linkaja` LinkAja · `motion-pay` Motion Pay · `netzme` Netzme · `otto-pay` OTTO Pay · `ovo-new-alt` OVO (New Alt) · `ovo-new` OVO (New) · `ovo-old-alt` OVO (Old Alt) · `ovo-old` OVO (Old) · `paydia` Paydia · `paytren` Paytren · `pospay` Pospay · `shopee-pay` Shopee Pay · `speedcash` SpeedCash · `truemoney` TrueMoney · `uangku` Uangku · `yukk` Yukk
+`astra-pay` Astra Pay · `bluepay` Bluepay · `dana` DANA · `dipay` Dipay · `doku` DOKU · `dutamoney` Dutamoney · `gopay` GoPay · `gopay-alt` GoPay (Alt) · `i-saku` i.saku · `jakone-pay` JakOne Pay · `kaspro` Kaspro · `linkaja` LinkAja · `motion-pay` Motion Pay · `netzme` Netzme · `otto-pay` OTTO Pay · `ovo` OVO · `ovo-alt` OVO (Alt) · `ovo-old` OVO (Old) · `ovo-old-alt` OVO (Old Alt) · `paydia` Paydia · `paytren` Paytren · `pospay` Pospay · `shopee-pay` Shopee Pay · `speedcash` SpeedCash · `truemoney` TrueMoney · `uangku` Uangku · `yukk` Yukk
 
 </details>
 
 <details>
 <summary><b>Entertainment</b> · 26 logos · <code>entertainment</code></summary>
 
-`apple-music` Apple Music · `catchplay` Catchplay · `cgv` CGV · `cinepolis` Cinepolis · `disney-plus` Disney+ · `disney-plus-hotstar` Disney+ Hotstar · `hbo-go` HBO GO · `hoox` HOOX · `joox` JOOX · `langitmusik` Langitmusik · `maxstream` Maxstream · `mnc-vision` MNC Vision · `mtix` MTIX · `netflix` Netflix · `netflix-alt` Netflix (Alt) · `nex-parabola` Nex Parabola · `nickelodeon` Nickelodeon · `prime-video` Prime Video · `spotify` Spotify · `spotify-alt` Spotify (Alt) · `transvision-new` TransVision (New) · `transvision-old` TransVision (Old) · `vidio` Vidio · `vision-plus` Vision+ · `viu` VIU · `xxi-21` XXI (21)
+`apple-music` Apple Music · `catchplay` Catchplay · `cgv` CGV · `cinepolis` Cinepolis · `disney-plus` Disney+ · `disney-plus-hotstar` Disney+ Hotstar · `hbo-go` HBO GO · `hoox` HOOX · `joox` JOOX · `langitmusik` Langitmusik · `maxstream` Maxstream · `mnc-vision` MNC Vision · `mtix` m.tix · `netflix` Netflix · `netflix-alt` Netflix (Alt) · `nex-parabola` Nex Parabola · `nickelodeon` Nickelodeon · `prime-video` Prime Video · `spotify` Spotify · `spotify-alt` Spotify (Alt) · `transvision` TransVision · `transvision-old` TransVision (Old) · `vidio` Vidio · `vision-plus` Vision+ · `viu` VIU · `xxi-21` XXI (21)
 
 </details>
 
@@ -510,21 +545,21 @@ All 572 logos, grouped by category and sorted by name. Click a section to expand
 <details>
 <summary><b>Miscellaneous</b> · 21 logos · <code>miscellaneous</code></summary>
 
-`alipay-new` Alipay (New) · `alipay-old` Alipay (Old) · `alipay-plus` Alipay+ · `alipay-plus-old` Alipay+ (Old) · `alipay-plus-old-alt` Alipay+ (Old Alt) · `apple-pay` Apple Pay · `dbs-paylah` DBS Paylah · `google-pay` Google Pay · `grab-pay` Grab Pay · `interlink` Interlink · `line-pay` LINE Pay · `line-pay-alt` LINE Pay (Alt) · `nets` NETS · `ocbc-pay-anyone` OCBC Pay Anyone · `samsung-pay` Samsung Pay · `samsung-pay-alt` Samsung Pay (Alt) · `verifone` Verifone · `verifone-new` Verifone (New) · `wechat-pay` WeChat Pay · `wechat-pay-alt` WeChat Pay (Alt) · `wirecard` Wirecard
+`alipay` Alipay · `alipay-old` Alipay (Old) · `alipay-plus` Alipay+ · `alipay-plus-old` Alipay+ (Old) · `alipay-plus-old-alt` Alipay+ (Old Alt) · `apple-pay` Apple Pay · `dbs-paylah` DBS Paylah · `google-pay` Google Pay · `grab-pay` Grab Pay · `interlink` Interlink · `line-pay` LINE Pay · `line-pay-alt` LINE Pay (Alt) · `nets` NETS · `ocbc-pay-anyone` OCBC Pay Anyone · `samsung-pay` Samsung Pay · `samsung-pay-alt` Samsung Pay (Alt) · `verifone` Verifone · `verifone-old` Verifone (Old) · `wechat-pay` WeChat Pay · `wechat-pay-alt` WeChat Pay (Alt) · `wirecard` Wirecard
 
 </details>
 
 <details>
 <summary><b>Mobile Telco</b> · 20 logos · <code>mobile-telco</code></summary>
 
-`axis` AXIS · `by-u` by.U · `im3` IM3 · `kartu-as` Kartu As · `kartu-halo` Kartu Halo · `live-on` Live.On · `mentari-ooredoo` Mentari Ooredoo · `simpati` Simpati · `simpati-new` Simpati (New) · `smartfren` Smartfren · `smartfren-old` Smartfren (Old) · `telkomsel` Telkomsel · `telkomsel-alt` Telkomsel (Alt) · `telkomsel-halo` Telkomsel Halo · `telkomsel-prabayar` Telkomsel Prabayar · `tri` Tri · `xl` XL · `xl-prioritas` XL Prioritas · `xl-smart` XL Smart · `xl-smart-alt` XL SMART (Alt)
+`axis` AXIS · `by-u` by.U · `im3` IM3 · `kartu-as` Kartu As · `kartu-halo` Kartu Halo · `live-on` Live.On · `mentari-ooredoo` Mentari Ooredoo · `simpati` simPATI · `simpati-old` simPATI (Old) · `smartfren` Smartfren · `smartfren-old` Smartfren (Old) · `telkomsel` Telkomsel · `telkomsel-alt` Telkomsel (Alt) · `telkomsel-halo` Telkomsel Halo · `telkomsel-prabayar` Telkomsel Prabayar · `tri` Tri · `xl` XL · `xl-prioritas` XL Prioritas · `xl-smart` XL Smart · `xl-smart-alt` XL SMART (Alt)
 
 </details>
 
 <details>
 <summary><b>Bank App</b> · 17 logos · <code>bank-app</code></summary>
 
-`bca-mobile` BCA Mobile · `bni-mobile-banking` BNI Mobile Banking · `brimo` BRImo · `bsi-mobile` BSI Mobile · `byond-bsi` BYOND BSI · `byond-bsi-alt` BYOND BSI (Alt) · `digibank` Digibank · `digibank-alt` Digibank (Alt) · `jago-app` Jago · `jakone-mobile` JakOne Mobile · `jenius-app` Jenius · `mandiri-livin` Mandiri Livin · `mandiri-livin-new` Mandiri Livin (New) · `neobank` Neobank · `octo-clicks` OCTO Clicks · `uob-tmrw` UOB TMRW · `wondr-by-bni` Wondr by BNI
+`bca-mobile` BCA Mobile · `bni-mobile-banking` BNI Mobile Banking · `brimo` BRImo · `bsi-mobile` BSI Mobile · `byond-bsi` BYOND by BSI · `byond-bsi-alt` BYOND by BSI (Alt) · `digibank` Digibank · `digibank-alt` Digibank (Alt) · `jago-app` Jago · `jakone-mobile` JakOne Mobile · `jenius-app` Jenius · `mandiri-livin` Livin' by Mandiri · `mandiri-livin-old` Livin' by Mandiri (Old) · `neobank` Neobank · `octo-clicks` OCTO Clicks · `uob-tmrw` UOB TMRW · `wondr-by-bni` Wondr by BNI
 
 </details>
 
@@ -538,49 +573,49 @@ All 572 logos, grouped by category and sorted by name. Click a section to expand
 <details>
 <summary><b>Game</b> · 15 logos · <code>game</code></summary>
 
-`app-store` App Store · `apple-arcade` Apple Arcade · `ea-play` EA Play · `ea-play-alt` EA Play (Alt) · `epic-games` Epic Games · `epic-games-store` Epic Games Store · `google-play` Google Play · `google-play-alt` Google Play (Alt) · `my-nintendo` My Nintendo · `nintendo-online` Nintendo Online · `playstation-plus` Playstation Plus · `playstation-store` Playstation Store · `steam` Steam · `ubisoft-plus` UBISOFT+ · `xbox-game-pass` XBOX Game Pass
+`app-store` App Store · `apple-arcade` Apple Arcade · `ea-play` EA Play · `ea-play-alt` EA Play (Alt) · `epic-games` Epic Games · `epic-games-store` Epic Games Store · `google-play` Google Play · `google-play-alt` Google Play (Alt) · `my-nintendo` My Nintendo · `nintendo-online` Nintendo Online · `playstation-plus` PlayStation Plus · `playstation-store` PlayStation Store · `steam` Steam · `ubisoft-plus` UBISOFT+ · `xbox-game-pass` XBOX Game Pass
 
 </details>
 
 <details>
 <summary><b>ISP</b> · 15 logos · <code>isp</code></summary>
 
-`biznet` Biznet · `biznet-home` Biznet Home · `cbn` CBN · `first-media` First Media · `iconnet` Iconnet · `indihome-new` IndiHome (New) · `indihome-old` IndiHome (Old) · `indosat-hifi` Indosat Hifi · `indosat-m2` Indosat M2 · `melsa` Melsa · `myrepublic` MyRepublic · `oxygen-id` Oxygen.id · `oxygen-id-home` Oxygen.id Home · `telkomsel-orbit` Telkomsel Orbit · `xl-satu` XL Satu
+`biznet` Biznet · `biznet-home` Biznet Home · `cbn` CBN · `first-media` First Media · `iconnet` Iconnet · `indihome` IndiHome · `indihome-old` IndiHome (Old) · `indosat-hifi` Indosat Hifi · `indosat-m2` Indosat M2 · `melsa` Melsa · `myrepublic` MyRepublic · `oxygen-id` Oxygen.id · `oxygen-id-home` Oxygen.id Home · `telkomsel-orbit` Telkomsel Orbit · `xl-satu` XL Satu
 
 </details>
 
 <details>
 <summary><b>Remittance</b> · 14 logos · <code>remittance</code></summary>
 
-`flip` Flip · `moneygram` MoneyGram · `payoneer` Payoneer · `paypal` PayPal · `paypal-new` PayPal (New) · `ria-money` Ria Money · `skrill` Skrill · `swift` SWIFT · `swift-alt` SWIFT (Alt) · `topremit` Topremit · `topremit-1` Topremit-1 · `transfez` Transfez · `western-union` Western Union · `wise` Wise
+`flip` Flip · `moneygram` MoneyGram · `payoneer` Payoneer · `paypal` PayPal · `paypal-old` PayPal (Old) · `ria-money` Ria Money · `skrill` Skrill · `swift` SWIFT · `swift-alt` SWIFT (Alt) · `topremit` Topremit · `topremit-alt` Topremit (Alt) · `transfez` Transfez · `western-union` Western Union · `wise` Wise
 
 </details>
 
 <details>
 <summary><b>Switching</b> · 13 logos · <code>switching</code></summary>
 
-`alto` ALTO · `atm-bersama` ATM Bersama · `bca-atm` BCA ATM · `bca-debit` BCA Debit · `bi-fast` BI-FAST · `jalin` Jalin · `link` Link · `link-new-alt` Link (New Alt) · `link-new` Link (New) · `link-old` Link (Old) · `meps` MEPS · `prima` PRIMA · `prima-debit` PRIMA Debit
+`alto` ALTO · `atm-bersama` ATM Bersama · `atm-link` ATM Link · `bca-atm` BCA ATM · `bca-debit` BCA Debit · `bi-fast` BI-FAST · `jalin` Jalin · `link` Link · `link-alt` Link (Alt) · `link-old` Link (Old) · `meps` MEPS · `prima` PRIMA · `prima-debit` PRIMA Debit
 
 </details>
 
 <details>
 <summary><b>E-Commerce</b> · 12 logos · <code>e-commerce</code></summary>
 
-`bhinneka` Bhinneka · `blibli` Blibli · `bukalapak` Bukalapak · `bukalapak-alt` Bukalapak (Alt) · `bukalapak-new` Bukalapak (New) · `lazada` Lazada · `shopee` Shopee · `shopee-alt` Shopee (Alt) · `tiktok-shop` TikTok Shop · `tokopedia` Tokopedia · `tokopedia-alt` Tokopedia (Alt) · `zalora` Zalora
+`bhinneka` Bhinneka · `blibli` Blibli · `bukalapak` Bukalapak · `bukalapak-alt` Bukalapak (Alt) · `bukalapak-old` Bukalapak (Old) · `lazada` Lazada · `shopee` Shopee · `shopee-alt` Shopee (Alt) · `tiktok-shop` TikTok Shop · `tokopedia` Tokopedia · `tokopedia-alt` Tokopedia (Alt) · `zalora` Zalora
 
 </details>
 
 <details>
 <summary><b>Transportation</b> · 12 logos · <code>transportation</code></summary>
 
-`cititrans` Cititrans · `damri` DAMRI · `daytrans` DayTrans · `jaklingko` JakLingko · `kai` KAI · `kai-bandara` KAI Bandara · `kai-commuter-new` KAI Commuter (New) · `kai-commuter-old` KAI Commuter (Old) · `lrt-jakarta` LRT Jakarta · `mrt-jakarta` MRT Jakarta · `transjakarta` TransJakarta · `whoosh` Whoosh
+`cititrans` Cititrans · `damri` DAMRI · `daytrans` DayTrans · `jaklingko` JakLingko · `kai` KAI · `kai-bandara` KAI Bandara · `kai-commuter` KAI Commuter · `kai-commuter-old` KAI Commuter (Old) · `lrt-jakarta` LRT Jakarta · `mrt-jakarta` MRT Jakarta · `transjakarta` TransJakarta · `whoosh` Whoosh
 
 </details>
 
 <details>
 <summary><b>Payment Gateway</b> · 10 logos · <code>payment-gateway</code></summary>
 
-`2c2p` 2c2p · `2c2p-new` 2c2p (New) · `2c2p-new-alt` 2c2p (New-Alt) · `espay` Espay · `finpay` Finpay · `ipay88` ipay88 · `midtrans` Midtrans · `prismalink` PrismaLink · `stripe` Stripe · `xendit` Xendit
+`2c2p` 2c2p · `2c2p-alt` 2c2p (Alt) · `2c2p-old` 2c2p (Old) · `espay` Espay · `finpay` Finpay · `ipay88` ipay88 · `midtrans` Midtrans · `prismalink` PrismaLink · `stripe` Stripe · `xendit` Xendit
 
 </details>
 
@@ -594,7 +629,7 @@ All 572 logos, grouped by category and sorted by name. Click a section to expand
 <details>
 <summary><b>Prepaid Card</b> · 9 logos · <code>prepaid-card</code></summary>
 
-`bca-flazz` BCA Flazz · `bca-flazz-alt` BCA Flazz (Alt) · `bca-flazz-new` BCA Flazz (New) · `bni-tapcash` BNI TapCash · `bri-brizzi` BRI BRIZZI · `bri-brizzi-alt` BRI BRIZZI (Alt) · `e-toll-card` e-Toll Card · `jakcard` Jakcard · `mandiri-e-money` Mandiri e-money
+`bca-flazz` BCA Flazz · `bca-flazz-alt` BCA Flazz (Alt) · `bca-flazz-old` BCA Flazz (Old) · `bni-tapcash` BNI TapCash · `bri-brizzi` BRI BRIZZI · `bri-brizzi-alt` BRI BRIZZI (Alt) · `e-toll-card` e-Toll Card · `jakcard` Jakcard · `mandiri-e-money` Mandiri e-money
 
 </details>
 
@@ -615,7 +650,7 @@ All 572 logos, grouped by category and sorted by name. Click a section to expand
 <details>
 <summary><b>Utilities</b> · 7 logos · <code>utilities</code></summary>
 
-`aetra-tangerang` Aetra Tangerang · `pam-jaya-new` PAM Jaya (New) · `pam-jaya-old` PAM Jaya (Old) · `pdam` PDAM · `pdam-kota-surabaya` PDAM Kota Surabaya · `pgn` PGN · `pln` PLN
+`aetra-tangerang` Aetra Tangerang · `pam-jaya` PAM Jaya · `pam-jaya-old` PAM Jaya (Old) · `pdam` PDAM · `pdam-kota-surabaya` PDAM Kota Surabaya · `pgn` PGN · `pln` PLN
 
 </details>
 
@@ -649,8 +684,11 @@ Spot a discrepancy between a logo here and the corresponding Figma file? Please 
 **Q: Are the SVGs free to use commercially?**
 The build tooling is MIT-licensed (free for any use). The SVG artwork is CC BY-NC 4.0 (non-commercial). The trademarks themselves belong to their holders — **commercial use of any individual brand mark requires permission from that brand**. See [License](#license).
 
-**Q: Why are some brand names misspelled (e.g. "Amercian Express", "Mualamat")?**
-Historical slugs are preserved for backwards compatibility with v1 (`indo-financial-logolibrary`). The display names in `name:` fields are correct; only the slug spelling is frozen.
+**Q: Weren't some slugs misspelled (e.g. "amercian-express-alt", "mualamat")?**
+They were, inherited from v1 (`indo-financial-logolibrary`). v2.4.0 fixed the spellings (`american-express-alt`, `muamalat`) and cleaned up numbered slugs (`bank-dki-1` → `bank-dki-alt`). The old slugs live on as **aliases**, so `getLogo('mualamat')` and `getLogo('bank-dki-1')` still resolve — nothing breaks. See [MIGRATION.md](./MIGRATION.md) for the full rename table.
+
+**Q: A brand rebranded — which slug gets the new logo?**
+The bare slug, always. When a brand refreshes its logo, the new art takes over the bare slug (`bri`) and the previous art moves to `<brand>-old` (`bri-old`). So pinning the bare slug in your code means you automatically get the current logo on every update. v2.4 cleaned up the legacy `-new` suffixes this way — see [MIGRATION.md](./MIGRATION.md).
 
 **Q: Can I request a missing logo?**
 Yes — open an issue at [github.com/hafidznoor/idn-finlogos/issues](https://github.com/hafidznoor/idn-finlogos/issues) with the brand name, your source for the vector, and the trademark holder. PRs against [`data/logos.yml`](./data/logos.yml) and `icons/<slug>.svg` welcome.

@@ -1,6 +1,6 @@
 {
   "name": "idn-finlogos",
-  "version": "2.3.0",
+  "version": "2.4.0",
   "description": "Indonesian financial institution logos (banks, e-wallets, payment gateways, and 20+ more categories) as optimized SVGs with per-logo ESM imports.",
   "keywords": [
     "indonesia",
@@ -43,6 +43,7 @@
     },
     "./manifest.json": "./dist/manifest.json",
     "./icons/*.svg": "./dist/icons/*.svg",
+    "./png/*.png": "./dist/png/*.png",
     "./icons/*": {
       "types": "./dist/icons/*.d.ts",
       "import": "./dist/icons/*.mjs",
@@ -80,13 +81,19 @@
     "validate": "node scripts/validate.mjs",
     "build": "node scripts/build.mjs",
     "build:frameworks": "node scripts/build-frameworks.mjs",
+    "build:png": "node scripts/build-png.mjs",
     "build:android": "node scripts/build-android.mjs",
     "build:ios": "node scripts/build-ios.mjs",
     "build:flutter": "node scripts/build-flutter.mjs",
     "build:all": "node scripts/build-all.mjs",
-    "prepublishOnly": "npm run validate && npm run build && npm run build:frameworks"
+    "test:visual": "playwright test -c tests/visual/playwright.config.ts",
+    "test:visual:update": "playwright test -c tests/visual/playwright.config.ts --update-snapshots",
+    "test:visual:report": "playwright show-report tests/visual/report",
+    "prepublishOnly": "npm run validate && npm run build && npm run build:frameworks && npm run build:png"
   },
   "devDependencies": {
+    "@playwright/test": "^1.60.0",
+    "@resvg/resvg-js": "^2.6.2",
     "js-yaml": "^4.1.0",
     "svgo": "^3.3.0"
   },
@@ -98,11 +105,21 @@
     "vue": ">=3.0"
   },
   "peerDependenciesMeta": {
-    "react": { "optional": true },
-    "react-native": { "optional": true },
-    "react-native-svg": { "optional": true },
-    "svelte": { "optional": true },
-    "vue": { "optional": true }
+    "react": {
+      "optional": true
+    },
+    "react-native": {
+      "optional": true
+    },
+    "react-native-svg": {
+      "optional": true
+    },
+    "svelte": {
+      "optional": true
+    },
+    "vue": {
+      "optional": true
+    }
   },
   "engines": {
     "node": ">=18"

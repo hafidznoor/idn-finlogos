@@ -95,6 +95,24 @@ async function main() {
       `declare const svg: string;\nexport default svg;\n`
     );
 
+    // Deprecated alias shims: retired slugs (e.g. "bri-new" after that art
+    // became canonical "bri") keep resolving for per-icon imports + CDN URLs.
+    for (const alias of logo.aliases ?? []) {
+      fs.writeFileSync(path.join(DIST, 'icons', `${alias}.svg`), optimized);
+      fs.writeFileSync(
+        path.join(DIST, 'icons', `${alias}.mjs`),
+        `export { default } from './${logo.slug}.mjs';\n`
+      );
+      fs.writeFileSync(
+        path.join(DIST, 'icons', `${alias}.js`),
+        `'use strict';\nmodule.exports = require('./${logo.slug}.js');\n`
+      );
+      fs.writeFileSync(
+        path.join(DIST, 'icons', `${alias}.d.ts`),
+        `declare const svg: string;\nexport default svg;\n`
+      );
+    }
+
     manifestLogos.push({
       slug: logo.slug,
       name: logo.name,
@@ -159,10 +177,44 @@ export function getCategories() {
   return Object.entries(manifest.categories).map(([slug, meta]) => ({ slug, ...meta }));
 }
 
+// Mirrors scripts/slugify.mjs — keep in sync.
+function slugifyName(name) {
+  return String(name)
+    .toLowerCase()
+    .replace(/&/g, ' and ')
+    .replace(/\\+/g, ' plus ')
+    .replace(/[()]/g, ' ')
+    .replace(/[\\u2018\\u2019\\u201B'\`]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
+// Accepts a slug, a retired slug (alias), or a brand name in any casing —
+// e.g. 'bri', 'bri-new', 'BRI', 'Bank Rakyat Indonesia', 'PayPal'.
+function resolveMeta(input) {
+  if (input == null) return null;
+  const raw = String(input);
+  const direct =
+    manifest.logos.find((l) => l.slug === raw) ||
+    manifest.logos.find((l) => (l.aliases || []).includes(raw));
+  if (direct) return direct;
+  const q = raw.trim().toLowerCase();
+  const byName = manifest.logos.find((l) => l.name.toLowerCase() === q);
+  if (byName) return byName;
+  const s = slugifyName(raw);
+  if (!s) return null;
+  return (
+    manifest.logos.find((l) => l.slug === s) ||
+    manifest.logos.find((l) => (l.aliases || []).includes(s)) ||
+    manifest.logos.find((l) => slugifyName(l.name) === s) ||
+    null
+  );
+}
+
 export async function getLogo(slug) {
-  const meta = manifest.logos.find((l) => l.slug === slug);
+  const meta = resolveMeta(slug);
   if (!meta) return null;
-  const { default: svg } = await import(\`./icons/\${slug}.mjs\`);
+  const { default: svg } = await import(\`./icons/\${meta.slug}.mjs\`);
   return { ...meta, svg };
 }
 
@@ -175,7 +227,8 @@ export function getLogoUrl(slug, opts = {}) {
   const { cdn = 'jsdelivr', version = manifest.version } = opts;
   const base = CDN_BASES[cdn];
   if (!base) throw new Error(\`Unknown cdn "\${cdn}". Use 'jsdelivr' or 'unpkg'.\`);
-  return \`\${base(version)}/dist/icons/\${slug}.svg\`;
+  const meta = resolveMeta(slug);
+  return \`\${base(version)}/dist/icons/\${meta ? meta.slug : slug}.svg\`;
 }
 
 export default { VERSION, PACKAGE_NAME, listLogos, getCategories, getLogo, getLogoUrl };
@@ -208,10 +261,44 @@ function getCategories() {
   return Object.entries(manifest.categories).map(([slug, meta]) => Object.assign({ slug }, meta));
 }
 
+// Mirrors scripts/slugify.mjs — keep in sync.
+function slugifyName(name) {
+  return String(name)
+    .toLowerCase()
+    .replace(/&/g, ' and ')
+    .replace(/\\+/g, ' plus ')
+    .replace(/[()]/g, ' ')
+    .replace(/[\\u2018\\u2019\\u201B'\`]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
+// Accepts a slug, a retired slug (alias), or a brand name in any casing —
+// e.g. 'bri', 'bri-new', 'BRI', 'Bank Rakyat Indonesia', 'PayPal'.
+function resolveMeta(input) {
+  if (input == null) return null;
+  const raw = String(input);
+  const direct =
+    manifest.logos.find((l) => l.slug === raw) ||
+    manifest.logos.find((l) => (l.aliases || []).includes(raw));
+  if (direct) return direct;
+  const q = raw.trim().toLowerCase();
+  const byName = manifest.logos.find((l) => l.name.toLowerCase() === q);
+  if (byName) return byName;
+  const s = slugifyName(raw);
+  if (!s) return null;
+  return (
+    manifest.logos.find((l) => l.slug === s) ||
+    manifest.logos.find((l) => (l.aliases || []).includes(s)) ||
+    manifest.logos.find((l) => slugifyName(l.name) === s) ||
+    null
+  );
+}
+
 function getLogo(slug) {
-  const meta = manifest.logos.find((l) => l.slug === slug);
+  const meta = resolveMeta(slug);
   if (!meta) return null;
-  const svg = require('./icons/' + slug + '.js');
+  const svg = require('./icons/' + meta.slug + '.js');
   return Object.assign({}, meta, { svg });
 }
 
@@ -226,7 +313,8 @@ function getLogoUrl(slug, opts) {
   const version = opts.version || manifest.version;
   const base = CDN_BASES[cdn];
   if (!base) throw new Error('Unknown cdn "' + cdn + '". Use \\'jsdelivr\\' or \\'unpkg\\'.');
-  return base(version) + '/dist/icons/' + slug + '.svg';
+  const meta = resolveMeta(slug);
+  return base(version) + '/dist/icons/' + (meta ? meta.slug : slug) + '.svg';
 }
 
 module.exports = { VERSION, PACKAGE_NAME, listLogos, getCategories, getLogo, getLogoUrl };
@@ -269,7 +357,13 @@ export declare const PACKAGE_NAME: string;
 
 export declare function listLogos(filter?: ListLogosFilter): LogoMeta[];
 export declare function getCategories(): Category[];
+/**
+ * Accepts a canonical slug, a retired slug (alias), or the brand name in any
+ * casing — \`getLogo('bri')\`, \`getLogo('bri-new')\`, \`getLogo('BRI')\`, and
+ * \`getLogo('Bank Rakyat Indonesia')\` all resolve to the same logo.
+ */
 export declare function getLogo(slug: string): Promise<(LogoMeta & { svg: string }) | null>;
+/** Same input resolution as \`getLogo\`; unresolvable input is used verbatim. */
 export declare function getLogoUrl(slug: string, opts?: GetLogoUrlOpts): string;
 
 declare const _default: {

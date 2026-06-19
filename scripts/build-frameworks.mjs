@@ -27,10 +27,18 @@ function jsIdent(slug) {
   return '_' + slug.replace(/[^a-zA-Z0-9_$]/g, '_');
 }
 
-function buildIconsMap(slugs) {
-  // dist/icons-map.mjs — re-export every per-slug SVG string through one object
+function buildIconsMap(logos) {
+  // dist/icons-map.mjs — re-export every per-slug SVG string through one
+  // object. Aliases (retired slugs) map to the same import as their canonical
+  // slug, so e.g. slug="bri-new" keeps rendering after the rename to "bri".
+  const slugs = logos.map((l) => l.slug);
+  const keyToSlug = logos.flatMap((l) => [
+    [l.slug, l.slug],
+    ...(l.aliases ?? []).map((a) => [a, l.slug])
+  ]).sort(([a], [b]) => a.localeCompare(b));
+
   const esmImports = slugs.map((s) => `import ${jsIdent(s)} from './icons/${s}.mjs';`).join('\n');
-  const esmEntries = slugs.map((s) => `  '${s}': ${jsIdent(s)}`).join(',\n');
+  const esmEntries = keyToSlug.map(([k, s]) => `  '${k}': ${jsIdent(s)}`).join(',\n');
   const esm = `${esmImports}
 
 const iconsMap = {
@@ -42,7 +50,7 @@ export default iconsMap;
   fs.writeFileSync(path.join(DIST, 'icons-map.mjs'), esm);
 
   // CJS twin — each per-slug .js exports the string via module.exports.
-  const cjsRequires = slugs.map((s) => `  '${s}': require('./icons/${s}.js')`).join(',\n');
+  const cjsRequires = keyToSlug.map(([k, s]) => `  '${k}': require('./icons/${s}.js')`).join(',\n');
   const cjs = `'use strict';
 const iconsMap = {
 ${cjsRequires}
@@ -538,7 +546,7 @@ function main() {
 
   const slugs = catalog.logos.map((l) => l.slug).sort();
 
-  buildIconsMap(slugs);
+  buildIconsMap(catalog.logos);
   const dirs = [buildReact(), buildReactNative(), buildVue(), buildSvelte(), buildVanilla()];
 
   console.log(`Built framework wrappers for ${slugs.length} logos`);
