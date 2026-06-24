@@ -4,6 +4,7 @@ dist/
 .DS_Store
 .idea/
 .vscode/
+.claude/
 *.log
 npm-debug.log*
 .env
