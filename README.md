@@ -39,6 +39,7 @@ The single source of truth for Indonesian fintech and financial brand marks acro
 - [License](#license)
 - [Contributing](#contributing)
 - [Support this project](#support-this-project)
+- [Project activity](#project-activity)
 
 ---
 
@@ -750,6 +751,18 @@ If this package saved you time on a checkout screen, payment UI, or fintech dash
 [![Support on Lemon Squeezy](https://img.shields.io/badge/☕%20Buy%20me%20a%20coffee-Lemon%20Squeezy-FFC233?logo=lemonsqueezy&logoColor=white&style=for-the-badge)](https://hafidznoor.lemonsqueezy.com/checkout/buy/f2b81ada-e8a9-4e29-b35c-7b7249b78404)
 
 Every contribution directly funds new logos, faster turnaround on rebrand requests, and continued maintenance of the Android, iOS, Flutter, and web packages. Thank you. 🙏
+
+---
+
+## Project activity
+
+**npm downloads** — interactive trends on [npmcharts](https://npmcharts.com/compare/idn-finlogos?interval=30):
+
+[![npm downloads](https://img.shields.io/npm/dm/idn-finlogos?logo=npm&label=downloads%2Fmonth)](https://npmcharts.com/compare/idn-finlogos?interval=30)
+
+**GitHub stars over time** — powered by [Star History](https://www.star-history.com/#hafidznoor/idn-finlogos&Date):
+
+[![Star History Chart](https://api.star-history.com/svg?repos=hafidznoor/idn-finlogos&type=Date)](https://www.star-history.com/#hafidznoor/idn-finlogos&Date)
 
 ---
 
