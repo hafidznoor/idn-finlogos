@@ -32,6 +32,7 @@ The single source of truth for Indonesian fintech and financial brand marks acro
   - [Android](#android)
   - [iOS](#ios)
   - [Flutter](#flutter)
+- [CLI](#cli)
 - [Coverage](#coverage)
 - [Complete logo catalog](#complete-logo-catalog)
 - [Design source (Figma)](#design-source-figma)
@@ -49,10 +50,11 @@ The single source of truth for Indonesian fintech and financial brand marks acro
 |---|---|---|
 | **Web (npm)** | `npm install idn-finlogos` | `idn-finlogos` |
 | **React / RN / Vue / Svelte** | `npm install idn-finlogos` + framework subpath | `idn-finlogos/{react,react-native,vue,svelte}` |
-| **Android (Gradle)** | `implementation("io.github.hafidznoor:idn-finlogos:2.4.0")` | `io.github.hafidznoor:idn-finlogos` |
-| **iOS (SPM)** | `.package(url: "https://github.com/hafidznoor/idn-finlogos", from: "2.4.0")` | `IdnFinLogos` |
+| **Android (Gradle)** | `implementation("io.github.hafidznoor:idn-finlogos:2.5.0")` | `io.github.hafidznoor:idn-finlogos` |
+| **iOS (SPM)** | `.package(url: "https://github.com/hafidznoor/idn-finlogos", from: "2.5.0")` | `IdnFinLogos` |
 | **Flutter** | `flutter pub add idn_finlogos` | `idn_finlogos` |
 | **Web (CDN, zero install)** | `<img src="https://cdn.jsdelivr.net/npm/idn-finlogos@2/dist/icons/bca.svg" />` | jsDelivr / unpkg |
+| **CLI (zero install)** | `npx idn-finlogos download bca` | `idn-finlogos` |
 
 All packages ship the same 572 SVGs from a single source of truth (`data/logos.yml` + `icons/`). Mobile packages bundle SVGs as platform-native resources; web packages ship them as both ESM modules and raw files.
 
@@ -105,9 +107,9 @@ The recommended install paths. Same artifact, same coordinates, no auth required
 |---|---|
 | **Web (npm)** | `npm install idn-finlogos` |
 | **React / React Native / Vue / Svelte** | `npm install idn-finlogos` — components import from `idn-finlogos/{react,react-native,vue,svelte}`; React Native also needs `react-native-svg` |
-| **Android (Maven Central)** | `implementation("io.github.hafidznoor:idn-finlogos:2.4.0")` |
-| **Android (JitPack, no wait)** | Add `maven { url = uri("https://jitpack.io") }`, then `implementation("com.github.hafidznoor:idn-finlogos:2.4.0")` |
-| **iOS (Swift Package Manager)** | `.package(url: "https://github.com/hafidznoor/idn-finlogos", from: "2.4.0")` |
+| **Android (Maven Central)** | `implementation("io.github.hafidznoor:idn-finlogos:2.5.0")` |
+| **Android (JitPack, no wait)** | Add `maven { url = uri("https://jitpack.io") }`, then `implementation("com.github.hafidznoor:idn-finlogos:2.5.0")` |
+| **iOS (Swift Package Manager)** | `.package(url: "https://github.com/hafidznoor/idn-finlogos", from: "2.5.0")` |
 | **Flutter (pub.dev)** | `flutter pub add idn_finlogos` |
 | **Web (jsDelivr CDN)** | `https://cdn.jsdelivr.net/npm/idn-finlogos@2/dist/icons/<slug>.svg` |
 | **Web (unpkg CDN)** | `https://unpkg.com/idn-finlogos@2/dist/icons/<slug>.svg` |
@@ -149,7 +151,7 @@ dependencyResolutionManagement {
 Then use the same coordinate as Maven Central:
 
 ```kotlin
-implementation("io.github.hafidznoor:idn-finlogos:2.4.0")
+implementation("io.github.hafidznoor:idn-finlogos:2.5.0")
 ```
 
 ---
@@ -213,7 +215,7 @@ await getLogo('014');                       // → bca (kode bank)
 await getLogo('002');                       // → bri
 
 getLogoUrl('bca');
-// → 'https://cdn.jsdelivr.net/npm/idn-finlogos@2.4.0/dist/icons/bca.svg'
+// → 'https://cdn.jsdelivr.net/npm/idn-finlogos@2.5.0/dist/icons/bca.svg'
 ```
 
 #### 4. CDN — no install, no build step
@@ -223,7 +225,7 @@ getLogoUrl('bca');
 <img src="https://unpkg.com/idn-finlogos@2/dist/icons/gopay.svg" alt="GoPay" />
 ```
 
-Pin a major (`@2`), minor (`@2.4`), or exact version (`@2.4.0`). jsDelivr and unpkg both work.
+Pin a major (`@2`), minor (`@2.5`), or exact version (`@2.5.0`). jsDelivr and unpkg both work.
 
 #### 5. PNG fallbacks (for environments that can't render SVG)
 
@@ -351,7 +353,7 @@ Each `LogoMeta` carries: `slug`, `name`, `category`, `aliases`, `tags`, plus acc
 ```kotlin
 // app/build.gradle.kts
 dependencies {
-    implementation("io.github.hafidznoor:idn-finlogos:2.4.0")
+    implementation("io.github.hafidznoor:idn-finlogos:2.5.0")
     // Recommended SVG renderer:
     implementation("io.coil-kt:coil-compose:2.6.0")
     implementation("io.coil-kt:coil-svg:2.6.0")
@@ -391,7 +393,7 @@ fun BcaLogo() {
 
 ```swift
 // Package.swift
-.package(url: "https://github.com/hafidznoor/idn-finlogos", from: "2.4.0")
+.package(url: "https://github.com/hafidznoor/idn-finlogos", from: "2.5.0")
 ```
 
 ```swift
@@ -442,6 +444,52 @@ class BcaLogo extends StatelessWidget {
 **Catalog API:** `IdnFinLogos.all`, `byCategory(...)`, `get(...)`, `search(...)`. Full Flutter-specific docs in [platforms/flutter/README.md](./platforms/flutter/README.md).
 
 **Min SDK:** Dart 3.0+, Flutter 3.0+.
+
+---
+
+## CLI
+
+Download logos straight from your terminal — no project, no bundler, no install:
+
+```bash
+npx idn-finlogos download bca
+# ✓ bca.svg (4.5 KB)
+```
+
+The CLI is bundled with the npm package and fetches artwork from the CDN, so it works anywhere Node 18+ runs. A network connection is required.
+
+Running `idn-finlogos` with no arguments opens a dashboard with live library stats, the command menu, and quick-start examples:
+
+```bash
+npx idn-finlogos
+```
+
+**Download** one or more logos. Queries accept a slug, a retired slug, or the brand name in any casing (banks also resolve by SWIFT/BIC and 3-digit kode bank):
+
+```bash
+npx idn-finlogos download gopay ovo dana
+npx idn-finlogos download "Bank Rakyat Indonesia" --out ./assets
+npx idn-finlogos download bca --format png --scale 2      # -> bca@2x.png (160×160)
+```
+
+| Flag | Values | Default | Notes |
+|---|---|---|---|
+| `--format` | `svg`, `png` | `svg` | Downloaded SVGs include `xmlns`, so they open standalone. |
+| `--scale` | `1`–`4` | `1` | PNG only (`@Nx`, 80–320 px). |
+| `--out` | directory | current dir | Created if missing. |
+| `--cdn` | `jsdelivr`, `unpkg` | `jsdelivr` | Which CDN to fetch from. |
+| `--pkg-version` | version | this CLI's | Fetch a specific published version. |
+
+**Browse** the catalog without downloading:
+
+```bash
+npx idn-finlogos list --category e-wallet     # tabular slug / name / category
+npx idn-finlogos search mandiri               # filter by name, slug, or alias
+npx idn-finlogos info "Bank Rakyat Indonesia" # metadata + CDN URLs
+npx idn-finlogos categories                   # all categories with counts
+```
+
+Add `--json` to `list`, `search`, `info`, or `categories` for machine-readable output. Run `npx idn-finlogos --help` for the full reference.
 
 ---
 

@@ -7,7 +7,7 @@
 import 'logo_meta.dart';
 import 'category.dart';
 
-const String catalogVersion = '2.4.0';
+const String catalogVersion = '2.5.0';
 
 const List<LogoMeta> catalogLogos = <LogoMeta>[
   LogoMeta(slug: '2c2p', name: '2c2p', category: 'payment-gateway', aliases: const <String>['2c2p-new'], tags: const <String>[]),
