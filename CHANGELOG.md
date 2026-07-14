@@ -4,6 +4,27 @@ All notable changes to this project will be documented in this file. Format foll
 
 ## [Unreleased]
 
+## [2.5.0]
+
+### Added — command-line interface
+
+A bundled `idn-finlogos` CLI for downloading logos from the terminal — no bundler or project setup required:
+
+```bash
+npx idn-finlogos download bca                          # -> bca.svg
+npx idn-finlogos download gopay ovo dana --out ./assets
+npx idn-finlogos download bca --format png --scale 2   # -> bca@2x.png
+npx idn-finlogos list --category e-wallet
+npx idn-finlogos search mandiri
+npx idn-finlogos info "Bank Rakyat Indonesia"
+npx idn-finlogos categories
+```
+
+- Queries resolve by slug, retired slug, or brand name in any casing (banks also by SWIFT/BIC and kode bank), mirroring `getLogo()`.
+- Thin CDN client: fetches the manifest and artwork from jsDelivr/unpkg at runtime (Node's global `fetch`), so it carries **zero runtime dependencies**. Requires Node 18+ and a network connection. `--cdn` and `--pkg-version` override the source.
+- Downloaded SVGs have `xmlns` re-added so they open standalone; `--json` gives machine-readable output for `list`/`search`/`info`/`categories`.
+- Running `idn-finlogos` with no arguments opens a welcome dashboard: an ASCII wordmark banner, live library stats (a category bar chart), the command menu, and quick-start examples. Colors and box-drawing degrade gracefully when piped or when `NO_COLOR` is set.
+
 ## [2.4.0]
 
 ### Changed — slug cleanup, bare slug = newest logo

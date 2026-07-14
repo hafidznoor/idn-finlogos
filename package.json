@@ -1,6 +1,6 @@
 {
   "name": "idn-finlogos",
-  "version": "2.4.0",
+  "version": "2.5.0",
   "description": "Indonesian financial institution logos (banks, e-wallets, payment gateways, and 20+ more categories) as optimized SVGs with per-logo ESM imports.",
   "keywords": [
     "indonesia",
@@ -24,12 +24,16 @@
   },
   "bugs": "https://github.com/hafidznoor/idn-finlogos/issues",
   "type": "module",
+  "bin": {
+    "idn-finlogos": "./bin/idn-finlogos.mjs"
+  },
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "sideEffects": false,
   "files": [
     "dist/",
+    "bin/",
     "LICENSE",
     "LICENSE-ASSETS",
     "NOTICE",
