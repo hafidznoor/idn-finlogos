@@ -4,6 +4,7 @@
 
 [![npm version](https://img.shields.io/npm/v/idn-finlogos?logo=npm&label=npm)](https://www.npmjs.com/package/idn-finlogos)
 [![npm downloads](https://img.shields.io/npm/dm/idn-finlogos?logo=npm&label=downloads)](https://www.npmjs.com/package/idn-finlogos)
+[![jsDelivr](https://data.jsdelivr.com/v1/package/npm/idn-finlogos/badge)](https://www.jsdelivr.com/package/npm/idn-finlogos)
 [![Maven Central](https://img.shields.io/maven-central/v/io.github.hafidznoor/idn-finlogos?logo=apachemaven&label=maven%20central)](https://central.sonatype.com/artifact/io.github.hafidznoor/idn-finlogos)
 [![pub.dev](https://img.shields.io/pub/v/idn_finlogos?logo=dart&label=pub.dev)](https://pub.dev/packages/idn_finlogos)
 [![CI](https://github.com/hafidznoor/idn-finlogos/actions/workflows/ci.yml/badge.svg)](https://github.com/hafidznoor/idn-finlogos/actions/workflows/ci.yml)
