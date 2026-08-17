@@ -2,11 +2,13 @@
 
 > The package **`idn-finlogos`** — **Indonesian fintech & financial institution logos**: banks, e-wallets, payment gateways, switching networks, regulators, and more, as **optimized SVGs** ready to drop into web, Android, iOS, and Flutter projects.
 
-[![npm version](https://img.shields.io/npm/v/idn-finlogos?logo=npm&label=npm)](https://www.npmjs.com/package/idn-finlogos)
-[![npm downloads](https://img.shields.io/npm/dm/idn-finlogos?logo=npm&label=downloads)](https://www.npmjs.com/package/idn-finlogos)
+![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/hafidznoor/idn-finlogos/total?logo=github&label=Github%20Downloads)
+[![npm version](https://img.shields.io/npm/v/idn-finlogos?logo=npm&label=NPM)](https://www.npmjs.com/package/idn-finlogos)
+[![npm downloads](https://img.shields.io/npm/dm/idn-finlogos?logo=npm&label=NPM%20Downloads)](https://www.npmjs.com/package/idn-finlogos)
 [![jsDelivr](https://data.jsdelivr.com/v1/package/npm/idn-finlogos/badge)](https://www.jsdelivr.com/package/npm/idn-finlogos)
-[![Maven Central](https://img.shields.io/maven-central/v/io.github.hafidznoor/idn-finlogos?logo=apachemaven&label=maven%20central)](https://central.sonatype.com/artifact/io.github.hafidznoor/idn-finlogos)
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.hafidznoor/idn-finlogos?logo=apachemaven&label=Maven%20Central)](https://central.sonatype.com/artifact/io.github.hafidznoor/idn-finlogos)
 [![pub.dev](https://img.shields.io/pub/v/idn_finlogos?logo=dart&label=pub.dev)](https://pub.dev/packages/idn_finlogos)
+[![pub downloads](https://img.shields.io/pub/dm/idn_finlogos?logo=dart&label=pub.dev%20downloads)](https://pub.dev/packages/idn_finlogos)
 [![CI](https://github.com/hafidznoor/idn-finlogos/actions/workflows/ci.yml/badge.svg)](https://github.com/hafidznoor/idn-finlogos/actions/workflows/ci.yml)
 [![License](https://img.shields.io/badge/license-MIT%20%2B%20CC%20BY--NC%204.0-blue)](#license)
 
