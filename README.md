@@ -807,10 +807,6 @@ Every contribution directly funds new logos, faster turnaround on rebrand reques
 
 ## Project activity
 
-**npm downloads** — interactive trends on [npmcharts](https://npmcharts.com/compare/idn-finlogos?interval=30):
-
-[![npm downloads](https://img.shields.io/npm/dm/idn-finlogos?logo=npm&label=downloads%2Fmonth)](https://npmcharts.com/compare/idn-finlogos?interval=30)
-
 **GitHub stars over time** — powered by [Star History](https://www.star-history.com/#hafidznoor/idn-finlogos&Date):
 
 [![Star History Chart](https://api.star-history.com/svg?repos=hafidznoor/idn-finlogos&type=Date)](https://www.star-history.com/#hafidznoor/idn-finlogos&Date)
