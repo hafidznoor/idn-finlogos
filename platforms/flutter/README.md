@@ -89,6 +89,20 @@ The original artwork lives in three Figma community files. They're the canonical
 
 Spot a discrepancy between a logo here and the corresponding Figma file? Please [open an issue](https://github.com/hafidznoor/idn-finlogos/issues) — the goal is to keep both in sync.
 
+## Privacy
+
+**This package contains no telemetry.** It ships SVG assets and a generated Dart
+catalog — no network calls, no analytics, no identifiers. Rendering a logo sends
+nothing, anywhere.
+
+The `idn-finlogos` **CLI**, which is distributed only via npm and is not part of
+this package, does collect anonymous usage stats (unmatched search terms, to
+decide which logos to add next). It has no bearing on Flutter consumers. Details:
+[PRIVACY.md](https://github.com/hafidznoor/idn-finlogos/blob/main/PRIVACY.md).
+
+Per-logo popularity is measured from [jsDelivr's public CDN statistics](https://data.jsdelivr.com/v1/stats/packages/npm/idn-finlogos),
+never from code running in your app.
+
 ## License
 
 - Package code: MIT

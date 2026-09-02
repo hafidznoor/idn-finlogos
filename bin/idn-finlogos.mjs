@@ -20,6 +20,7 @@ import os from 'node:os';
 import process from 'node:process';
 import { parseArgs } from 'node:util';
 import { fileURLToPath } from 'node:url';
+import * as telemetry from './telemetry.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 
@@ -105,6 +106,11 @@ function displayPath(p) {
   const rel = path.relative(process.cwd(), p);
   return rel && !rel.startsWith('..') ? rel : p;
 }
+
+// What the run actually resolved, accumulated by the commands and reported once
+// by main(). Unresolved queries are the signal we care about: brands people
+// look for that the catalog doesn't carry yet.
+const outcome = { resolved: 0, unresolved: [] };
 
 // Thrown for expected, user-facing errors (bad flags, unresolved logos, network
 // failures) — printed without a stack trace.
@@ -206,6 +212,7 @@ Usage:
   idn-finlogos search <query>                  Search logos by name/slug/alias
   idn-finlogos info <query>                    Show a logo's metadata and URLs
   idn-finlogos categories                      List categories with counts
+  idn-finlogos telemetry [on|off]              Show or change usage-stats collection
 
 Download options:
   --format <svg|png>   Output format (default: svg)
@@ -227,7 +234,12 @@ Queries accept a slug, a retired slug, or the brand name in any casing:
   idn-finlogos download dana --format png --scale 3 --out ./assets
 
 Logos are fetched from the CDN, so a network connection is required and only
-published logos are available.`;
+published logos are available.
+
+This CLI sends anonymous usage stats (command, flags, and search terms that
+matched nothing) to guide which logos get added. It never sends file paths or
+personal data. Opt out with \`idn-finlogos telemetry off\`, IDN_FINLOGOS_TELEMETRY=0,
+or DO_NOT_TRACK=1. See PRIVACY.md.`;
 
 async function cmdDownload(queries, opts) {
   if (queries.length === 0) {
@@ -254,6 +266,7 @@ async function cmdDownload(queries, opts) {
     const meta = resolveMeta(manifest, query);
     if (!meta) {
       failures++;
+      outcome.unresolved.push(query);
       process.stderr.write(`✗ "${query}" — no matching logo.\n`);
       const hints = suggest(manifest, query);
       if (hints.length) {
@@ -264,6 +277,7 @@ async function cmdDownload(queries, opts) {
       continue;
     }
 
+    outcome.resolved++;
     const isPng = format === 'png';
     const fileName = isPng ? `${meta.slug}@${scale}x.png` : `${meta.slug}.svg`;
     const url = isPng
@@ -315,6 +329,9 @@ async function cmdList(opts) {
     });
   }
 
+  if (logos.length === 0 && opts.search) outcome.unresolved.push(opts.search);
+  outcome.resolved += logos.length;
+
   if (opts.json) {
     process.stdout.write(JSON.stringify(logos, null, 2) + '\n');
     return;
@@ -363,12 +380,14 @@ async function cmdInfo(query, opts) {
   const manifest = await fetchManifest(opts);
   const meta = resolveMeta(manifest, query);
   if (!meta) {
+    outcome.unresolved.push(query);
     const hints = suggest(manifest, query);
     let msg = `No matching logo for "${query}".`;
     if (hints.length) msg += `\nDid you mean: ${hints.map((h) => h.slug).join(', ')}`;
     throw new UserError(msg);
   }
 
+  outcome.resolved++;
   const v = opts.version;
   const urls = {
     svg: {
@@ -520,7 +539,7 @@ async function cmdWelcome(opts) {
 // arg parsing + dispatch
 // ---------------------------------------------------------------------------
 
-const COMMANDS = new Set(['download', 'list', 'search', 'info', 'categories']);
+const COMMANDS = new Set(['download', 'list', 'search', 'info', 'categories', 'telemetry']);
 
 async function main(argv) {
   const { values, positionals } = parseArgs({
@@ -560,6 +579,12 @@ async function main(argv) {
 
   const [command, ...rest] = positionals;
 
+  // Handled first: it must work offline and must not itself emit an event.
+  if (command === 'telemetry') {
+    telemetry.telemetryCommand(rest[0]);
+    return;
+  }
+
   // Bare `idn-finlogos bca` is treated as `download bca`.
   const isKnown = COMMANDS.has(command);
   const cmd = isKnown ? command : 'download';
@@ -597,14 +622,31 @@ async function main(argv) {
       process.stderr.write(`Unknown command "${command}".\n\n${HELP}\n`);
       process.exitCode = 1;
   }
+
+  telemetry.track({
+    command: cmd,
+    opts: { ...opts, pkgVersionExplicit: values['pkg-version'] != null },
+    cliVersion: readOwnVersion(),
+    resolved: outcome.resolved,
+    unresolved: outcome.unresolved
+  });
 }
 
-main(process.argv.slice(2)).catch((err) => {
-  if (err instanceof UserError) {
-    process.stderr.write(`${err.message}\n`);
+main(process.argv.slice(2))
+  .catch((err) => {
+    if (err instanceof UserError) {
+      process.stderr.write(`${err.message}\n`);
+      // A UserError still tells us something worth knowing (usually an
+      // unresolved query), so report the run before exiting.
+      telemetry.track({
+        command: 'error',
+        cliVersion: readOwnVersion(),
+        resolved: outcome.resolved,
+        unresolved: outcome.unresolved
+      });
+    } else {
+      process.stderr.write(`Unexpected error: ${err && err.stack ? err.stack : err}\n`);
+    }
     process.exitCode = 1;
-  } else {
-    process.stderr.write(`Unexpected error: ${err && err.stack ? err.stack : err}\n`);
-    process.exitCode = 1;
-  }
-});
+  })
+  .finally(() => telemetry.flush());

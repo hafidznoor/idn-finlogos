@@ -14,6 +14,32 @@ Open an issue at https://github.com/hafidznoor/idn-finlogos/issues with:
 
 If you're a trademark holder asking for a logo to be removed or updated, please say so explicitly in the issue. Removals are processed quickly.
 
+## Deciding which logos to add next (maintainers)
+
+Two signals, neither of which requires guessing.
+
+**What people already fetch.** jsDelivr publishes per-file hit counts for every
+version it serves, so demand is measurable without shipping any tracking code:
+
+```bash
+npm run stats                # busiest logos this month
+npm run stats -- --zero      # catalog entries nobody fetched
+npm run stats -- --period year
+```
+
+Read `--zero` with care: bundler users who `import` from npm never touch the
+CDN, so a cold entry is a weak signal of "unused", not proof. The report also
+flags **retired slugs still receiving traffic** — each of those is a missing
+`aliases` entry worth adding.
+
+`.github/workflows/stats.yml` snapshots this weekly to `data/stats.json`, so the
+trend survives jsDelivr's rolling retention window.
+
+**What people look for and don't find.** The CLI reports search terms that
+matched no logo (see [PRIVACY.md](./PRIVACY.md)). That queue is the most direct
+input to this list — a brand appearing there repeatedly is one people expect the
+catalog to carry.
+
 ## Adding a new logo (for maintainers)
 
 1. Drop the SVG into [`icons/`](./icons/) named with the kebab-case slug rule (see [`scripts/slugify.mjs`](./scripts/slugify.mjs)). Examples: `bca-digital.svg`, `j-and-t-cargo.svg`.

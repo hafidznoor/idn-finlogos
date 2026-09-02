@@ -12,7 +12,7 @@ Android library (`idn-finlogos`) for the [Indonesia Fintech Logos](https://githu
 
 ```kotlin
 dependencies {
-    implementation("io.github.hafidznoor:idn-finlogos:2.3.0")
+    implementation("io.github.hafidznoor:idn-finlogos:2.5.1")
 }
 ```
 
@@ -28,7 +28,7 @@ dependencyResolutionManagement {
 
 // app/build.gradle.kts
 dependencies {
-    implementation("com.github.hafidznoor:idn-finlogos:2.3.0")
+    implementation("com.github.hafidznoor:idn-finlogos:2.5.1")
 }
 ```
 
@@ -126,6 +126,20 @@ The original artwork lives in three Figma community files. They're the canonical
 | **Bill Payment Logo Library — Indonesia** | https://www.figma.com/community/file/1325472637345495839/bill-payment-logo-library-indonesia-in-svg-format |
 
 Spot a discrepancy between a logo here and the corresponding Figma file? Please [open an issue](https://github.com/hafidznoor/idn-finlogos/issues) — the goal is to keep both in sync.
+
+## Privacy
+
+**This library contains no telemetry.** It ships SVG assets and a generated
+Kotlin catalog — no network calls, no analytics, no identifiers. Rendering a
+logo sends nothing, anywhere.
+
+The `idn-finlogos` **CLI**, which is distributed only via npm and is not part of
+this artifact, does collect anonymous usage stats (unmatched search terms, to
+decide which logos to add next). It has no bearing on Android consumers. Details:
+[PRIVACY.md](https://github.com/hafidznoor/idn-finlogos/blob/main/PRIVACY.md).
+
+Per-logo popularity is measured from [jsDelivr's public CDN statistics](https://data.jsdelivr.com/v1/stats/packages/npm/idn-finlogos),
+never from code running in your app.
 
 ## License
 

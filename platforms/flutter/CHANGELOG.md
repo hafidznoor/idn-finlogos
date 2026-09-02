@@ -1,3 +1,13 @@
+## 2.5.1
+
+No Flutter API changes — version bump to stay in lockstep with the other
+platform packages.
+
+**This package contains no telemetry.** The `idn-finlogos` CLI added anonymous
+usage collection in this release, but the CLI is distributed only via npm and is
+not part of this package. Rendering a logo here sends nothing, anywhere. See
+[PRIVACY.md](https://github.com/hafidznoor/idn-finlogos/blob/main/PRIVACY.md).
+
 ## 2.3.0
 
 Added `korlantas-polri` (Government). Moved `qris` from `government` → `qr-payment`. Removed 3 duplicates (`octo-clicks-direct-debit`, `wirecard-1`, `wirecard-2`). Re-exported `ibk-bank` and `qris` to fix broken clip-path masks. Total: **572 logos across 25 categories**. No Flutter API changes.

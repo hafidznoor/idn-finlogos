@@ -53,8 +53,8 @@ The single source of truth for Indonesian fintech and financial brand marks acro
 |---|---|---|
 | **Web (npm)** | `npm install idn-finlogos` | `idn-finlogos` |
 | **React / RN / Vue / Svelte** | `npm install idn-finlogos` + framework subpath | `idn-finlogos/{react,react-native,vue,svelte}` |
-| **Android (Gradle)** | `implementation("io.github.hafidznoor:idn-finlogos:2.5.0")` | `io.github.hafidznoor:idn-finlogos` |
-| **iOS (SPM)** | `.package(url: "https://github.com/hafidznoor/idn-finlogos", from: "2.5.0")` | `IdnFinLogos` |
+| **Android (Gradle)** | `implementation("io.github.hafidznoor:idn-finlogos:2.5.1")` | `io.github.hafidznoor:idn-finlogos` |
+| **iOS (SPM)** | `.package(url: "https://github.com/hafidznoor/idn-finlogos", from: "2.5.1")` | `IdnFinLogos` |
 | **Flutter** | `flutter pub add idn_finlogos` | `idn_finlogos` |
 | **Web (CDN, zero install)** | `<img src="https://cdn.jsdelivr.net/npm/idn-finlogos@2/dist/icons/bca.svg" />` | jsDelivr / unpkg |
 | **CLI (zero install)** | `npx idn-finlogos download bca` | `idn-finlogos` |
@@ -110,9 +110,9 @@ The recommended install paths. Same artifact, same coordinates, no auth required
 |---|---|
 | **Web (npm)** | `npm install idn-finlogos` |
 | **React / React Native / Vue / Svelte** | `npm install idn-finlogos` — components import from `idn-finlogos/{react,react-native,vue,svelte}`; React Native also needs `react-native-svg` |
-| **Android (Maven Central)** | `implementation("io.github.hafidznoor:idn-finlogos:2.5.0")` |
-| **Android (JitPack, no wait)** | Add `maven { url = uri("https://jitpack.io") }`, then `implementation("com.github.hafidznoor:idn-finlogos:2.5.0")` |
-| **iOS (Swift Package Manager)** | `.package(url: "https://github.com/hafidznoor/idn-finlogos", from: "2.5.0")` |
+| **Android (Maven Central)** | `implementation("io.github.hafidznoor:idn-finlogos:2.5.1")` |
+| **Android (JitPack, no wait)** | Add `maven { url = uri("https://jitpack.io") }`, then `implementation("com.github.hafidznoor:idn-finlogos:2.5.1")` |
+| **iOS (Swift Package Manager)** | `.package(url: "https://github.com/hafidznoor/idn-finlogos", from: "2.5.1")` |
 | **Flutter (pub.dev)** | `flutter pub add idn_finlogos` |
 | **Web (jsDelivr CDN)** | `https://cdn.jsdelivr.net/npm/idn-finlogos@2/dist/icons/<slug>.svg` |
 | **Web (unpkg CDN)** | `https://unpkg.com/idn-finlogos@2/dist/icons/<slug>.svg` |
@@ -154,7 +154,7 @@ dependencyResolutionManagement {
 Then use the same coordinate as Maven Central:
 
 ```kotlin
-implementation("io.github.hafidznoor:idn-finlogos:2.5.0")
+implementation("io.github.hafidznoor:idn-finlogos:2.5.1")
 ```
 
 ---
@@ -218,7 +218,7 @@ await getLogo('014');                       // → bca (kode bank)
 await getLogo('002');                       // → bri
 
 getLogoUrl('bca');
-// → 'https://cdn.jsdelivr.net/npm/idn-finlogos@2.5.0/dist/icons/bca.svg'
+// → 'https://cdn.jsdelivr.net/npm/idn-finlogos@2.5.1/dist/icons/bca.svg'
 ```
 
 #### 4. CDN — no install, no build step
@@ -228,7 +228,7 @@ getLogoUrl('bca');
 <img src="https://unpkg.com/idn-finlogos@2/dist/icons/gopay.svg" alt="GoPay" />
 ```
 
-Pin a major (`@2`), minor (`@2.5`), or exact version (`@2.5.0`). jsDelivr and unpkg both work.
+Pin a major (`@2`), minor (`@2.5`), or exact version (`@2.5.1`). jsDelivr and unpkg both work.
 
 #### 5. PNG fallbacks (for environments that can't render SVG)
 
@@ -356,7 +356,7 @@ Each `LogoMeta` carries: `slug`, `name`, `category`, `aliases`, `tags`, plus acc
 ```kotlin
 // app/build.gradle.kts
 dependencies {
-    implementation("io.github.hafidznoor:idn-finlogos:2.5.0")
+    implementation("io.github.hafidznoor:idn-finlogos:2.5.1")
     // Recommended SVG renderer:
     implementation("io.coil-kt:coil-compose:2.6.0")
     implementation("io.coil-kt:coil-svg:2.6.0")
@@ -396,7 +396,7 @@ fun BcaLogo() {
 
 ```swift
 // Package.swift
-.package(url: "https://github.com/hafidznoor/idn-finlogos", from: "2.5.0")
+.package(url: "https://github.com/hafidznoor/idn-finlogos", from: "2.5.1")
 ```
 
 ```swift
@@ -493,6 +493,34 @@ npx idn-finlogos categories                   # all categories with counts
 ```
 
 Add `--json` to `list`, `search`, `info`, or `categories` for machine-readable output. Run `npx idn-finlogos --help` for the full reference.
+
+### Usage stats
+
+The **CLI** sends an anonymous event per run — the command, which flags were used, and any search term that matched **no** logo. That last one is the whole point: unmatched queries are how we decide which Indonesian brands to add next.
+
+It never sends file paths (`--out ./client/assets` is recorded as `flag_out: true`, nothing more), successful queries, usernames, or anything machine-identifying. Unmatched queries must pass a strict brand-shaped allowlist before transmission — anything resembling a path, URL, email, or credential is dropped rather than sanitized.
+
+```bash
+idn-finlogos telemetry           # show status and exactly what's collected
+idn-finlogos telemetry off       # permanent opt-out
+export IDN_FINLOGOS_TELEMETRY=0  # or, this shell only
+```
+
+Nothing is sent on the first run, in CI, under `DO_NOT_TRACK=1`, or after opting out. Sends are capped at 400 ms and fail silently, so the CLI behaves identically offline. Full details in [PRIVACY.md](./PRIVACY.md).
+
+> The installable **packages** (npm, Maven, SPM, pub.dev) contain no telemetry whatsoever — importing a logo in your app sends nothing, anywhere.
+
+### Which logos actually get used
+
+Per-logo traffic is public. jsDelivr publishes hit counts for every file it serves, so `scripts/stats.mjs` reads that API — no tracking code, retroactive across every published version:
+
+```bash
+npm run stats                    # top logos this month
+npm run stats -- --zero          # logos nobody fetched
+npm run stats -- --period year --json
+```
+
+A [weekly workflow](.github/workflows/stats.yml) snapshots the result to [`data/stats.json`](./data/stats.json), building the long-run history jsDelivr's rolling window doesn't keep.
 
 ---
 
