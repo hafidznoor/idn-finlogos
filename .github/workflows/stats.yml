@@ -1,0 +1,47 @@
+# Weekly snapshot of per-logo CDN traffic.
+#
+# jsDelivr only serves a rolling window (a year at most), so committing the
+# report each week builds the long-run history it won't keep for us. Read-only
+# against the CDN API — nothing here touches published packages.
+name: Stats
+
+on:
+  schedule:
+    # Mondays, 03:00 UTC.
+    - cron: '0 3 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: stats
+  cancel-in-progress: false
+
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '20'
+          cache: npm
+
+      - run: npm ci
+
+      - name: Harvest per-logo CDN stats
+        run: npm run stats -- --json --out data/stats.json
+
+      - name: Commit snapshot if changed
+        run: |
+          if git diff --quiet -- data/stats.json; then
+            echo "No change in logo stats — nothing to commit."
+            exit 0
+          fi
+          git config user.name  'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add data/stats.json
+          git commit -m 'chore: weekly per-logo CDN stats snapshot'
+          git push
