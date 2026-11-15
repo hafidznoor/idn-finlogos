@@ -496,7 +496,7 @@ Add `--json` to `list`, `search`, `info`, or `categories` for machine-readable o
 
 ### Usage stats
 
-The **CLI** sends an anonymous event per run — the command, which flags were used, and any search term that matched **no** logo. That last one is the whole point: unmatched queries are how we decide which Indonesian brands to add next.
+The **CLI** reports each run anonymously to Google Analytics — the command, which flags were used, and any search term that matched **no** logo. That last one is the whole point: unmatched queries are how we decide which Indonesian brands to add next.
 
 It never sends file paths (`--out ./client/assets` is recorded as `flag_out: true`, nothing more), successful queries, usernames, or anything machine-identifying. Unmatched queries must pass a strict brand-shaped allowlist before transmission — anything resembling a path, URL, email, or credential is dropped rather than sanitized.
 

@@ -22,12 +22,13 @@ npm run stats -- --period year --json --out data/stats.json
 - Cross-references `data/logos.yml` to report cold entries and retired slugs still receiving traffic.
 - A weekly workflow (`.github/workflows/stats.yml`) snapshots the report to `data/stats.json`, building the long-run history jsDelivr's rolling window doesn't retain.
 
-**CLI telemetry** — the `idn-finlogos` CLI now sends one anonymous event per run, to answer the question CDN stats can't: which Indonesian brands people search for that the catalog doesn't carry.
+**CLI telemetry** — the `idn-finlogos` CLI now reports each run anonymously to Google Analytics 4, to answer the question CDN stats can't: which Indonesian brands people search for that the catalog doesn't carry.
 
 - Collects the command name, flag names, CLI/Node version, OS, and **search terms that matched no logo**.
 - Never collects file paths (`--out` is recorded as a boolean), successful queries, usernames, or machine-derived identifiers. Unmatched queries must pass a strict brand-shaped allowlist; anything resembling a path, URL, email, or credential is dropped rather than sanitized.
 - Silent on first run, in CI, under `DO_NOT_TRACK=1`, `IDN_FINLOGOS_TELEMETRY=0`, `NODE_ENV=test`, and after `idn-finlogos telemetry off`.
-- Fire-and-forget with a 400 ms cap on process exit; failures are swallowed, so behavior offline is identical.
+- Fire-and-forget with a 400 ms cap on process exit, after which a pending send is cancelled; failures are swallowed, so behavior offline is identical.
+- Ad use is marked as denied on every request (`ad_user_data`, `ad_personalization`).
 - New `idn-finlogos telemetry [on|off]` command shows status and toggles collection.
 - **The installable packages (npm, Maven, SPM, pub.dev) remain telemetry-free** — this affects the CLI only.
 

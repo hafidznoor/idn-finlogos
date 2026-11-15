@@ -11,22 +11,35 @@ This document covers the two places usage data does exist: the **CLI** and the
 
 ## 1. The CLI (`npx idn-finlogos`)
 
-The command-line tool sends an anonymous event per invocation. It exists to
-answer one question we cannot answer any other way: **which Indonesian brands
-are people looking for that the catalog doesn't carry yet?** Every logo added
-since v2.6 came from that signal.
+The command-line tool reports each invocation anonymously to **Google
+Analytics 4**. It exists to answer one question we cannot answer any other way:
+**which Indonesian brands are people looking for that the catalog doesn't carry
+yet?**
+
+Each run sends one `cli_command` event, plus one `logo_not_found` event for each
+search term that matched nothing (at most five).
 
 ### What is sent
 
 | Field | Example | Why |
 |---|---|---|
-| `command` | `download` | Which commands are worth maintaining |
+| `command`, `result` | `download`, `ok` / `error` | Which commands are worth maintaining, and how often they fail |
 | `flag_format`, `flag_scale`, `flag_cdn` | `png`, `2`, `jsdelivr` | Which output formats matter |
-| `flag_json`, `flag_category`, `flag_out` | `true` / `false` | **Booleans only** — never the values |
-| `cli_version`, `node_major`, `os` | `2.5.0`, `22`, `darwin` | Which platforms to support |
+| `flag_json`, `flag_category`, `flag_out`, `flag_pkg_version` | `true` / `false` | **Booleans only** — never the values |
+| `cli_version`, `node_major`, `os` | `2.5.1`, `22`, `darwin` | Which platforms to support |
 | `resolved_count`, `unresolved_count` | `3`, `1` | How often lookups fail |
-| `unresolved_queries` | `["bank tidak ada"]` | **The point of all this** — missing brands |
-| `distinct_id` | random UUID | Separates "10 runs by one person" from "10 people" |
+| `query` (on `logo_not_found`) | `bank tidak ada` | **The point of all this** — missing brands |
+| `client_id` | random UUID | Separates "10 runs by one person" from "10 people" |
+| `session_id`, `engagement_time_msec` | timestamp of the run, `1` | Required by Google Analytics to count the event; the session id is never stored |
+
+### Where it goes
+
+Events are sent over HTTPS to Google Analytics 4 (`www.google-analytics.com`),
+into a property owned by the maintainer, and are processed by Google under its
+[privacy policy](https://policies.google.com/privacy). Every request marks ad
+use as denied (`ad_user_data` and `ad_personalization`), so the data is not
+used for advertising or ad personalization. No cookies are involved — a CLI has
+none.
 
 ### What is never sent
 
@@ -42,8 +55,9 @@ since v2.6 came from that signal.
   machine fingerprint. `distinct_id` is a random UUID generated on first run; it
   is not derived from anything about your machine. Delete the config file and
   you are a new, unrelated user.
-- **Your IP address**, beyond what any HTTPS request necessarily exposes in
-  transit. It is not stored as an identifier.
+- **Your IP address or location**, beyond what any HTTPS request necessarily
+  exposes in transit. The CLI sends no location fields, and Google Analytics 4
+  does not log or store IP addresses.
 
 ### When nothing is sent at all
 
@@ -79,8 +93,8 @@ your anonymous id.
 
 ### Reliability
 
-Sends are fire-and-forget with a hard 400 ms cap on process exit and a 1.2 s
-request timeout. Every failure is swallowed silently. **If the collector is
+Sends are fire-and-forget with a hard 400 ms cap on process exit; a request
+still pending at that point is cancelled. Every failure is swallowed silently. **If the collector is
 down, offline, or blocked by your firewall, the CLI behaves exactly the same.**
 
 ---
