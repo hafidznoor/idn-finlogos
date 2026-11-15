@@ -1,3 +1,8 @@
+## 2.5.2
+
+No Flutter API changes — version bump to stay in lockstep with the other
+platform packages. This package contains no telemetry.
+
 ## 2.5.1
 
 No Flutter API changes — version bump to stay in lockstep with the other

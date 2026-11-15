@@ -19,6 +19,8 @@
 //   4. Silent in CI and under DO_NOT_TRACK. Silent on first run, which only
 //      prints the notice.
 //
+// Events go to Google Analytics 4 (Measurement Protocol).
+//
 // Opt out permanently:  idn-finlogos telemetry off
 // Opt out per-shell:    IDN_FINLOGOS_TELEMETRY=0
 // See PRIVACY.md for the exact payload.
@@ -28,14 +30,28 @@ import path from 'node:path';
 import os from 'node:os';
 import crypto from 'node:crypto';
 import process from 'node:process';
+import http from 'node:http';
+import https from 'node:https';
 
-// PostHog-compatible capture endpoint. Project API keys ("phc_…") are designed
-// to be public client-side identifiers — they can only write events, never read
-// them — which is why shipping one in an npm package is safe.
-const ENDPOINT = process.env.IDN_FINLOGOS_TELEMETRY_URL || 'https://us.i.posthog.com/i/v0/e/';
-const API_KEY = process.env.IDN_FINLOGOS_TELEMETRY_KEY || '__POSTHOG_PROJECT_KEY__';
+// Google Analytics 4, via the Measurement Protocol. Both values come from
+// GA Admin → Data streams → (your stream):
+//   - Measurement ID ("G-…") is on the stream details page.
+//   - API secret is under "Measurement Protocol API secrets" → Create.
+// The secret is write-only: it can add events to this one stream and read
+// nothing. Shipping it in an npm package means anyone could send junk events;
+// if that ever happens, revoke it in GA Admin and publish a patch release.
+const MEASUREMENT_ID = process.env.IDN_FINLOGOS_GA_MEASUREMENT_ID || 'G-EMTME2VP8J';
+const API_SECRET = process.env.IDN_FINLOGOS_GA_API_SECRET || 'lWo6QvLeTv-qb-2faD6Eug';
+// IDN_FINLOGOS_TELEMETRY_DEBUG=1 prints the payload and sends it to GA's
+// validation endpoint instead, which checks the event but does not record it.
+const DEBUG = Boolean(process.env.IDN_FINLOGOS_TELEMETRY_DEBUG);
+const ENDPOINT =
+  process.env.IDN_FINLOGOS_TELEMETRY_URL ||
+  `https://www.google-analytics.com/${DEBUG ? 'debug/' : ''}mp/collect`;
 const EVENT = 'cli_command';
+const MISSING_EVENT = 'logo_not_found';
 const SEND_CAP_MS = 400; // most we will ever delay process exit for a send
+const DEBUG_CAP_MS = 5000; // debug runs wait for GA's validation response
 
 // ---------------------------------------------------------------------------
 // config file — stores the opt-out flag and an anonymous, randomly generated id
@@ -109,7 +125,7 @@ export function suppressedBecause(cfg = readConfig()) {
   if (cfg.telemetry === false) return 'config';
   if (isCI()) return 'ci';
   if (process.env.NODE_ENV === 'test') return 'test';
-  if (!API_KEY || API_KEY.startsWith('__')) return 'unconfigured';
+  if ([MEASUREMENT_ID, API_SECRET].some((v) => !v || v.startsWith('__'))) return 'unconfigured';
   return null;
 }
 
@@ -151,9 +167,11 @@ export function scrubQuery(raw) {
 // becomes 'other' rather than being passed through.
 const oneOf = (value, allowed) => (value == null ? null : allowed.includes(String(value)) ? String(value) : 'other');
 
-export function buildProperties({ command, opts = {}, cliVersion, resolved = 0, unresolved = [] }) {
+export function buildProperties({ command, failed = false, opts = {}, cliVersion, resolved = 0, unresolved = [] }) {
   return {
     command,
+    // 'error' = the run ended in a usage error, typically a logo that wasn't found
+    result: failed ? 'error' : 'ok',
     cli_version: cliVersion,
     node_major: Number(process.versions.node.split('.')[0]),
     os: process.platform,
@@ -161,16 +179,33 @@ export function buildProperties({ command, opts = {}, cliVersion, resolved = 0, 
     flag_format: oneOf(opts.format, ['svg', 'png']),
     flag_scale: oneOf(opts.scale, ['1', '2', '3', '4']),
     flag_cdn: oneOf(opts.cdn, ['jsdelivr', 'unpkg']),
-    flag_json: Boolean(opts.json),
-    flag_category: Boolean(opts.category),
+    flag_json: String(Boolean(opts.json)),
+    flag_category: String(Boolean(opts.category)),
     // the path itself is never transmitted — only whether one was given
-    flag_out: opts.out != null,
-    flag_pkg_version: opts.pkgVersionExplicit === true,
+    flag_out: String(opts.out != null),
+    flag_pkg_version: String(opts.pkgVersionExplicit === true),
     resolved_count: resolved,
-    unresolved_count: unresolved.length,
-    // the point of the exercise: brands people want that we don't carry
-    unresolved_queries: unresolved.map(scrubQuery).filter(Boolean).slice(0, 5)
+    unresolved_count: unresolved.length
   };
+}
+
+// GA4 event params must be scalars (no arrays, no nulls), so the run is sent as
+// one `cli_command` event plus one `logo_not_found` event per unmatched query —
+// the point of the exercise: brands people want that we don't carry. One query
+// per event is also what makes "top missing brands" a plain GA report.
+export function buildEvents(payload) {
+  const props = Object.fromEntries(Object.entries(buildProperties(payload)).filter(([, v]) => v != null));
+  // GA drops events from its Realtime and user counts unless both are present.
+  // The session id is per-run and never stored.
+  const base = { session_id: String(Date.now()), engagement_time_msec: 1 };
+  const queries = [...new Set((payload.unresolved ?? []).map(scrubQuery).filter(Boolean))].slice(0, 5);
+  return [
+    { name: EVENT, params: { ...base, ...props } },
+    ...queries.map((query) => ({
+      name: MISSING_EVENT,
+      params: { ...base, query, command: props.command, cli_version: props.cli_version }
+    }))
+  ];
 }
 
 // ---------------------------------------------------------------------------
@@ -202,6 +237,7 @@ export function noticeIfFirstRun(cfg = readConfig()) {
 // ---------------------------------------------------------------------------
 
 let inflight = null;
+let request = null;
 
 // Fire-and-forget. Returns immediately; call flush() before exit to give the
 // request a bounded chance to land.
@@ -211,30 +247,55 @@ export function track(payload) {
   if (suppressedBecause(cfg)) return;
 
   const body = JSON.stringify({
-    api_key: API_KEY,
-    event: EVENT,
-    distinct_id: installId(cfg),
-    properties: buildProperties(payload),
-    timestamp: new Date().toISOString()
+    client_id: installId(cfg),
+    // analytics only — never feed this into Google's ads products
+    consent: { ad_user_data: 'DENIED', ad_personalization: 'DENIED' },
+    events: buildEvents(payload)
   });
 
   try {
-    inflight = fetch(ENDPOINT, {
-      method: 'POST',
-      headers: { 'content-type': 'application/json' },
-      body,
-      signal: AbortSignal.timeout(SEND_CAP_MS * 3)
-    }).catch(() => {});
+    const url = new URL(ENDPOINT);
+    url.searchParams.set('measurement_id', MEASUREMENT_ID);
+    url.searchParams.set('api_secret', API_SECRET);
+    // node:https rather than fetch: destroying the request tears the socket
+    // down even mid-connect, which aborting a fetch does not.
+    const { request: send } = url.protocol === 'http:' ? http : https;
+    inflight = new Promise((resolve) => {
+      request = send(url, { method: 'POST', headers: { 'content-type': 'application/json' } }, (res) => {
+        let text = '';
+        res.on('data', (chunk) => DEBUG && (text += chunk));
+        res.on('end', () => {
+          if (DEBUG) process.stderr.write(`[telemetry] ${body}\n[telemetry] HTTP ${res.statusCode} ${text}\n`);
+          resolve();
+        });
+        res.on('error', resolve);
+      });
+      request.on('error', (err) => {
+        if (DEBUG) process.stderr.write(`[telemetry] send failed: ${err.message}\n`);
+        resolve();
+      });
+      request.on('close', resolve);
+      request.end(body);
+    });
   } catch {
     inflight = null;
   }
 }
 
-// Wait for a pending send, but never longer than SEND_CAP_MS.
+// Wait for a pending send, but never longer than the cap — then destroy it. The
+// destroy matters: an unfinished request keeps Node alive on its own, so
+// without it a slow or blackholed network would hold the CLI open long after
+// its work was done.
 export async function flush() {
   if (!inflight) return;
-  const timer = new Promise((r) => setTimeout(r, SEND_CAP_MS).unref?.());
-  await Promise.race([inflight, timer]);
+  let timer;
+  const cap = new Promise((r) => {
+    timer = setTimeout(r, DEBUG ? DEBUG_CAP_MS : SEND_CAP_MS);
+  });
+  await Promise.race([inflight, cap]);
+  clearTimeout(timer);
+  request?.destroy();
+  inflight = null;
 }
 
 // ---------------------------------------------------------------------------
@@ -265,13 +326,13 @@ export function telemetryCommand(action) {
     config: 'disabled by `idn-finlogos telemetry off`',
     ci: 'suppressed — CI environment detected',
     test: 'suppressed — NODE_ENV=test',
-    unconfigured: 'inactive — no collection endpoint is configured in this build'
+    unconfigured: 'inactive — no Google Analytics stream is configured in this build'
   };
   process.stdout.write(
     `Telemetry: ${why ? `OFF (${reason[why] ?? why})` : 'ON'}\n` +
       `Config:    ${CONFIG_PATH}\n\n` +
       `Collected: command name, flag names, CLI/Node version, OS, and search\n` +
-      `           terms that matched no logo.\n` +
+      `           terms that matched no logo. Sent to Google Analytics.\n` +
       `Never:     file paths, --out values, usernames, IP-linked identifiers.\n\n` +
       // 'unconfigured' is a property of the build, not a user setting —
       // telling them to switch it on would be misleading.

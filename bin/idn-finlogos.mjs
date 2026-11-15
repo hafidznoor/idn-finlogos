@@ -110,7 +110,7 @@ function displayPath(p) {
 // What the run actually resolved, accumulated by the commands and reported once
 // by main(). Unresolved queries are the signal we care about: brands people
 // look for that the catalog doesn't carry yet.
-const outcome = { resolved: 0, unresolved: [] };
+const outcome = { command: null, resolved: 0, unresolved: [] };
 
 // Thrown for expected, user-facing errors (bad flags, unresolved logos, network
 // failures) — printed without a stack trace.
@@ -601,6 +601,8 @@ async function main(argv) {
     json: values.json
   };
 
+  outcome.command = cmd;
+
   switch (cmd) {
     case 'download':
       await cmdDownload(args, opts);
@@ -639,7 +641,8 @@ main(process.argv.slice(2))
       // A UserError still tells us something worth knowing (usually an
       // unresolved query), so report the run before exiting.
       telemetry.track({
-        command: 'error',
+        command: outcome.command ?? 'unknown',
+        failed: true,
         cliVersion: readOwnVersion(),
         resolved: outcome.resolved,
         unresolved: outcome.unresolved

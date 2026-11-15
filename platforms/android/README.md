@@ -12,7 +12,7 @@ Android library (`idn-finlogos`) for the [Indonesia Fintech Logos](https://githu
 
 ```kotlin
 dependencies {
-    implementation("io.github.hafidznoor:idn-finlogos:2.5.1")
+    implementation("io.github.hafidznoor:idn-finlogos:2.5.2")
 }
 ```
 
@@ -28,7 +28,7 @@ dependencyResolutionManagement {
 
 // app/build.gradle.kts
 dependencies {
-    implementation("com.github.hafidznoor:idn-finlogos:2.5.1")
+    implementation("com.github.hafidznoor:idn-finlogos:2.5.2")
 }
 ```
 
