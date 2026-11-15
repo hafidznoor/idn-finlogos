@@ -26,7 +26,7 @@ search term that matched nothing (at most five).
 | `command`, `result` | `download`, `ok` / `error` | Which commands are worth maintaining, and how often they fail |
 | `flag_format`, `flag_scale`, `flag_cdn` | `png`, `2`, `jsdelivr` | Which output formats matter |
 | `flag_json`, `flag_category`, `flag_out`, `flag_pkg_version` | `true` / `false` | **Booleans only** — never the values |
-| `cli_version`, `node_major`, `os` | `2.5.1`, `22`, `darwin` | Which platforms to support |
+| `cli_version`, `node_major`, `os` | `2.5.2`, `22`, `darwin` | Which platforms to support |
 | `resolved_count`, `unresolved_count` | `3`, `1` | How often lookups fail |
 | `query` (on `logo_not_found`) | `bank tidak ada` | **The point of all this** — missing brands |
 | `client_id` | random UUID | Separates "10 runs by one person" from "10 people" |

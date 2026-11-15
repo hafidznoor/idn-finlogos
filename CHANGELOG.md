@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file. Format foll
 
 ## [Unreleased]
 
+## [2.5.2]
+
+### Fixed — CLI telemetry
+v2.5.1 shipped to Maven Central and pub.dev but its npm publish failed, so the CLI telemetry it describes below never reached npm users. 2.5.2 is the first npm release with it, and changes how it works:
+
+- **Reports to Google Analytics 4** (Measurement Protocol) instead of the never-configured PostHog endpoint. One `cli_command` event per run, plus one `logo_not_found` event per unmatched search term (max five). Ad use is marked as denied on every request.
+- **No longer holds the CLI open.** A stalled or blackholed network could keep the process alive ~10 s past its work; sends are now cancelled after the 400 ms cap.
+- **Failed runs keep their command name** (`result: error`) instead of being reported as `command: error`.
+- `IDN_FINLOGOS_TELEMETRY_DEBUG=1` prints the payload and validates it with GA without recording anything.
+
+Opt-outs are unchanged. See [PRIVACY.md](./PRIVACY.md) for the exact payload.
+
 ## [2.5.1]
 
 ### Added — usage analytics
@@ -292,7 +304,8 @@ First release. Initially published as `@hafidznoor/idn-finlogos`; renamed to `id
 - `paypal` (Remittance); Misc copy dropped.
 - `western-union` (Remittance); Misc copy dropped.
 
-[Unreleased]: https://github.com/hafidznoor/idn-finlogos/compare/v2.5.1...HEAD
+[Unreleased]: https://github.com/hafidznoor/idn-finlogos/compare/v2.5.2...HEAD
+[2.5.2]: https://github.com/hafidznoor/idn-finlogos/compare/v2.5.1...v2.5.2
 [2.5.1]: https://github.com/hafidznoor/idn-finlogos/compare/v2.5.0...v2.5.1
 [2.5.0]: https://github.com/hafidznoor/idn-finlogos/compare/v2.4.0...v2.5.0
 [2.4.0]: https://github.com/hafidznoor/idn-finlogos/compare/v2.3.0...v2.4.0
